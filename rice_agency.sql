@@ -30,7 +30,9 @@ create table [address] (
 	street varchar(50) not null,
 	city varchar(50) not null,
 	primary key (userid, house_num, street, city),
-	constraint fk_uid_address foreign key (userid) references [user] (userid),
+	constraint fk_uid_address foreign key (userid) references [user] (userid) 
+	on delete cascade
+	on update cascade
 );
 
 CREATE TABLE Account(
@@ -39,26 +41,34 @@ CREATE TABLE Account(
     [Type] varchar(20) not null,
 	userid char(6),
     PRIMARY KEY(Username),
-	constraint fk_uid_account foreign key (userid) references [user] (userid),
+	constraint fk_uid_account foreign key (userid) references [user] (userid)
+	on delete cascade
+	on update cascade
 );
 
 create table employee (
 	employee_id char(6),
 	manager_id char(6),
 	primary key (employee_id),
-	constraint fk_empid_uid foreign key (employee_id) references [user] (userid),
+	constraint fk_empid_uid foreign key (employee_id) references [user] (userid)
+	on delete cascade
+	on update cascade
 );
 
 create table customer (
 	customer_id char(6),
 	primary key (customer_id),
-	constraint fk_uid_customer foreign key (customer_id) references [user] (userid),
+	constraint fk_uid_customer foreign key (customer_id) references [user] (userid)
+	on delete cascade
+	on update cascade
 );
 
 create table seller (
 	seller_id char(6),
 	primary key (seller_id),
-	constraint fk_empid_seller foreign key (seller_id) references employee (employee_id),
+	constraint fk_empid_seller foreign key (seller_id) references employee (employee_id)
+	on delete cascade
+	on update cascade
 );
 
 -- alter
