@@ -1,0 +1,63 @@
+<div class="wrapper upload">
+  <div class="preview-side">
+    <i class="fa fa-times-circle" aria-hidden="true"></i>
+    <img src="img/upload.png" alt="" class="preview-img">
+  </div>
+  <header>Đăng bán sản phẩm</header>
+  <form action="">
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="4">
+            <div>
+              Thêm ảnh
+              <img src="img/upload.png" alt="" class="upload-icon">
+              <input class="file-input" type="file" name="file" id="file" hidden required/>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="label"><label for="name">Tên sách</label></td>
+          <td class="input"><input type="text" name="name" id="name" required /></td>
+          <td class="label"><label for="quantity">Số lượng</label></td>
+          <td class="input"><input type="text" name="quantity" id="quantity" required /></td>
+        </tr>
+        <tr>
+          <td class="label"><label for="category">Thể loại</label></td>
+          <td class="input">
+            <select name="category" id="category">
+              <option value="detective">Trinh thám</option>
+              <option value="horror">Kinh dị</option>
+              <option value="romance">Lãng mạn</option>
+              <option value="comedy">Hài hước</option>
+              <option value="children">Thiếu nhi</option>
+              <option value="education">Giáo dục</option>
+              <option value="economic">Kinh tế</option>
+              <option value="science">Khoa học</option>
+            </select>
+          </td>
+          <td class="label"><label for="price">Giá tiền</label></td>
+          <td class="input"><input type="text" name="price" id="price" required /></td>
+        </tr>
+        <tr>
+          <td class="label"><label for="type">Danh mục</label></td>
+          <td class="input"><select name="type" id="type">
+            <option value="type1">Truyện chữ</option>
+            <option value="type2">Truyện tranh</option>
+            <option value="type3">Sách ảnh</option>
+            <option value="type4">Sách chữ nói</option>
+            <option value="type5">Sách cữ</option>
+          </select></td>
+          <td class="label"></td>
+          <td class="input"></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  <div class="button">
+    <button type="submit" class="submit-upload">Đăng bán</button>
+    <button type="button" class="cancel-upload">Hủy</button>
+  </div>
+</div>
+
+

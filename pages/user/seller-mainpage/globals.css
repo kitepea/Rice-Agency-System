@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+html, body, button {
+  margin: 0px;
+  height: max-content;
+  background-color:#fff;
+  font-family: 'Josefin Sans';
+}
+
+ul {
+  list-style: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+input[type="text" i] {
+  font-family: "Josefin Sans";
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: black;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+input:-moz-autofill {
+  -moz-text-fill-color: black;
+  -moz-box-shadow: 0 0 0px 1000px white inset;
+}
+input:-o-autofill {
+  -o-text-fill-color: black;
+  -o-box-shadow: 0 0 0px 1000px white inset;
+}
+input:-khtml-autofill {
+  -khtml-text-fill-color: black;
+  -khtml-box-shadow: 0 0 0px 1000px white inset;
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: #fff;
+  background: #ff5e99;
+}
