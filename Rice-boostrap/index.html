@@ -70,29 +70,27 @@
     <!-- Filter -->
     <div class="filter">
         <div class="row">
-            <div class="">
+            <div class="col-sm-3">
                 <input class="prompt" type="text" placeholder="">
             </div>
-        </div>
-        <div class="row">
-            <div class="">
+            <div class="col-sm-3">
                 <input class="prompt-type" type="text" placeholder="">
             </div>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownPriceButton"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                Hiển thị theo giá
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownPriceButton">
-                <div class="priceMenu">
-                    <li><a class="dropdown-item" href="#">Cao đến thấp</a></li>
-                    <li><a class="dropdown-item" href="#">Thấp đến cao</a></li>
-                </div>
-            </ul>
-        </div>
-        <div class="">
-            <a onclick="btn_handler()" class="btn btn-outline-dark">Submit</a>
+            <div class="col-sm-3 dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownPriceButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Hiển thị theo giá
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownPriceButton">
+                    <div class="priceMenu">
+                        <li><a class="dropdown-item" href="#">Cao đến thấp</a></li>
+                        <li><a class="dropdown-item" href="#">Thấp đến cao</a></li>
+                    </div>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <a onclick="btn_handler()" class="btn btn-outline-dark">Submit</a>
+            </div>
         </div>
     </div>
     <!-- Section-->
@@ -102,7 +100,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top mt-2" src="https://giagao.com/wp-content/uploads/2020/01/gao-ST25-lua-tom.jpg" alt="..." />
+                        <img class="card-img-top mt-2"
+                            src="https://giagao.com/wp-content/uploads/2020/01/gao-ST25-lua-tom.jpg" alt="..." />
                         <!-- Product details-->
                         <div class="card-body">
                             <div class="text-center">
@@ -224,7 +223,7 @@
                 </div>
                 <div class="col mb-5">
                     <div class="card h-100">
-   
+
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                         <!-- Product details-->
