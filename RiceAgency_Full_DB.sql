@@ -1,4 +1,5 @@
-﻿-- QUAN --
+-- FULL DATABASE OF RICE AGENCY --
+-- QUAN --
 USE master;
 GO
 DROP DATABASE IF EXISTS Rice_Agency;
@@ -47,8 +48,8 @@ CREATE TABLE Account(
 );
 
 create table employee (
-	employee_id char(6),
-	manager_id char(6),
+	employee_id char(6) NOT NULL,
+	manager_id char(6) NOT NULL,
 	primary key (employee_id),
 	constraint fk_empid_uid foreign key (employee_id) references [user] (userid)
 	on delete cascade
@@ -56,7 +57,7 @@ create table employee (
 );
 
 create table customer (
-	customer_id char(6),
+	customer_id char(6) NOT NULL,
 	primary key (customer_id),
 	constraint fk_uid_customer foreign key (customer_id) references [user] (userid)
 	on delete cascade
@@ -64,7 +65,7 @@ create table customer (
 );
 
 create table seller (
-	seller_id char(6),
+	seller_id char(6) NOT NULL,
 	primary key (seller_id),
 	constraint fk_empid_seller foreign key (seller_id) references employee (employee_id)
 	on delete cascade
@@ -218,7 +219,9 @@ CREATE TABLE CONTAIN_PHYBAGS(
 /************************* NHÂN VIÊN VẬN CHUYỂN *****************************/
 CREATE TABLE SHIPPER (
 	shipper_id CHAR(6) NOT NULL,
-	CONSTRAINT PK_SHIPEMP PRIMARY KEY (shipper_id)
+	CONSTRAINT PK_SHIPEMP PRIMARY KEY (shipper_id),
+
+	CONSTRAINT SHIPER_TO_EMPLOY FOREIGN KEY (shipper_id) REFERENCES employee (employee_id)
 )
 /******************************************************/
 
@@ -247,5 +250,3 @@ CREATE TABLE PRODUCTION (
 	CONSTRAINT FK_PRODUCTION_TO_COMPANY FOREIGN KEY(company_name) REFERENCES COMPANY_PRODUCT(company_name)
 )
 /******************************************************/
-
-
