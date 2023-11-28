@@ -12,7 +12,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="mainpage.css">
- 
+
 
     <!--  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -67,7 +67,7 @@
     </div>
 
     <!-- Filter -->
-    <div class="container filter">
+    <div class="container my-5">
         <div class="row">
             <div class="col-sm-3">
                 <input class="prompt" type="text" placeholder="">
@@ -75,20 +75,22 @@
             <div class="col-sm-3">
                 <input class="prompt-type" type="text" placeholder="">
             </div>
-            <div class="col-sm-3 dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownPriceButton"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Hiển thị theo giá
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownPriceButton">
-                    <div class="priceMenu">
-                        <li><a class="dropdown-item" href="#">Cao đến thấp</a></li>
-                        <li><a class="dropdown-item" href="#">Thấp đến cao</a></li>
-                    </div>
-                </ul>
+            <div class="col-sm-2">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownPriceButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Hiển thị theo giá
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownPriceButton">
+                        <div class="priceMenu">
+                            <li><a class="dropdown-item" href="#">Cao đến thấp</a></li>
+                            <li><a class="dropdown-item" href="#">Thấp đến cao</a></li>
+                        </div>
+                    </ul>
+                </div>
             </div>
             <div class="col-sm-3">
-                <a onclick="btn_handler()" class="btn btn-outline-dark">Submit</a>
+                <button onclick="btn_handler()" class="btn btn-outline-dark bg-primary text-white">Submit</button>
             </div>
         </div>
     </div>

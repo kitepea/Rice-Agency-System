@@ -9,14 +9,6 @@
   align-items: center;
 }
 
-.filter {
-  display: flex;
-  flex-direction: row;
-  /* gap: 20px; */
-  /* margin-left: 105px; */
-  margin-top: 40px;
-}
-
 .card-img-top {
     width: 100%;
     height: 20vw;
