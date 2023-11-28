@@ -72,11 +72,6 @@ create table seller (
 	on update cascade
 );
 
--- alter
-alter table employee
-add constraint fk_manager_id foreign key (manager_id) references employee (employee_id);
--- add prefix auto_increment (procedure and trigger)
-
 -- VKDKhoa
 /************************* MẶT_HÀNG *****************************/
 -- PK = PMXXXX;  [PREFIX] = PM, id PMXXXX
@@ -84,7 +79,6 @@ CREATE TABLE [PRODUCT] (
 	id_product CHAR(6) NOT NULL,
 	[PName] NVARCHAR(30) NOT NULL,
 	[description]  NVARCHAR(80),
-	price_kg DECIMAL(10,0) DEFAULT 20000, -- giá gốc(VND) của 1kg gạo đó
 	featured VARCHAR(9),
 	Original VARCHAR(9),
 	picture IMAGE --this is IMAGE type
@@ -104,7 +98,9 @@ CREATE TABLE TYPE_OF_BAGS(
 
 	CONSTRAINT PR_TYPEBAGS PRIMARY KEY(id_pro, id_type),
 
-	CONSTRAINT FK_TOBPRO_TO_IDPRO FOREIGN KEY (id_pro) REFERENCES [PRODUCT](id_product),
+	CONSTRAINT FK_TOBPRO_TO_IDPRO FOREIGN KEY (id_pro) REFERENCES [PRODUCT](id_product)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE,
 
 	CHECK (
 		(BName = 2 OR BName = 5 OR BName = 10) -- các loại bao gạo gồm 3 loại 2kg,5kg,10kg
@@ -123,8 +119,9 @@ CREATE TABLE PHYSICAL_RICEBAG (
     HSD DATE,
     CONSTRAINT PK_PHYBAGS PRIMARY KEY(id_product, id_type, NumOrder),
 
-   --CONSTRAINT FK_PHYBAGS_TO_TYPEBAGS_PRODUCT FOREIGN KEY (id_product) REFERENCES TYPE_OF_BAGS(id_pro),
-   --CONSTRAINT FK_PHYBAGS_TO_TYPEBAGS_TYPE FOREIGN KEY (id_type) REFERENCES TYPE_OF_BAGS(id_type),
+   CONSTRAINT FK_PHYBAGS_TO_TYPEBAGS
+	FOREIGN KEY (id_product, id_type) 
+	REFERENCES TYPE_OF_BAGS(id_pro,id_type),
 
     CHECK (NSX < HSD)
 );
@@ -160,7 +157,7 @@ CREATE TABLE DELIVERY_TRIP(
 	shipper_id CHAR(6) NOT NULL,
 	id_vechile CHAR(6) NOT NULL,
 
-	CONSTRAINT PK_Deli PRIMARY KEY (id_DelivTrip),
+	CONSTRAINT PK_Deli PRIMARY KEY (id_DelivTrip)
 )
 /******************************************************/
 
@@ -170,7 +167,8 @@ CREATE TABLE PACKAGE(
 	id_bill CHAR(6) NOT NULL,
 	[status] VARCHAR(15)  DEFAULT 'Not started',
 	id_DelivTrip CHAR(6) NOT NULL,
-	CONSTRAINT PK_PACKAGES PRIMARY KEY(id_package,id_bill),
+
+	CONSTRAINT PK_PACKAGES PRIMARY KEY(id_package),
 
 	CONSTRAINT FK_PACKAGE_TO_BILL FOREIGN KEY (id_bill) REFERENCES BILL(id_bill),
 	CONSTRAINT FK_PACKAGE_TO_DELTRIP FOREIGN KEY (id_DelivTrip) REFERENCES DELIVERY_TRIP(id_DelivTrip),
@@ -188,11 +186,11 @@ CREATE TABLE CONTAIN_PACKAGE(
 	Quantity INT DEFAULT 1, -- số lượng lô trong kiện hàng
 	CONSTRAINT PK_CP PRIMARY KEY (id_product,id_type,NumOrder,id_package),
 
-	--CONSTRAINT FK_CONPACK_TO_PHYBAGS_pro FOREIGN KEY (id_product) REFERENCES PHYSICAL_RICEBAG(id_product),
-	--CONSTRAINT FK_CONPACK_TO_PHYBAGS_type FOREIGN KEY (id_type) REFERENCES PHYSICAL_RICEBAG(id_type),
-	--CONSTRAINT FK_CONPACK_TO_PHYBAGS_numord FOREIGN KEY (NumOrder) REFERENCES PHYSICAL_RICEBAG(NumOrder),
-	--CONSTRAINT FK_CONPACK_TO_PACK FOREIGN KEY (id_package) REFERENCES PACKAGE(id_package),
+	CONSTRAINT FK_CONPACK_TO_PHYBAGS 
+		FOREIGN KEY (id_product,id_type,NumOrder) 
+		REFERENCES PHYSICAL_RICEBAG(id_product,id_type,NumOrder),
 
+	CONSTRAINT FK_CONPACK_TO_PACK FOREIGN KEY (id_package) REFERENCES PACKAGE(id_package),
 	CHECK (Quantity > 0)
 )
 /******************************************************/
@@ -207,9 +205,9 @@ CREATE TABLE CONTAIN_PHYBAGS(
 
 	CONSTRAINT PK_CPB PRIMARY KEY (id_product,id_type,NumOrder,id_bill),
 
-	--CONSTRAINT FK_CONPHY_TO_PHYBAGS_pro FOREIGN KEY (id_product) REFERENCES PHYSICAL_RICEBAG(id_product),
-	--CONSTRAINT FK_CONPHY_TO_PHYBAGS_type FOREIGN KEY (id_type) REFERENCES PHYSICAL_RICEBAG(id_type),
-	--CONSTRAINT FK_CONPHY_TO_PHYBAGS_numord FOREIGN KEY (NumOrder) REFERENCES PHYSICAL_RICEBAG(NumOrder),
+	CONSTRAINT FK_CONPHY_TO_PHYBAGS
+		FOREIGN KEY (id_product,id_type,NumOrder) 
+		REFERENCES PHYSICAL_RICEBAG(id_product,id_type,NumOrder),
 	CONSTRAINT FK_CONPHY_TO_BILL FOREIGN KEY (id_bill) REFERENCES BILL(id_bill),
 
 	CHECK (Quantity > 0)
@@ -250,3 +248,23 @@ CREATE TABLE PRODUCTION (
 	CONSTRAINT FK_PRODUCTION_TO_COMPANY FOREIGN KEY(company_name) REFERENCES COMPANY_PRODUCT(company_name)
 )
 /******************************************************/
+
+-- alter
+alter table employee
+add constraint fk_manager_id foreign key (manager_id) references employee (employee_id);
+
+alter table BILL
+add CONSTRAINT FK_BILL_TO_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE;
+
+alter table BILL
+add CONSTRAINT FK_BILL_TO_SELLER FOREIGN KEY (seller_id) REFERENCES seller(seller_id)
+
+alter table DELIVERY_TRIP
+add CONSTRAINT FK_DELTRP_TO_SHIPER FOREIGN KEY (shipper_id) REFERENCES SHIPPER(shipper_id)
+
+alter table DELIVERY_TRIP
+add CONSTRAINT FK_DELTRP_TO_VECHILE FOREIGN KEY (id_vechile) REFERENCES VECHILE(id_vechile)
+
+-- add prefix auto_increment (procedure and trigger)
