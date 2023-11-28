@@ -11,9 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="js/scripts.js">
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="mainpage.css">
+ 
 
     <!--  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -46,7 +45,7 @@
 <body>
     <!-- Navigation-->
     <div class="container nav-bar my-3">
-        <img src="assets/logo.png" alt="" class="logo">
+        <img src="/Rice-boostrap/assets/logo.png" alt="" class="logo">
         <div class="input-group rounded mx-5">
             <input type="search" class="form-control rounded" placeholder="Tìm kiếm..." aria-label="Search"
                 aria-describedby="search-addon" />
@@ -68,15 +67,15 @@
     </div>
 
     <!-- Filter -->
-    <div class="filter">
-        <div class="row">
-            <div class="col-sm-3">
+    <div class="container filter">
+        <div class="d-flex justify-content-between" style="width: 100%;">
+            <div class="">
                 <input class="prompt" type="text" placeholder="">
             </div>
-            <div class="col-sm-3">
+            <div class="">
                 <input class="prompt-type" type="text" placeholder="">
             </div>
-            <div class="col-sm-3 dropdown">
+            <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownPriceButton"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Hiển thị theo giá
@@ -88,7 +87,7 @@
                     </div>
                 </ul>
             </div>
-            <div class="col-sm-3">
+            <div class="">
                 <a onclick="btn_handler()" class="btn btn-outline-dark">Submit</a>
             </div>
         </div>

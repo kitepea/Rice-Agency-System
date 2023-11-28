@@ -1,6 +1,6 @@
 .logo {
   width: 150px;
-  margin-left: 25px;
+  /* margin-left: 25px; */
 }
 
 .nav-bar {
@@ -12,8 +12,8 @@
 .filter {
   display: flex;
   flex-direction: row;
-  gap: 20px;
-  margin-left: 105px;
+  /* gap: 20px; */
+  /* margin-left: 105px; */
   margin-top: 40px;
 }
 
