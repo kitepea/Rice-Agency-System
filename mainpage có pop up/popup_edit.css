@@ -1,0 +1,19 @@
+.modal-header{
+    background-color:dodgerblue;
+    color:black
+}
+.modal-dialog {
+    width: 800px; /* Kích thước tối đa */
+
+}
+.btn-close-red {
+    --bs-bg-opacity: 1;
+    background-color: #dc3545; 
+    border: none;
+    border-radius: 50%; 
+    padding: 0.25rem 0.5rem;
+}
+
+.btn-close-red:hover {
+    background-color: #c82333;
+}
