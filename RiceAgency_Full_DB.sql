@@ -266,3 +266,27 @@ alter table DELIVERY_TRIP
 add CONSTRAINT FK_DELTRP_TO_VECHILE FOREIGN KEY (id_vechile) REFERENCES VECHILE(id_vechile)
 
 -- add prefix auto_increment (procedure and trigger)
+GO
+create function cost_bill (@bill_id char(6))
+returns decimal(15,3)
+as
+begin
+	declare @final_cost decimal(15,3);	-- giá trả về
+	if (LEFT(@bill_id,2) = 'BM') -- parameter validation, only accept id with 'BM' PREFIX
+		begin
+			
+			declare @gia_soLuong table(gia decimal(10,0), soLuong int);			-- mã gạo
+
+			insert into @gia_soLuong
+			select loaiBao.price_Bags, rela_gom_donHang_loBaoGao.Quantity
+			from CONTAIN_PHYBAGS as rela_gom_donHang_loBaoGao join TYPE_OF_BAGS as loaiBao on rela_gom_donHang_loBaoGao.id_product = loaiBao.id_pro
+			where rela_gom_donHang_loBaoGao.id_bill = @bill_id;
+
+			set @final_cost = (select sum(gia*soLuong) from @gia_soLuong);
+			if (@final_cost > 0)
+				return @final_cost;
+			else 
+				return null;
+		end
+	return null;
+end
