@@ -9,7 +9,7 @@ GO
 USE Rice_Agency;
 GO
 
-CREATE TABLE [user] (
+CREATE TABLE [USER] (
     userid CHAR(6),
     FMName VARCHAR(30) NOT NULL,
     [Name] VARCHAR(10) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE [user] (
 );
 
 
-create table [address] (
+create table [ADDRESS] (
 	userid char(6),
 	house_num varchar(5) not null,
 	street varchar(50) not null,
@@ -36,10 +36,10 @@ create table [address] (
 	on update cascade
 );
 
-CREATE TABLE Account(
+CREATE TABLE [ACCOUNT](
 	Username varchar(30),
     [Password] varchar(20) not null,
-    [Type] varchar(20) not null,
+ 	[Type] VARCHAR(20) CHECK ([TYPE] IN ('Employee', 'Customer')) NOT NULL,
 	userid char(6),
     PRIMARY KEY(Username),
 	constraint fk_uid_account foreign key (userid) references [user] (userid)
@@ -47,7 +47,7 @@ CREATE TABLE Account(
 	on update cascade
 );
 
-create table employee (
+create table EMPLOYEE (
 	employee_id char(6) NOT NULL,
 	manager_id char(6) NOT NULL,
 	primary key (employee_id),
@@ -56,17 +56,15 @@ create table employee (
 	on update cascade
 );
 
-create table customer (
-	customer_id char(6) NOT NULL,
-	primary key (customer_id),
+create table CUSTOMER (
+	customer_id char(6) PRIMARY KEY,
 	constraint fk_uid_customer foreign key (customer_id) references [user] (userid)
 	on delete cascade
 	on update cascade
 );
 
-create table seller (
-	seller_id char(6) NOT NULL,
-	primary key (seller_id),
+create table SELLER (
+	seller_id char(6) PRIMARY KEY,
 	constraint fk_empid_seller foreign key (seller_id) references employee (employee_id)
 	on delete cascade
 	on update cascade
