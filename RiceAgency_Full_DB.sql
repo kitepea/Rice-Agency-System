@@ -266,9 +266,6 @@ alter table DELIVERY_TRIP
 add CONSTRAINT FK_DELTRP_TO_VECHILE FOREIGN KEY (id_vechile) REFERENCES VECHILE(id_vechile)
 
 -- add prefix auto_increment (procedure and trigger)
-
-
--- function to calculate cost of a bill bases on bill id
 GO
 create function cost_bill (@bill_id char(6))
 returns decimal(15,3)
@@ -293,4 +290,3 @@ begin
 		end
 	return null;
 end
-
