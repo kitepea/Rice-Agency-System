@@ -9,23 +9,25 @@ GO
 USE Rice_Agency;
 GO
 
-CREATE TABLE [USER] (
-    userid CHAR(6),
-    FMName VARCHAR(30) NOT NULL,
-    [Name] VARCHAR(10) NOT NULL,
-    Phone CHAR(10) UNIQUE,
-    Email VARCHAR(50) UNIQUE,
-    [Address] VARCHAR(50),
-    PRIMARY KEY(userid),
-    CHECK (
+CREATE TABLE [USER]
+(
+	userid CHAR(6),
+	FMName VARCHAR(30) NOT NULL,
+	[Name] VARCHAR(10) NOT NULL,
+	Phone CHAR(10) UNIQUE,
+	Email VARCHAR(50) UNIQUE,
+	[Address] VARCHAR(50),
+	PRIMARY KEY(userid),
+	CHECK (
         (LEFT(userid, 2) = 'EM' OR LEFT(userid, 2) = 'CM') AND
-        ISNUMERIC(RIGHT(userid, 4)) = 1 AND
-        LEN(userid) = 6
+		ISNUMERIC(RIGHT(userid, 4)) = 1 AND
+		LEN(userid) = 6
     )
 );
 
 
-create table [ADDRESS] (
+create table [ADDRESS]
+(
 	userid char(6),
 	house_num varchar(5) not null,
 	street varchar(50) not null,
@@ -36,18 +38,20 @@ create table [ADDRESS] (
 	on update cascade
 );
 
-CREATE TABLE [ACCOUNT](
+CREATE TABLE [ACCOUNT]
+(
 	Username varchar(30),
-    [Password] varchar(20) not null,
- 	[Type] VARCHAR(20) CHECK ([TYPE] IN ('Employee', 'Customer')) NOT NULL,
+	[Password] varchar(20) not null,
+	[Type] VARCHAR(20) CHECK ([TYPE] IN ('Employee', 'Customer')) NOT NULL,
 	userid char(6),
-    PRIMARY KEY(Username),
+	PRIMARY KEY(Username),
 	constraint fk_uid_account foreign key (userid) references [user] (userid)
 	on delete cascade
 	on update cascade
 );
 
-create table EMPLOYEE (
+create table EMPLOYEE
+(
 	employee_id char(6) NOT NULL,
 	manager_id char(6) NOT NULL,
 	primary key (employee_id),
@@ -56,14 +60,16 @@ create table EMPLOYEE (
 	on update cascade
 );
 
-create table CUSTOMER (
+create table CUSTOMER
+(
 	customer_id char(6) PRIMARY KEY,
 	constraint fk_uid_customer foreign key (customer_id) references [user] (userid)
 	on delete cascade
 	on update cascade
 );
 
-create table SELLER (
+create table SELLER
+(
 	seller_id char(6) PRIMARY KEY,
 	constraint fk_empid_seller foreign key (seller_id) references employee (employee_id)
 	on delete cascade
@@ -73,26 +79,29 @@ create table SELLER (
 -- VKDKhoa
 /************************* MẶT_HÀNG *****************************/
 -- PK = PMXXXX;  [PREFIX] = PM, id PMXXXX
-CREATE TABLE [PRODUCT] (
+CREATE TABLE [PRODUCT]
+(
 	id_product CHAR(6) NOT NULL,
 	[PName] NVARCHAR(30) NOT NULL,
-	[description]  NVARCHAR(80),
+	[description] NVARCHAR(80),
 	featured VARCHAR(9),
 	Original VARCHAR(9),
 	picture IMAGE --this is IMAGE type
-	CONSTRAINT PR_Pro PRIMARY KEY(id_product),
+		CONSTRAINT PR_Pro PRIMARY KEY(id_product),
 	CONSTRAINT ProName UNIQUE([PName])
 )
 /******************************************************/
 
 /************************* LOẠI_BAO *****************************/
 --PK: id_type = TBXX, [PREFIX] = TB, XX chỉ loại bao VD Loại 2kg => XX = 02
-CREATE TABLE TYPE_OF_BAGS(
+CREATE TABLE TYPE_OF_BAGS
+(
 	id_pro CHAR(6) NOT NULL,
 	id_type CHAR(6) NOT NULL,
 	BName INT NOT NULL DEFAULT 2,
-	inventory_num INT, 
-	price_Bags DECIMAL(10,0), --giá (VND) của mỗi loại bao
+	inventory_num INT,
+	price_Bags DECIMAL(10,0),
+	--giá (VND) của mỗi loại bao
 
 	CONSTRAINT PR_TYPEBAGS PRIMARY KEY(id_pro, id_type),
 
@@ -108,27 +117,29 @@ CREATE TABLE TYPE_OF_BAGS(
 )
 /******************************************************/
 
-CREATE TABLE PHYSICAL_RICEBAG (
-    id_product CHAR(6) NOT NULL,
-    id_type CHAR(6) NOT NULL,
-    NumOrder CHAR(6) NOT NULL,
-    Quantity INT DEFAULT 1,
-    NSX DATE,
-    HSD DATE,
-    CONSTRAINT PK_PHYBAGS PRIMARY KEY(id_product, id_type, NumOrder),
+CREATE TABLE PHYSICAL_RICEBAG
+(
+	id_product CHAR(6) NOT NULL,
+	id_type CHAR(6) NOT NULL,
+	NumOrder CHAR(6) NOT NULL,
+	Quantity INT DEFAULT 1,
+	NSX DATE,
+	HSD DATE,
+	CONSTRAINT PK_PHYBAGS PRIMARY KEY(id_product, id_type, NumOrder),
 
-   CONSTRAINT FK_PHYBAGS_TO_TYPEBAGS
+	CONSTRAINT FK_PHYBAGS_TO_TYPEBAGS
 	FOREIGN KEY (id_product, id_type) 
 	REFERENCES TYPE_OF_BAGS(id_pro,id_type),
 
-    CHECK (NSX < HSD)
+	CHECK (NSX < HSD)
 );
 
 /******************************************************/
 
 /************************* ĐƠN_HÀNG *****************************/
 -- PK: id_bill = BMXXXX, [PREFIX] = BM,
-CREATE TABLE BILL(
+CREATE TABLE BILL
+(
 	id_bill CHAR(6) NOT NULL,
 	date_create DATE,
 	[status] VARCHAR(15) DEFAULT 'Unprocessed',
@@ -147,9 +158,10 @@ CREATE TABLE BILL(
 /******************************************************/
 
 /************************* CHUYẾN_GIAO_HÀNG *****************************/
-CREATE TABLE DELIVERY_TRIP(
+CREATE TABLE DELIVERY_TRIP
+(
 	id_DelivTrip CHAR(6) NOT NULL,
-	[status] VARCHAR(15)  DEFAULT 'Not started',
+	[status] VARCHAR(15) DEFAULT 'Not started',
 	expect_receive_day DATE,
 	actual_receive_day DATE,
 	shipper_id CHAR(6) NOT NULL,
@@ -160,10 +172,11 @@ CREATE TABLE DELIVERY_TRIP(
 /******************************************************/
 
 /************************* KIỆN_HÀNG *****************************/
-CREATE TABLE PACKAGE(
+CREATE TABLE PACKAGE
+(
 	id_package CHAR(6) NOT NULL,
 	id_bill CHAR(6) NOT NULL,
-	[status] VARCHAR(15)  DEFAULT 'Not started',
+	[status] VARCHAR(15) DEFAULT 'Not started',
 	id_DelivTrip CHAR(6) NOT NULL,
 
 	CONSTRAINT PK_PACKAGES PRIMARY KEY(id_package),
@@ -176,12 +189,15 @@ CREATE TABLE PACKAGE(
 /******************************************************/
 
 /************************* GỒM (MAPPING TỪ LÔ ĐẾN KIỆN) *****************************/
-CREATE TABLE CONTAIN_PACKAGE(
+CREATE TABLE CONTAIN_PACKAGE
+(
 	id_product CHAR(6) NOT NULL,
 	id_type CHAR(6) NOT NULL,
-	NumOrder CHAR(6) NOT NULL, -- ????
+	NumOrder CHAR(6) NOT NULL,
+	-- ????
 	id_package CHAR(6) NOT NULL,
-	Quantity INT DEFAULT 1, -- số lượng lô trong kiện hàng
+	Quantity INT DEFAULT 1,
+	-- số lượng lô trong kiện hàng
 	CONSTRAINT PK_CP PRIMARY KEY (id_product,id_type,NumOrder,id_package),
 
 	CONSTRAINT FK_CONPACK_TO_PHYBAGS 
@@ -194,12 +210,15 @@ CREATE TABLE CONTAIN_PACKAGE(
 /******************************************************/
 
 /************************* GỒM (MAPPING TỪ ĐƠN HÀNG ĐẾN LÔ BAO GẠO) *****************************/
-CREATE TABLE CONTAIN_PHYBAGS(
+CREATE TABLE CONTAIN_PHYBAGS
+(
 	id_product CHAR(6) NOT NULL,
 	id_type CHAR(6) NOT NULL,
-	NumOrder CHAR(6) NOT NULL, -- ????
+	NumOrder CHAR(6) NOT NULL,
+	-- ????
 	id_bill CHAR(6) NOT NULL,
-	Quantity INT DEFAULT 1, --số lượng lô trong đơn hàng
+	Quantity INT DEFAULT 1,
+	--số lượng lô trong đơn hàng
 
 	CONSTRAINT PK_CPB PRIMARY KEY (id_product,id_type,NumOrder,id_bill),
 
@@ -213,7 +232,8 @@ CREATE TABLE CONTAIN_PHYBAGS(
 /******************************************************/
 
 /************************* NHÂN VIÊN VẬN CHUYỂN *****************************/
-CREATE TABLE SHIPPER (
+CREATE TABLE SHIPPER
+(
 	shipper_id CHAR(6) NOT NULL,
 	CONSTRAINT PK_SHIPEMP PRIMARY KEY (shipper_id),
 
@@ -222,14 +242,16 @@ CREATE TABLE SHIPPER (
 /******************************************************/
 
 /************************* PHƯƠNG TIỆN *****************************/
-CREATE TABLE VECHILE (
+CREATE TABLE VECHILE
+(
 	id_vechile CHAR(6) NOT NULL,
 	CONSTRAINT PK_VECHILE PRIMARY KEY (id_vechile)
 )
 /******************************************************/
 
 /************************* CÔNG TY SẢN SUẤT *****************************/
-CREATE TABLE COMPANY_PRODUCT (
+CREATE TABLE COMPANY_PRODUCT
+(
 	company_name VARCHAR(30) NOT NULL,
 	hotline VARCHAR(15),
 	CONSTRAINT PK_COMPANY_PRODUCT PRIMARY KEY (company_name)
@@ -237,7 +259,8 @@ CREATE TABLE COMPANY_PRODUCT (
 /******************************************************/
 
 /************************* SẢN XUẤT *****************************/
-CREATE TABLE PRODUCTION (
+CREATE TABLE PRODUCTION
+(
 	id_product CHAR(6) NOT NULL,
 	company_name VARCHAR(30) NOT NULL,
 	CONSTRAINT PK_PRODUCTION PRIMARY KEY (id_product,company_name),
@@ -271,22 +294,56 @@ create function cost_bill (@bill_id char(6))
 returns decimal(15,3)
 as
 begin
-	declare @final_cost decimal(15,3);	-- giá trả về
-	if (LEFT(@bill_id,2) = 'BM') -- parameter validation, only accept id with 'BM' PREFIX
+	declare @final_cost decimal(15,3);
+	-- giá trả về
+	if (LEFT(@bill_id,2) = 'BM')		-- parameter validation, only accept id with 'BM' PREFIX
 		begin
-			
-			declare @gia_soLuong table(gia decimal(10,0), soLuong int);			-- mã gạo
 
-			insert into @gia_soLuong
-			select loaiBao.price_Bags, rela_gom_donHang_loBaoGao.Quantity
-			from CONTAIN_PHYBAGS as rela_gom_donHang_loBaoGao join TYPE_OF_BAGS as loaiBao on rela_gom_donHang_loBaoGao.id_product = loaiBao.id_pro
-			where rela_gom_donHang_loBaoGao.id_bill = @bill_id;
+		declare @gia_soLuong table(gia decimal(10,0),
+			soLuong int);
 
-			set @final_cost = (select sum(gia*soLuong) from @gia_soLuong);
-			if (@final_cost > 0)
+		insert into @gia_soLuong
+		select loaiBao.price_Bags, rela_gom_donHang_loBaoGao.Quantity
+		from CONTAIN_PHYBAGS as rela_gom_donHang_loBaoGao join TYPE_OF_BAGS as loaiBao on rela_gom_donHang_loBaoGao.id_product = loaiBao.id_pro
+		where rela_gom_donHang_loBaoGao.id_bill = @bill_id;
+
+		set @final_cost = (select sum(gia*soLuong)
+		from @gia_soLuong);
+		if (@final_cost > 0)
 				return @final_cost;
 			else 
 				return null;
-		end
+	end
 	return null;
+end
+
+/*	Function to calculate total value of all bills for each type of rice ()
+*/
+GO
+create or alter function total_revenue ()
+returns @ret_table table
+(
+	-- columns returned by the function
+	maGao char(6) primary key not null,
+	soLuongDon int not null,
+	doanhThu decimal(10,2) not null	
+)
+as
+begin
+	declare @tempTable table (
+		maGao char(6),
+		maHoaDon char(6),
+		cost_bill decimal(15,3)
+							)
+	insert into @tempTable
+	select id_product as maGao, id_bill as maHoaDon, dbo.cost_bill(id_bill) as cost_bill
+	from CONTAIN_PHYBAGS
+	group by id_product, id_bill;
+
+	insert into @ret_table
+	select maGao, COUNT(maHoaDon) as soLuongDon, SUM(cost_bill) as doanhThu
+	from @tempTable
+	group by maGao;
+
+	return
 end
