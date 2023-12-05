@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+.container{
+    margin-top: 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+.col-md-5 img{
+    padding-top: 40px;
+    display: block;
+    max-width: 100%;
+    height: auto;
+
+}
+
+.col-md-7 h2{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-weight: 600;
+    position: relative;
+    color: #12263a;
+    margin: 1rem 0;
+}
+.rating span{
+    font-weight: 600;
+    color: #252525;
+}
+.rating{
+    color: orange;
+}
+.divider-line {
+    border-bottom: 1px solid #252525; /* Màu và kiểu đường kẻ */
+    margin-bottom: 15px; /* Khoảng cách dưới kẻ đường */
+    padding-bottom: 15px; /* Khoảng cách giữa kẻ đường và các phần tử phía dưới */
+}
+
+
+/* Phần hình ảnh sản phẩm */
+
+/* Phần thông tin sản phẩm */
+.col-md-7 {
+    padding: 10px;
+}
+
+h2 {
+    color: #333;
+}
+
+.price {
+    color: green; /* Màu đỏ cho giá sản phẩm */
+    font-size: 26px;
+    padding-top: 10px;
+}
+
+/* Phần mô tả sản phẩm */
+p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Phần Thông tin chung sản phẩm */
+.CommonInform li{
+    list-style: none;
+    padding: 0;
+    background: url(/assets/wheat-sack.png) left center no-repeat;
+    background-size: 18px;
+    padding-left: 1.7rem;
+    margin: 0.4rem 0;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
