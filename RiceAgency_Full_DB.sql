@@ -36,7 +36,7 @@ create table [ADDRESS]
 	city varchar(50) not null,
 	primary key (userid, house_num, street, city),
 	constraint fk_uid_address foreign key (userid) references [user] (userid) 
-	on delete cascade
+	-- on delete cascade
 	on update cascade
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE [ACCOUNT]
 	userid char(6),
 	PRIMARY KEY(Username),
 	constraint fk_uid_account foreign key (userid) references [user] (userid)
-	on delete cascade
+	-- on delete cascade
 	on update cascade
 );
 
@@ -58,7 +58,7 @@ create table EMPLOYEE
 	manager_id char(6) NOT NULL,
 	primary key (employee_id),
 	constraint fk_empid_uid foreign key (employee_id) references [user] (userid)
-	on delete cascade
+	-- on delete cascade
 	on update cascade
 );
 
@@ -66,7 +66,7 @@ create table CUSTOMER
 (
 	customer_id char(6) PRIMARY KEY,
 	constraint fk_uid_customer foreign key (customer_id) references [user] (userid)
-	on delete cascade
+	-- on delete cascade
 	on update cascade
 );
 
@@ -74,7 +74,7 @@ create table SELLER
 (
 	seller_id char(6) PRIMARY KEY,
 	constraint fk_empid_seller foreign key (seller_id) references employee (employee_id)
-	on delete cascade
+	-- on delete cascade
 	on update cascade
 );
 
@@ -111,7 +111,7 @@ CREATE TABLE TYPE_OF_BAGS
 	CONSTRAINT PR_TYPEBAGS PRIMARY KEY(id_pro, id_type),
 
 	CONSTRAINT FK_TOBPRO_TO_IDPRO FOREIGN KEY (id_pro) REFERENCES [PRODUCT](id_product)
-	ON DELETE CASCADE
+	-- on delete cascade
 	ON UPDATE CASCADE,
 
 	CHECK (
@@ -285,7 +285,7 @@ add constraint fk_manager_id foreign key (manager_id) references employee (emplo
 
 alter table BILL
 add CONSTRAINT FK_BILL_TO_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
-	ON DELETE CASCADE
+	-- on delete cascade
 	ON UPDATE CASCADE;
 
 alter table BILL
