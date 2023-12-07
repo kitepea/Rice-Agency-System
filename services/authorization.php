@@ -10,4 +10,5 @@ if (!isset($_SESSION['id'])) {
         "status_code" => 200,
         "status_message" => getStatusCode(200)
     );
+    echo json_encode($data);
 }
