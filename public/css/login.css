@@ -1,0 +1,58 @@
+body {
+  background-image: url("/assets/rice.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.wrapper {
+  margin-top: 100px;
+  height: max-content;
+  width: 32%;
+  border-radius: 4px;
+  border: 1px solid var(--gray-100, #e4e7e9);
+  background: var(--gray-00, #fff);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12);
+}
+
+.btn {
+  background-color: var(--primary-500, #fa8232);
+}
+
+/* ANIMATIONS */
+
+/* Simple CSS3 Fade-in-down Animation */
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
