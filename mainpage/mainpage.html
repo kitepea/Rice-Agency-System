@@ -27,7 +27,9 @@
 <body>
     <!-- Navigation-->
     <div class="container nav-bar my-3">
-        <img src="/assets/logo.png" alt="" class="logo">
+        <a href="./mainpage.html">
+            <img src="/assets/logo.png" class="logo">
+        </a>
         <div class="input-group rounded mx-5">
             <input type="search" class="form-control rounded" placeholder="Tìm kiếm..." aria-label="Search"
                 aria-describedby="search-addon" />
@@ -46,7 +48,9 @@
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modaledit">Chỉnh sửa mặt
                         hàng</a>
                 </li>
-                <li><a class="dropdown-item" href="/login/index.html">Logout</a></li>
+                <li><a class="dropdown-item" href="./statistical.html">Thống Kê</a></li>
+                <li><a class="dropdown-item" href="./login/index.html">Logout</a></li>
+
             </ul>
         </div>
     </div>
@@ -107,7 +111,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Thêm</button>
-                    <button type="button" class="btn btn-danger">Hủy</button>
+                    <button type="button" class="btn btn-danger" aria-label="Close" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </div>
         </div>
@@ -173,7 +177,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Cập Nhập</button>
-                    <button type="button" class="btn btn-danger">Hủy</button>
+                    <button type="button" class="btn btn-danger" aria-label="Close" data-bs-dismiss="modal">Hủy</button>
                 </div>
             </div>
         </div>
@@ -228,7 +232,7 @@
                         <!-- Product actions-->
                         <div class="d-flex flex-row justify-content-around card-footer pt-0 border-top-0">
                             <div class="text-center"><a class="btn mt-auto bg-primary text-white" style="width: 80px;"
-                                    href="/mainpage/view.html">View</a>
+                                    href="./view.html">View</a>
                             </div>
                             <div class="text-center"><a class="btn  mt-auto bg-danger text-white" style="width: 80px;"
                                     href="#">Delete</a>

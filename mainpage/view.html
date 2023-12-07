@@ -28,7 +28,9 @@
 <body>
     <!-- Navigation-->
     <div class="container nav-bar my-3">
-        <img src="/assets/logo.png" alt="" class="logo">
+        <a href="./mainpage.html">
+            <img src="/assets/logo.png" alt="" class="logo">
+        </a>
         <div class="input-group rounded mx-5">
             <input type="search" class="form-control rounded" placeholder="Tìm kiếm..." aria-label="Search"
                 aria-describedby="search-addon" />
@@ -42,22 +44,85 @@
                 <i class="bi bi-person"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownProfileButton">
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modaladd">Thêm mặt
-                        hàng</a>
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modaledit">Chỉnh sửa mặt
                         hàng</a>
                 </li>
-                <li><a class="dropdown-item" href="/login/index.html">Logout</a></li>
+                <li><a class="dropdown-item" href="../login/index.html">Logout</a></li>
             </ul>
+        </div>
+    </div>
+    <div class="modal" id="modaledit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chỉnh sửa mặt hàng</h5>
+                    <button type="button" class="btn-close btn-close-red " aria-label="Close"
+                        data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label>Nhập mã mặt hàng cần chỉnh sửa</label>
+                            <input type="text" class="form-control" placeholder="Mã mặt hàng có dạng PMXXXX">
+                        </div>
+                        <div class="mb-3">
+                            <label>Nhập tên mới</label>
+                            <input type="text" class="form-control" placeholder="Nhập tên mới...">
+                        </div>
+                        <div class="mb-3">
+                            <label>Loại bao(kg)</label>
+                            <select>
+                                <option value="...">...</option>
+                                <option value="2kg">2kg</option>
+                                <option value="5kg">5kg</option>
+                                <option value="10kg">10kg</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Giá/bao</label>
+                            <input type="number" class="form-control" placeholder="Nhập Giá mới (VND)">
+                        </div>
+                        <div class="mb-3">
+                            <label>Nhà sản xuất</label>
+                            <input type="text" class="form-control" placeholder="NSX...">
+                        </div>
+                        <div class="mb-3">
+                            <label>Hình ảnh</label>
+                            <input type="file" class="form-control" placeholder="NSX...">
+                        </div>
+                        <div class="mb-3">
+                            <label>Đặc tính</label>
+                            <input type="text" class="form-control" placeholder="Thơm/dẻo...">
+                        </div>
+                        <label for="moTaSanPham">Chỉnh sửa mô tả:</label>
+                        <div class="mb-3">
+                            <textarea id="moTaSanPham" class="form-control" placeholder="Mô tả sản phẩm..." rows="5"
+                                cols="50"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label> Ngày sản suất</label>
+                            <input type="date">
+                        </div>
+                        <div class="mb-3">
+                            <label> Hạn sử dụng</label>
+                            <input type="date">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Cập Nhập</button>
+                    <button type="button" class="btn btn-danger" aria-label="Close" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </div>
         </div>
     </div>
     <section class="py-3">
         <div class="container">
             <div class="row">
-                
+
                 <div class="col-md-5">
                     <img class="img-fluid w-100"
-                    src="https://giagao.com/wp-content/uploads/2020/01/gao-ST25-lua-tom.jpg" alt="" />
+                        src="https://giagao.com/wp-content/uploads/2020/01/gao-ST25-lua-tom.jpg" alt="" />
                 </div>
                 <div class="col-md-7 order-md-last">
                     <div>
@@ -71,24 +136,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "rating divider-line">
-                        <i class = "fas fa-star"></i>
-                        <i class = "fas fa-star"></i>
-                        <i class = "fas fa-star"></i>
-                        <i class = "fas fa-star"></i>
-                        <i class = "fas fa-star-half-alt"></i>
+                    <div class="rating divider-line">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
                         <span>4.6</span>
-                      </div>
+                    </div>
                     <div class="price">
-                        <p class= "price"><b>GIÁ:</b> 37.000đ</p>
+                        <p class="price"><b>GIÁ:</b> 37.000đ</p>
                     </div>
                     <h4>Mô tả sản phẩm</h4>
-                    <p>Gạo Ông Cua ST25 là loại gạo cao cấp từ Việt Nam, nổi tiếng với hạt dài mềm mịn, 
-                        hương thơm đặc trưng và chất lượng tốt.Đạt giải gạo ngon nhất thế giới 2019, được phát triển 
-                        bởi người nông dân Nguyễn Văn Cường. Gạo này thu hút sự quan tâm của người tiêu dùng và đầu bếp 
+                    <p>Gạo Ông Cua ST25 là loại gạo cao cấp từ Việt Nam, nổi tiếng với hạt dài mềm mịn,
+                        hương thơm đặc trưng và chất lượng tốt.Đạt giải gạo ngon nhất thế giới 2019, được phát triển
+                        bởi người nông dân Nguyễn Văn Cường. Gạo này thu hút sự quan tâm của người tiêu dùng và đầu bếp
                         toàn cầu với vị ngon độc đáo và quá trình chăm sóc tỉ mỉ từ người nông dân</p>
                     <h4>Thông tin chung</h4>
-                        <ul class="CommonInform">
+                    <ul class="CommonInform">
                         <li><b>Nguồn gốc:</b> <span>Thanh Hóa</span></li>
                         <li><b>Loại bao:</b> <span>5kg</span></li>
                         <li><b>Lượng tồn kho:</b> <span>100</span></li>
@@ -110,10 +175,10 @@
                         </tr>
                     </table>
                 </div>
-            </div> 
+            </div>
         </div>
-        </section>
-   
+    </section>
+
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
