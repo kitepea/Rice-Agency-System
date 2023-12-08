@@ -504,34 +504,16 @@ GO
 CREATE OR ALTER PROCEDURE getAllRevenueOfProduct
 AS
 BEGIN
-	DECLARE @newTable table (
-		maGao char(6),
-		maBao char(6),
-		soLuongBao int ,
-		doanhThu decimal(10,2)
-		)
-	DECLARE @id_prod CHAR(6);
-
-	DECLARE prod_cursor CURSOR LOCAL FOR
-		SELECT id_product
-	FROM CONTAIN_PHYBAGS
-	GROUP BY id_product
-
-	OPEN prod_cursor
-	FETCH NEXT FROM prod_cursor INTO @id_prod
-
-	WHILE @@FETCH_STATUS = 0
-		BEGIN
-		-- Select rows from a return table from getRevenueOfProduct with each id_product
-		INSERT INTO @newTable
-		SELECT *
-		FROM getRevenueOfProduct(@id_prod)
-		FETCH NEXT FROM prod_cursor INTO @id_prod
-		END
-
-	SELECT * FROM @newTable
-	CLOSE prod_cursor
-	DEALLOCATE prod_cursor
-
+	select id_product AS maGao, loaiBao.id_type AS maLoai, SUM(Quantity) AS soBao, SUM(loaibao.price_Bags) AS doanhThu, id_bill
+		from
+			CONTAIN_PHYBAGS as rela_gom_donHang_loBaoGao
+			join
+			TYPE_OF_BAGS as loaiBao on (
+				rela_gom_donHang_loBaoGao.id_product = loaiBao.id_pro
+				AND rela_gom_donHang_loBaoGao.id_type = loaiBao.id_type
+			)
+		GROUP BY id_product, loaiBao.id_type, id_bill;
 
 END
+
+EXEC getAllRevenueOfProduct
