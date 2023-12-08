@@ -504,16 +504,23 @@ GO
 CREATE OR ALTER PROCEDURE getAllRevenueOfProduct
 AS
 BEGIN
-	select id_product AS maGao, loaiBao.id_type AS maLoai, SUM(Quantity) AS soBao, SUM(loaibao.price_Bags) AS doanhThu, id_bill
+	select rela_gom_donHang_loBaoGao.id_product AS maGao, PRODUCT.PName AS TenGao, loaiBao.id_type AS maLoai, SUM(Quantity) AS soBao, SUM(loaibao.price_Bags) AS doanhThu, id_bill
 		from
-			CONTAIN_PHYBAGS as rela_gom_donHang_loBaoGao
-			join
-			TYPE_OF_BAGS as loaiBao on (
+			CONTAIN_PHYBAGS AS rela_gom_donHang_loBaoGao
+			JOIN
+			TYPE_OF_BAGS AS loaiBao ON (
 				rela_gom_donHang_loBaoGao.id_product = loaiBao.id_pro
 				AND rela_gom_donHang_loBaoGao.id_type = loaiBao.id_type
 			)
-		GROUP BY id_product, loaiBao.id_type, id_bill;
-
+			JOIN PRODUCT ON rela_gom_donHang_loBaoGao.id_product = PRODUCT.id_product
+		GROUP BY rela_gom_donHang_loBaoGao.id_product, PRODUCT.PName, loaiBao.id_type, id_bill;
 END
 
-EXEC getAllRevenueOfProduct
+GO
+CREATE OR ALTER PROCEDURE getAllPnameHasBeenSold
+AS
+BEGIN
+	SELECT PRODUCT.Pname
+	FROM CONTAIN_PHYBAGS JOIN PRODUCT ON CONTAIN_PHYBAGS.id_product = PRODUCT.id_product
+	GROUP BY PRODUCT.Pname;
+END
