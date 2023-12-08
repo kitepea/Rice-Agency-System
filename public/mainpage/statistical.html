@@ -9,7 +9,7 @@
     <title>Thống Kê</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/mainpage.css">
     <link rel="stylesheet" href="../css/statistical.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -20,15 +20,14 @@
     <!--Bootstrap for pop up-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="./statistical.js"></script>
 
-
-    <!--  -->
 </head>
 
 <body>
     <div class="container nav-bar my-3">
         <a href="./mainpage.html">
-            <img src="/assets/logo.png" alt="" class="logo">
+            <img src="../assets/logo.png" alt="" class="logo">
         </a>
         <div class="input-group rounded mx-5">
             <input type="search" class="form-control rounded" placeholder="Tìm kiếm..." aria-label="Search"
@@ -54,17 +53,19 @@
             data-bs-toggle="dropdown" aria-expanded="false">
             Chọn mặt hàng
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownProfileButton">
-            <li><a class="dropdown-item" href="#" id="#stastical" onclick="show()">Gạo Ông Cua</a>
+        <ul id="product-selection" class="dropdown-menu" aria-labelledby="dropdownProfileButton">
+            <!-- Lay ten tat ca cac loai gao da ban -->
+            <script>fetchAllPriceName()</script>
+
         </ul>
+
     </div>
 
-    <div class="container" id="stastical" style="display: none;">
-
+    <div class="container" id="statistical-container" style="display: none;">
         <div class="cardBox">
             <div class="card">
                 <div>
-                    <div class="number">350</div>
+                    <div class="number" id="Tong-so-bao"></div>
                     <div class="cardName">Tổng Số Bao</div>
                 </div>
                 <div class="iconBx">
@@ -73,7 +74,7 @@
             </div>
             <div class="card">
                 <div>
-                    <div class="number">100,000,000</div>
+                    <div class="number" id="Tong-doanh-thu"></div>
                     <div class="cardName">Doanh thu(VND) </div>
                 </div>
                 <div class="iconBx">
@@ -84,15 +85,15 @@
 
         <div class="chart">
             <div class="card">
-                <div class="card-body">
-                    Tổng Bao
+                <div class="card-body Tong-bao">
+                    Tổng bao mà từng loại bao bán được
                     <hr>
                     <canvas id="Chart-1"></canvas>
                 </div>
             </div>
             <div class="card">
-                <div class="card-body">
-                    Doanh thu
+                <div class="card-body Doanh-thu">
+                    Doanh thu từng loại bao
                     <hr>
                     <canvas id="Chart-2"></canvas>
                 </div>
@@ -128,10 +129,13 @@
 
     <!--Using ChartJS Library-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
     <!--Chart Doanh Thu-->
     <script>
         const ctx2 = document.getElementById('Chart-2');
-        new Chart(ctx2,
+
+        chart2 = new Chart(ctx2,
             {
                 type: 'bar',
                 data:
@@ -140,45 +144,7 @@
                     datasets:
                         [
                             {
-                                label: 'Jan to April',
-                                data: [1500000, 1900000, 3000000],
-                                backgroundColor:
-                                    [
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(153, 102, 255, 0.2)'
-                                    ],
-                                borderColor:
-                                    [
-                                        'rgb(255, 99, 132)',
-                                        'rgb(255, 99, 132)',
-                                        'rgb(255, 99, 132)',
-                                        'rgb(255, 159, 64)',
-                                        'rgb(153, 102, 255)'
-                                    ],
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'May to Aug',
-                                data: [10000000, 9000000, 800000],
-                                backgroundColor:
-                                    [
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)'
-                                    ],
-                                borderColor:
-                                    [
-                                        'rgb(255, 159, 64)',
-                                        'rgb(255, 159, 64)',
-                                        'rgb(255, 159, 64)'
-                                    ],
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'Sep to Dec',
+                                label: 'Doanh thu',
                                 data: [11500000, 9500000, 8300000],
                                 backgroundColor:
                                     [
@@ -219,7 +185,7 @@
     <!--Chart So Luong Bao-->
     <script>
         const ctx1 = document.getElementById('Chart-1');
-        new Chart(ctx1,
+        chart1 = new Chart(ctx1,
             {
                 type: 'doughnut',
                 data:
@@ -236,7 +202,8 @@
                                     'rgb(255, 205, 86)'
                                 ],
                             hoverOffset: 4
-                        }]
+                        }
+                    ]
                 },
 
                 options:
@@ -244,17 +211,6 @@
                     responsive: true
                 }
             });
-    </script>
-    <script>
-        function show() {
-            var stasticalDiv = document.getElementById('stastical');
-            if (stasticalDiv.style.display === 'none') {
-                stasticalDiv.style.display = 'block';
-            }
-            else {
-                stasticalDiv.style.display = 'none';
-            }
-        }
     </script>
 </body>
 

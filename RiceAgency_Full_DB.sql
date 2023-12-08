@@ -2,7 +2,13 @@
 -- QUAN --
 USE master;
 GO
-DROP DATABASE IF EXISTS Rice_Agency;
+IF EXISTS (SELECT name
+FROM master.sys.databases
+WHERE name = N'Rice_Agency')
+BEGIN
+	ALTER DATABASE Rice_Agency SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DATABASE Rice_Agency;
+END;
 GO
 CREATE DATABASE Rice_Agency;
 GO
@@ -443,75 +449,78 @@ values
 	('PM1001', N'thơm Thái', N'Khi nấu xong, gạo sẽ có độ dẻo mềm vừa phải và rất thơm.', N'Hạt dài, màu trắng trong và ít bạc bụng', 'Vietnam', 'https://khogaomientay.com.vn/uploads/images/image(4).png'),
 	('PM1002', N'Bắc Hương', N'Hạt gạo Bắc Hương nhỏ dài và có màu trắng trong. Khi nấu xong gạo có độ dẻo nhiều và độ dính cao. Cơm khi để nguội vẫn giữ được độ dẻo và mùi thơm đặc trưng.', N'Hạt nhỏ dài và có màu trắng trong', 'Vietnam', 'https://gaogiasi.com.vn/uploads/noidung/gao-bac-huong-0-167.jpg'),
 	('PM1003', N'Tám Xoan', N'Với hạt gạo hơi dài, thon nhỏ và vẹo một đầu, bạn sẽ dễ dàng nhận ra gạo Tám Xoan. Hạt của chúng có màu trong xanh, không bị bạc bụng, mùi thơm lại dịu và rất tự nhiên.', N'Hạt nhỏ dài và có màu trắng trong, dẻo và độ dính', 'Vietnam', 'https://down-vn.img.susercontent.com/file/f37eb203adc72dbc2ad840f956eba3dc'),
-	('PM1004', N'ST24', N'Gạo ST24 có dáng dài và dẹt, màu trắng trong, mang mùi thơm lá dứa tự nhiên. Khi nấu cho cơm mềm dẻo với hương thơm của lá dứa. Điều đặc biệt ở gạo ST24 là càng để nguội ăn càng ngon, hạt gạo vẫn giữ được độ mềm dẻo mà không bị cứng.', N'Hạt có dáng dài và dẹt, màu trắng trong', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/08/gao-ST24_AAN.jpg'),
+	('PM1004', N'ST24', N'Gạo ST24 có dáng dài và dẹt, màu trắng trong, mang mùi thơm lá dứa tự nhiên. Khi nấu cho cơm mềm dẻo với hương thơm của lá dứa. Điều đặc biệt ở gạo ST24 là càng để nguội ăn càng ngon, hạt gạo vẫn giữ được độ mềm dẻo mà không bị cứng.', N'Hạt có dáng dài và dẹt, màu trắng trong', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/08/gao-ST24_AAN.jpg'),
 	('PM1005', N'Hàm Châu', N'Với dáng vẻ bên ngoài giống như các loại gạo khác, gạo Hàm Châu với hương thơm tự nhiên, vị ngọt đậm. Gạo khi nấu xong nở và xốp, rất thích hợp để làm món cơm chiên.', N'Hạt có hương thơm tự nhiên, vị ngọt đậm', 'Vietnam', 'https://gaosachonline.com/wp-content/uploads/2018/05/gao-ham-chau-dong-tui.png'),
 	('PM1006', N'Nàng Xuân', N'Là sự lai tạo của hai giống lúa Tám Xoan và KhaoDawk Mali (Thái Lan), gạo Nàng Xuân có hạt thon dài. Cơm khi nấu xong mềm dẻo, ngọt và có mùi thơm đặc trưng.', N'Hạt thon dài, khi nấu mềm dẻo, ngọt', 'Vietnam', 'https://gaochatluong.com/wp-content/uploads/2023/03/gao-nang-xuan-removebg-preview.png'),
 	('PM1007', N'Tài Nguyên', N'Khác với những hạt gạo trắng trong, hạt gạo Tài Nguyên có màu trắng đục. Khi nấu sẽ cho cơm ráo, mềm, xốp, ngọt cơm. Đặc biệt, cơm vẫn ngon khi để nguội.', N'Hạt có màu trắng đục', 'Vietnam', 'https://product.hstatic.net/1000362335/product/14_9eedb99655254a0dbdaa78657657cfbf_master.png'),
-	('PM1008', N'thơm Jasmine', N'Hạt gạo thơm Jasmine dài và màu trắng bóng rất đẹp mắt. Khi nấu cho cơm dẻo vừa và có mùi thơm nhẹ, được nhiều người ưa chuộng.', N'Hạt gạo thơm lài dài và màu trắng bóng ', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/08/gao-Jasmine_AAN.jpg'),
+	('PM1008', N'thơm Jasmine', N'Hạt gạo thơm Jasmine dài và màu trắng bóng rất đẹp mắt. Khi nấu cho cơm dẻo vừa và có mùi thơm nhẹ, được nhiều người ưa chuộng.', N'Hạt gạo thơm lài dài và màu trắng bóng', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/08/gao-Jasmine_AAN.jpg'),
 	('PM1009', N'ST25', N'Hạt gạo ST25 có mùi thơm đặc trưng của lá dứa hòa quyện với mùi thơm của cốm non rất dễ ngửi thấy kể cả khi gạo còn sống. Hơn thế nữa cơm được nấu từ gạo ST25 là loại cơm "cực phẩm" với hạt cơm khô ráo, độ dẻo, thơm nhất định và vị ngọt thanh đến từ tinh bột gạo hảo hạng, khi để nguội cũng khô bị khô cứng.', N'Hạt có mùi thơm đặc trưng', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/10/gao-ST25-hut-chan-khong-5kg-600x600.jpg'),
-	('PM1010', N'Tám Thái đỏ', N'Được lai tạo từ gạo Hom Mali (Thái Lan), gạo Tám Thái đỏ có hạt nhỏ, dài đều, căng bóng, màu đục. Cơm chín có vị dẻo dai, màu cơm trắng hồng và có độ kết dính vừa phải.', N'Hạt nhỏ, dài đều, căng bóng, màu đục', 'Vietnam', 'http://cefvina.com.vn/wp-content/uploads/2018/07/3vFQHlMPPapyM2tj56Z1_simg_de2fe0_250x250_maxb.jpg'),
+	('PM1010', N'Tám Thái đỏ', N'Được lai tạo từ gạo Hom Mali (Thái Lan), gạo Tám Thái đỏ có hạt nhỏ, dài đều, căng bóng, màu đục. Cơm chín có vị dẻo dai, màu cơm trắng hồng và có độ kết dính vừa phải.', N'Hạt nhỏ, dài đều, căng bóng, màu đục', 'Vietnam', 'http://cefvina.com.vn/wp-content/uploads/2018/07/3vFQHlMPPapyM2tj56Z1_simg_de2fe0_250x250_maxb.jpg'),
 	('PM1011', N'Lứt', N'Gạo lứt với lớp cám gạo chưa được xay xát, có màu tím hoặc đỏ, mang đến hàm lượng dinh dưỡng dồi dào cho người tiêu dùng. Gạo lứt có các loại như: gạo lứt đỏ, gạo lứt đen, gạo lứt tẻ, gạo lứt nếp. Khi nấu, gạo cũng cần được nấu lâu hơn gạo trắng để đạt được độ mềm như mong muốn.', N'Hạt có màu tím hoặc đỏ', 'Vietnam', 'https://gaophuongnam.vn/thumbs/560x640x1/upload/product/gao-lut-dien-bien-do-4618.jpg'),
 	('PM1012', N'Tám Điện Biên', N'Nổi tiếng với hương thơm và độ dẻo như nếp, tám Điện Biên có gạt gạo nhỏ, đều, căng bóng và hơi đục. Dù bề ngoài không được bắt mắt, cơm khi nấu xong lại cho ra những chén cơm thơm phức, dẻo ngọt khiến ai cũng phải thay đổi suy nghĩ về loại gạo này.', N'Hạt gạo nhỏ, đều, căng bóng và hơi đục', 'Vietnam', 'https://gaogiasi.com.vn/uploads/noidung/gao-tam-dien-bien-0-400.jpg');
 
 ALTER TABLE [PRODUCT] CHECK CONSTRAINT ALL;
 
---------------------------------------------------------------------------------
 
 GO
-create function cost_bill (@bill_id char(6))
-returns decimal(15,3)
-as
-begin
-	declare @final_cost decimal(15,3);
-	-- giá trả về
-	if (LEFT(@bill_id,2) = 'BM')		-- parameter validation, only accept id with 'BM' PREFIX
-		begin
-
-		declare @gia_soLuong table(gia decimal(10,0),
-			soLuong int);
-
-		insert into @gia_soLuong
-		select loaiBao.price_Bags, rela_gom_donHang_loBaoGao.Quantity
-		from CONTAIN_PHYBAGS as rela_gom_donHang_loBaoGao join TYPE_OF_BAGS as loaiBao on rela_gom_donHang_loBaoGao.id_product = loaiBao.id_pro
-		where rela_gom_donHang_loBaoGao.id_bill = @bill_id;
-
-		set @final_cost = (select sum(gia*soLuong)
-		from @gia_soLuong);
-		if (@final_cost > 0)
-				return @final_cost;
-			else 
-				return null;
-	end
-	return null;
-end
-
-/*	Function to calculate total value of all bills for each type of rice ()
-*/
-GO
-create or alter function total_revenue ()
+create or alter function getRevenueOfProduct (@maGao CHAR(6))
 returns @ret_table table
 (
 	-- columns returned by the function
-	maGao char(6) primary key not null,
-	soLuongDon int not null,
-	doanhThu decimal(10,2) not null	
+	maGao char(6) not null,
+	maBao char(6) not null,
+	soLuongBao int ,
+	doanhThu decimal(10,2)
+		PRIMARY KEY(maGao, maBao)
 )
 as
 begin
-	declare @tempTable table (
-		maGao char(6),
-		maHoaDon char(6),
-		cost_bill decimal(15,3)
-							)
-	insert into @tempTable
-	select id_product as maGao, id_bill as maHoaDon, dbo.cost_bill(id_bill) as cost_bill
-	from CONTAIN_PHYBAGS
-	group by id_product, id_bill;
 
-	insert into @ret_table
-	select maGao, COUNT(maHoaDon) as soLuongDon, SUM(cost_bill) as doanhThu
-	from @tempTable
-	group by maGao;
-
+	if (LEFT(@maGao,2) = 'PM') 
+		BEGIN
+		insert into @ret_table
+		select id_product AS maGao, loaiBao.id_type AS maLoai, SUM(Quantity) AS soBao, SUM(loaibao.price_Bags) AS doanhThu
+		from
+			CONTAIN_PHYBAGS as rela_gom_donHang_loBaoGao
+			join
+			TYPE_OF_BAGS as loaiBao on (
+				rela_gom_donHang_loBaoGao.id_product = loaiBao.id_pro
+				AND rela_gom_donHang_loBaoGao.id_type = loaiBao.id_type
+			)
+		WHERE id_product = @maGao
+		GROUP BY id_product, loaiBao.id_type;
+	END
+	ELSE
+		BEGIN
+		INSERT INTO @ret_table
+		VALUES
+			('------', '------', null, null);
+	END
 	return
 end
+
+GO
+-- Create the stored procedure to print revenue of all id_product
+CREATE OR ALTER PROCEDURE getAllRevenueOfProduct
+AS
+BEGIN
+	select rela_gom_donHang_loBaoGao.id_product AS maGao, PRODUCT.PName AS TenGao, loaiBao.id_type AS maLoai, SUM(Quantity) AS soBao, SUM(loaibao.price_Bags) AS doanhThu, id_bill
+		from
+			CONTAIN_PHYBAGS AS rela_gom_donHang_loBaoGao
+			JOIN
+			TYPE_OF_BAGS AS loaiBao ON (
+				rela_gom_donHang_loBaoGao.id_product = loaiBao.id_pro
+				AND rela_gom_donHang_loBaoGao.id_type = loaiBao.id_type
+			)
+			JOIN PRODUCT ON rela_gom_donHang_loBaoGao.id_product = PRODUCT.id_product
+		GROUP BY rela_gom_donHang_loBaoGao.id_product, PRODUCT.PName, loaiBao.id_type, id_bill;
+END
+
+GO
+CREATE OR ALTER PROCEDURE getAllPnameHasBeenSold
+AS
+BEGIN
+	SELECT PRODUCT.Pname
+	FROM CONTAIN_PHYBAGS JOIN PRODUCT ON CONTAIN_PHYBAGS.id_product = PRODUCT.id_product
+	GROUP BY PRODUCT.Pname;
+END
