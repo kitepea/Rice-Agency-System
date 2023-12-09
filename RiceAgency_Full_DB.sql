@@ -178,9 +178,10 @@ CREATE TABLE DELIVERY_TRIP
 	expect_receive_day DATE,
 	actual_receive_day DATE,
 	shipper_id CHAR(6) NOT NULL,
-	id_vechile CHAR(6) NOT NULL,
+	id_vechile CHAR(11) NOT NULL,
 
-	CONSTRAINT PK_Deli PRIMARY KEY (id_DelivTrip)
+	CONSTRAINT PK_Deli PRIMARY KEY (id_DelivTrip),
+	CHECK ([status] = 'Waiting' OR [status] = 'Delivering' OR [status] = 'Done' OR [status] = 'Cancelled')
 )
 /******************************************************/
 
@@ -259,7 +260,7 @@ CREATE TABLE SHIPPER
 /************************* PHƯƠNG TIỆN *****************************/
 CREATE TABLE VECHILE
 (
-	id_vechile CHAR(6) NOT NULL,
+	id_vechile CHAR(11) NOT NULL,
 	CONSTRAINT PK_VECHILE PRIMARY KEY (id_vechile)
 )
 /******************************************************/
@@ -331,7 +332,43 @@ values
 	('BM1019', '10-04-2023', 'Done', null, 'CM1019', 'EM1004', '423', N'Lê Lai', N'TP Hồ Chí Minh'),
 	('BM1020', '07-03-2023', 'Waiting', null, 'CM1020', 'EM1002', '236', N'Cách mạng tháng 8', N'TP Hồ Chí Minh');
 alter table bill check constraint all;
+/*********INSERT PHƯƠNG TIỆN, CHUYẾN GIAO HÀNG********/
+GO
+insert into VECHILE
+values
+	('51G8-12345'),
+	('29F3-11111'),
+	('33A1-67890'),
+	('23G7-69176'),
+	('80C8-77777'),
+	('79F5-18877');
 
+Alter table DELIVERY_TRIP NOCHECK CONSTRAINT ALL;
+insert into DELIVERY_TRIP
+values
+	('DM1001','Cancelled',null,null,'EM2002','29F3-11111'),
+	('DM1002','Done','27-02-2023','27-02-2023','EM2006','33A1-67890'),
+	('DM1003','Delivering','28-02-2023',NULL,'EM2003','34A8-88888'),
+	('DM1004','Waiting','29-04-2023',null,'EM2004','23G7-69176'),
+	('DM1005','Waiting','23-06-2023',NULL,'EM2005','80C8-77777'),
+	('DM1006','Done','25-07-2023','25-07-2023','EM2006','79F5-18877'),
+	('DM1007','Delivering','23-08-2023',NULL,'EM2007','51G8-66554'),
+	('DM1008','Done','12-09-2023','12-09-2023','EM2001','51G8-12345'),
+	('DM1009','Waiting','31-10-2023',NULL,'EM2008','80C8-77777'),
+	('DM1010','Waiting','28-11-2023',NULL,'EM2001','51G8-12345'),
+	('DM1011','Delivering','25-12-2023',NULL,'EM2001','23G7-69176'),
+	('DM1012','Cancelled',null,NULL,'EM2007','51G8-12345'),
+	('DM1013','Waiting','17-12-2023',NULL,'EM2003','51G8-12345'),
+	('DM1014','Cancelled',null,NULL,'EM2008','79F5-18877'),
+	('DM1015','Delivering','20-09-2023',NULL,'EM2008','23G7-69176'),
+	('DM1016','Delivering','25-07-2023',NULL,'EM2008','80C8-77777'),
+	('DM1017','Waiting','30-06-2023',NULL,'EM2008','23G7-69176'),
+	('DM1018','Done','20-05-2023','20-05-2023','EM2008','80C8-77777'),
+	('DM1019','Done','18-04-2023','17-04-2023','EM2008','80C8-77777'),
+	('DM1020','Waiting','25-03-2023',NULL,'EM2008','51G8-66554');
+Alter table DELIVERY_TRIP CHECK CONSTRAINT ALL;
+
+GO
 ALTER TABLE PACKAGE nocheck constraint all;
 insert into PACKAGE
 values
