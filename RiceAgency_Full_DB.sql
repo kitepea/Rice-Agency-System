@@ -532,3 +532,43 @@ BEGIN
 	FROM CONTAIN_PHYBAGS JOIN PRODUCT ON CONTAIN_PHYBAGS.id_product = PRODUCT.id_product
 	GROUP BY PRODUCT.Pname;
 END
+
+GO
+CREATE OR ALTER TRIGGER UpdateBillStatus
+ON PACKAGE
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @id_bill CHAR(6);
+	DECLARE @status VARCHAR(15);
+    DECLARE @packageCount INT;
+
+    SELECT @id_bill = id_bill FROM INSERTED;
+	SELECT @status = [status] FROM INSERTED;
+
+    IF UPDATE([status]) AND @status = 'Done'
+    BEGIN
+        SELECT @packageCount = COUNT(*)
+        FROM PACKAGE
+        WHERE id_bill = @id_bill AND status <> 'Done';
+
+        IF @packageCount = 0
+        BEGIN
+            UPDATE BILL SET [status] = 'Done'
+            WHERE id_bill = @id_bill;
+        END
+    END
+END
+
+
+
+/*
+UPDATE PACKAGE
+SET status = 'Done'
+where id_package = 'PK1016';
+go
+
+SELECT * FROM BILL;
+SELECT * FROM PACKAGE;
+go
+*/
