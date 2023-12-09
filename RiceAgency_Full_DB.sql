@@ -156,7 +156,7 @@ CREATE TABLE BILL
 (
 	id_bill CHAR(6) NOT NULL,
 	date_create DATE,
-	[status] VARCHAR(15) DEFAULT 'Unprocessed',
+	[status] VARCHAR(15) DEFAULT 'Waiting',
 	note NVARCHAR(200),
 	customer_id CHAR(6) NOT NULL,
 	seller_id CHAR(6) NOT NULL,
@@ -165,7 +165,7 @@ CREATE TABLE BILL
 	city nvarchar(50) NOT NULL,
 
 	CONSTRAINT PK_BILL PRIMARY KEY(id_bill),
-	CHECK ([status] = 'Unprocessed' OR [status] = 'Processed')
+	CHECK ([status] = 'Waiting' OR [status] = 'Delivering' OR [status] = 'Done' OR [status] = 'Cancelled')
 )
 
 /******************************************************/
@@ -189,7 +189,7 @@ CREATE TABLE PACKAGE
 (
 	id_package CHAR(6) NOT NULL,
 	id_bill CHAR(6) NOT NULL,
-	[status] VARCHAR(15) DEFAULT 'Not started',
+	[status] VARCHAR(15) DEFAULT 'Waiting',
 	id_DelivTrip CHAR(6) NOT NULL,
 
 	CONSTRAINT PK_PACKAGES PRIMARY KEY(id_package),
@@ -197,7 +197,7 @@ CREATE TABLE PACKAGE
 	CONSTRAINT FK_PACKAGE_TO_BILL FOREIGN KEY (id_bill) REFERENCES BILL(id_bill),
 	CONSTRAINT FK_PACKAGE_TO_DELTRIP FOREIGN KEY (id_DelivTrip) REFERENCES DELIVERY_TRIP(id_DelivTrip),
 
-	CHECK ([status] = 'Not started' OR [status] = 'Started' OR [status] = 'Complete')
+	CHECK ([status] = 'Waiting' OR [status] = 'Delivering' OR [status] = 'Done' OR [status] = 'Cancelled')
 )
 /******************************************************/
 
@@ -310,47 +310,55 @@ add CONSTRAINT FK_DELTRP_TO_VECHILE FOREIGN KEY (id_vechile) REFERENCES VECHILE(
 alter table bill nocheck constraint all;
 insert into bill
 values
-	('BM1001', '01-02-2023', 'Processed', null, 'CM1001', 'EM1001', '32', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1002', '01-02-2023', 'Processed', null, 'CM1002', 'EM1002', '234', N'Hoàng Diệu 2', N'TP Hồ Chí Minh'),
-	('BM1003', '21-02-2023', 'Processed', null, 'CM1003', 'EM1001', '124', N'Võ Nguyên Giáp', N'TP Hồ Chí Minh'),
-	('BM1004', '20-04-2023', 'Processed', null, 'CM1004', 'EM1002', '412', N'Nguyễn Thị Minh Khai', N'Bình Dương'),
-	('BM1005', '10-06-2023', 'Processed', null, 'CM1005', 'EM1002', '512', N'Đường 3 tháng 2', N'TP Hồ Chí Minh'),
-	('BM1006', '18-07-2023', 'Processed', null, 'CM1006', 'EM1001', '611', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
-	('BM1007', '15-08-2023', 'Processed', null, 'CM1007', 'EM1002', '712', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
-	('BM1008', '05-09-2023', 'Processed', null, 'CM1008', 'EM1001', '811', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
-	('BM1009', '23-10-2023', 'Unprocessed', null, 'CM1009', 'EM1003', '913', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1010', '18-11-2023', 'Unprocessed', null, 'CM1010', 'EM1002', '144', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
-	('BM1011', '14-12-2023', 'Unprocessed', N'Giao vào buổi sáng', 'CM1011', 'EM1003', '356', N'Võ Nguyên Giáp', N'TP Hồ Chí Minh'),
-	('BM1012', '05-01-2023', 'Processed', N'Giao vào buổi chiều', 'CM1012', 'EM1001', '126', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
-	('BM1013', '17-12-2023', 'Unprocessed', null, 'CM1013', 'EM1003', '543', N'Nguyễn Văn Trỗi', N'Cần Thơ'),
-	('BM1014', '15-10-2023', 'Unprocessed', null, 'CM1014', 'EM1002', '6556', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
-	('BM1015', '10-09-2023', 'Processed', null, 'CM1015', 'EM1001', '1256', N'Lê Lợi', N'Đồng Nai'),
-	('BM1016', '11-07-2023', 'Processed', null, 'CM1016', 'EM1004', '2', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1017', '01-06-2023', 'Processed', null, 'CM1017', 'EM1003', '11', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
-	('BM1018', '10-05-2023', 'Processed', null, 'CM1018', 'EM1001', '111', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
-	('BM1019', '10-04-2023', 'Processed', null, 'CM1019', 'EM1004', '423', N'Lê Lai', N'TP Hồ Chí Minh'),
-	('BM1020', '07-03-2023', 'Processed', null, 'CM1020', 'EM1002', '236', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
-	('BM1021', '10-02-2023', 'Processed', null, 'CM1021', 'EM1004', '128', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1022', '21-10-2023', 'Unprocessed', null, 'CM1022', 'EM1001', '421', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
-	('BM1023', '12-08-2023', 'Processed', N'Giao vào giờ hành chính', 'CM1023', 'EM1004', '68', N'Mari Curie', N'TP Hồ Chí Minh'),
-	('BM1024', '13-01-2023', 'Processed', N'Chỉ nhận sau ngày 20-01', 'CM1024', 'EM1003', '64', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
-	('BM1025', '07-01-2023', 'Processed', N'Giao vào buổi trưa', 'CM1025', 'EM1003', '72', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1026', '11-07-2023', 'Processed', null, 'CM1026', 'EM1002', '90', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
-	('BM1027', '14-12-2023', 'Unprocessed', null, 'CM1027', 'EM1003', '100', N'Đường Đất đỏ Bazan', N'Đăk Lăk'),
-	('BM1028', '10-06-2023', 'Processed', null, 'CM1028', 'EM1004', '5', N'Đường 621', N'TP Hồ Chí Minh'),
-	('BM1029', '10-04-2023', 'Processed', null, 'CM1029', 'EM1002', '127', N'Đường 621', N'TP Hồ Chí Minh'),
-	('BM1030', '05-09-2023', 'Processed', null, 'CM1030', 'EM1004', '623', N'Đường Song hành Xa lộ Hà Nội', N'TP Hồ Chí Minh'),
-	('BM1031', '01-06-2023', 'Processed', null, 'CM1031', 'EM1003', '4376', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1032', '05-09-2023', 'Processed', null, 'CM1032', 'EM1004', '1262', N'Đường Song hành Xa lộ Hà Nội', N'TP Hồ Chí Minh'),
-	('BM1033', '12-08-2023', 'Processed', null, 'CM1033', 'EM1002', '7462', N'Ngô Gia Tự', N'TP Hồ Chí Minh'),
-	('BM1034', '07-03-2023', 'Processed', null, 'CM1034', 'EM1004', '6266', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1035', '01-06-2023', 'Processed', null, 'CM1035', 'EM1003', '7436', N'Ngô Gia Tự', N'TP Hồ Chí Minh'),
-	('BM1036', '15-10-2023', 'Unprocessed', null, 'CM1036', 'EM1004', '5326', N'Hùng Vương', N'TP Hồ Chí Minh'),
-	('BM1037', '18-11-2023', 'Unprocessed', null, 'CM1037', 'EM1003', '2378', N'Lê Văn Việt', N'TP Hồ Chí Minh'),
-	('BM1038', '05-09-2023', 'Processed', null, 'CM1038', 'EM1002', '2356', N'Lê Văn Việt', N'TP Hồ Chí Minh'),
-	('BM1039', '17-12-2023', 'Unprocessed', null, 'CM1039', 'EM1003', '2322', N'Trần Thủ Độ', N'TP Hồ Chí Minh');
+	('BM1001', '01-02-2023', 'Cancelled', null, 'CM1001', 'EM1001', '32', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
+	('BM1002', '01-02-2023', 'Done', null, 'CM1002', 'EM1002', '234', N'Hoàng Diệu 2', N'TP Hồ Chí Minh'),
+	('BM1003', '21-02-2023', 'Delivering', null, 'CM1003', 'EM1001', '124', N'Võ Nguyên Giáp', N'TP Hồ Chí Minh'),
+	('BM1004', '20-04-2023', 'Waiting', null, 'CM1004', 'EM1002', '412', N'Nguyễn Thị Minh Khai', N'Bình Dương'),
+	('BM1005', '10-06-2023', 'Waiting', null, 'CM1005', 'EM1002', '512', N'Đường 3 tháng 2', N'TP Hồ Chí Minh'),
+	('BM1006', '18-07-2023', 'Done', null, 'CM1006', 'EM1001', '611', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
+	('BM1007', '15-08-2023', 'Delivering', null, 'CM1007', 'EM1002', '712', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
+	('BM1008', '05-09-2023', 'Done', null, 'CM1008', 'EM1001', '811', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
+	('BM1009', '23-10-2023', 'Waiting', null, 'CM1009', 'EM1003', '913', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
+	('BM1010', '18-11-2023', 'Waiting', null, 'CM1010', 'EM1002', '144', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
+	('BM1011', '14-12-2023', 'Delivering', N'Giao vào buổi sáng', 'CM1011', 'EM1003', '356', N'Võ Nguyên Giáp', N'TP Hồ Chí Minh'),
+	('BM1012', '05-01-2023', 'Cancelled', N'Giao vào buổi chiều', 'CM1012', 'EM1001', '126', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
+	('BM1013', '17-12-2023', 'Waiting', null, 'CM1013', 'EM1003', '543', N'Nguyễn Văn Trỗi', N'Cần Thơ'),
+	('BM1014', '15-10-2023', 'Cancelled', null, 'CM1014', 'EM1002', '6556', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
+	('BM1015', '10-09-2023', 'Delivering', null, 'CM1015', 'EM1001', '1256', N'Lê Lợi', N'Đồng Nai'),
+	('BM1016', '11-07-2023', 'Delivering', null, 'CM1016', 'EM1004', '2', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
+	('BM1017', '01-06-2023', 'Waiting', null, 'CM1017', 'EM1003', '11', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
+	('BM1018', '10-05-2023', 'Done', null, 'CM1018', 'EM1001', '111', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
+	('BM1019', '10-04-2023', 'Done', null, 'CM1019', 'EM1004', '423', N'Lê Lai', N'TP Hồ Chí Minh'),
+	('BM1020', '07-03-2023', 'Waiting', null, 'CM1020', 'EM1002', '236', N'Cách mạng tháng 8', N'TP Hồ Chí Minh');
 alter table bill check constraint all;
 
+ALTER TABLE PACKAGE nocheck constraint all;
+insert into PACKAGE
+values
+	('PK1001', 'BM1001', 'Cancelled', 'DM1001'),
+	('PK1002', 'BM1002', 'Done', 'DM1002'),
+	('PK1003', 'BM1003', 'Delivering', 'DM1003'),
+	('PK1004', 'BM1004', 'Waiting', 'DM1004'),
+	('PK1005', 'BM1005', 'Waiting', 'DM1005'),
+	('PK1006', 'BM1006', 'Done', 'DM1006'),
+	('PK1007', 'BM1007', 'Delivering', 'DM1007'),
+	('PK1008', 'BM1008', 'Done', 'DM1008'),
+	('PK1009', 'BM1009', 'Waiting', 'DM1009'),
+	('PK1010', 'BM1010', 'Waiting', 'DM1010'),
+	('PK1011', 'BM1011', 'Delivering', 'DM1011'),
+	('PK1023', 'BM1011', 'Delivering', 'DM1011'),
+	('PK1012', 'BM1012', 'Cancelled', 'DM1012'),
+	('PK1013', 'BM1013', 'Waiting', 'DM1013'),
+	('PK1014', 'BM1014', 'Cancelled', 'DM1014'),
+	('PK1015', 'BM1015', 'Delivering', 'DM1015'),
+	('PK1016', 'BM1016', 'Delivering', 'DM1016'),
+	('PK1021', 'BM1016', 'Delivering', 'DM1016'),
+	('PK1022', 'BM1016', 'Delivering', 'DM1016'),
+	('PK1017', 'BM1017', 'Waiting', 'DM1017'),
+	('PK1018', 'BM1018', 'Done', 'DM1018'),
+	('PK1019', 'BM1019', 'Done', 'DM1019'),
+	('PK1020', 'BM1020', 'Waiting', 'DM1020');
+alter table package check constraint all;
 
 ALTER TABLE CONTAIN_PHYBAGS nocheck constraint all;
 insert into CONTAIN_PHYBAGS
