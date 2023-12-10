@@ -11,7 +11,7 @@ function validateDates() {
   let manufacturingDate = new Date(manufacturingDateInput.value);
   let expiryDate = new Date(expiryDateInput.value);
 
-  if (manufacturingDate > expiryDate) {
+  if (manufacturingDate >= expiryDate) {
     alert("The manufacturing date must be earlier than the expiry date");
   }
 
