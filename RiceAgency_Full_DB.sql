@@ -305,8 +305,110 @@ add CONSTRAINT FK_DELTRP_TO_VECHILE FOREIGN KEY (id_vechile) REFERENCES VECHILE(
 -- add prefix auto_increment (procedure and trigger)
 
 -- insert data ---
+--INSERT USER CUSTOMER
+go
+alter table [USER] NOCHECK CONSTRAINT ALL;
+insert into [USER]
+values
+	('CM1001','Nguyen Van','A','0123456789','nguyenvanA@gmail.com',N'32 Nguyễn Chí Thanh TP Hồ Chí Minh'),
+	('CM1002','Nguyen Thi','B','0111111111','nguyenthiB@gmail.com',N'234 Hoàng Diệu 2 TP Hồ Chí Minh'),
+	('CM1003','Le Hoang','C','0222222222','lehoangC@gmail.com',N'124 Võ Nguyên Giáp TP Hồ Chí Minh'),
+	('CM1004','Lai Nhu','Y','0987654321','lainhuY@gmail.com',N'412 Nguyễn Thị Minh Khai Bình Dương'),
+	('CM1005','Lac Thi','D','0333333333','lacThiD@gmail.com', N'512 Đường 3 tháng 2 TP Hồ Chí Minh'),
+	('CM1006','Vuong Vu','Han','0444444444','vuongvuHan@gmail.com',N'611 Cách mạng tháng 8 TP Hồ Chí Minh'),
+	('CM1007','Van','L','0555555555','VanL@gmail.com',N'712 Đường Cộng hoà TP Hồ Chí Minh'),
+	('CM1008','Le Vo','Yen','0666666666','leVoYen@gmail.com',N'811 Võ Văn Ngân TP Hồ Chí Minh'),
+	('CM1009','Hoang Thi','Thu','0777777777','HoangThiThu@gmail.com',N'913 Nguyễn Chí Thanh TP Hồ Chí Minh'),
+	('CM1010','Thi Le','T','0888888888','ThileT@gmail.com',N'144 Đường Cộng hoà TP Hồ Chí Minh'),
+	('CM1011','Nguyen Minh','K','0999999999','NguyenMinhK@gmail.com',N'356 Võ Nguyên Giáp TP Hồ Chí Minh'),
+	('CM1012','Hoang Van','B','0111111112','hoangvanB@gmail.com',N'126 Đường Cộng hoà TP Hồ Chí Minh'),
+	('CM1013','Nguyen Lan','S','0111111113','nguyenlanA@gmail.com',N'543 Nguyễn Văn Trỗi Cần Thơ'),
+	('CM1014','Cao Van','X','0111111114','CaovanX@gmail.com',N'6556 Cách mạng tháng 8 TP Hồ Chí Minh'),
+	('CM1015','Duc Thi','Q','0388888881','DucThiQ@gmail.com',N'1256 Lê Lợi Đồng Nai'),
+	('CM1016','Nguyen Binh','Trong','0222233344','nguyenbinhTrong@gmail.com',N'2 Nguyễn Chí Thanh TP Hồ Chí Minh'),
+	('CM1017','Nguyen Van','Dang','0777666555','nguyenvanDang@gmail.com', N'11 Võ Văn Ngân TP Hồ Chí Minh'),
+	('CM1018','Nguyen Thanh','Hai','0123556789','nguyenThanhhai@gmail.com',N'111 Cách mạng tháng 8 TP Hồ Chí Minh'),
+	('CM1019','Tran','Dan','0135791357','trandan@gmail.com',N'423 Lê Lai TP Hồ Chí Minh'),
+	('CM1020','Le Van','Y','0246824682','levanYA@gmail.com',N'236 Cách mạng tháng 8 TP Hồ Chí Minh');
+alter table [USER] CHECK CONSTRAINT ALL;
 
-alter table bill nocheck CONSTRAINT all;
+go
+insert into CUSTOMER
+	values
+	('CM1001'),
+	('CM1002'),
+	('CM1003'),
+	('CM1004'),
+	('CM1005'),
+	('CM1006'),
+	('CM1007'),
+	('CM1008'),
+	('CM1009'),
+	('CM1010'),
+	('CM1011'),
+	('CM1012'),
+	('CM1013'),
+	('CM1014'),
+	('CM1015'),
+	('CM1016'),
+	('CM1017'),
+	('CM1018'),
+	('CM1019'),
+	('CM1020');
+-- INSERT [USER] EMPLOYEE
+alter table [USER] nocheck constraint all;
+insert into [USER]
+values 
+	('EM1001','Tran Van','An','0333222111 ',' example1@gmail.com',N'123 Điện Biên Phủ TP Hồ Chí Minh'),
+	('EM1002','Nguyen Thi','Bao','0555666777',' example2@gmail.com',N'56 Lê Lợi TP Hà Nội'),
+	('EM1003','Hoang Van','Cuong',' 044433322','example3@gmail.com',N'789 Nguyễn Huệ TP Đà Nẵng'),
+	('EM1004','Le Thanh','Dung','0666777888','example4@gmail.com',N'102 Trần Hưng Đạo TP Hải Phòng'),
+	('EM2001','Pham Hong','Khanh','0876565656','example5@gmail.com', N'457 Lý Thường Kiệt TP Cần Thơ'),
+	('EM2002','Vo Ngoc','Linh','0912345678','example6@gmail.com',N'234 Lê Duẩn TP Nha Trang'),
+	('EM2003','Nguyen Tien','Minh','0987123456','example7@gmail.com',N'999 Nguyễn Công Trứ TP Đà Lạt'),
+	('EM2004','Tran Thanh','Nga','0955555555','example8@gmail.com',N'222 Nguyễn Văn Linh tp Cần Thơ'),
+	('EM2005','Vo Van','Xuan','0999999991','example9@gmail.com',N'555 Võ Văn Kiệt TP Đà Nẵng'),
+	('EM2006','Le Van','Huy','0922222222','example10@gmail.com',N'7777 Lê Thánh Tôn TP Hồ Chí Minh'),
+	('EM2007','Pham Van','Trung','0944444444','example11@gmail.com',N'321 Hai Bà Trưng TP Huế'),
+	('EM2008','Hoang Thi','My','011111112','example12@gmail.com',N'356 Nguyễn Thị Minh Khai TP Vũng Tàu');
+
+insert into [EMPLOYEE]
+values
+	('EM1001','EM1001'),
+	('EM1002','EM1001'),
+	('EM1003','EM1001'),
+	('EM1004','EM1001'),
+	('EM2001','EM2008'),
+	('EM2002','EM2008'),
+	('EM2003','EM2008'),
+	('EM2004','EM2008'),
+	('EM2005','EM2004'),
+	('EM2006','EM2004'),
+	('EM2007','EM2004'),
+	('EM2008','EM2008');
+
+insert into SELLER
+values
+	('EM1001'),
+	('EM1002'),
+	('EM1003'),
+	('EM1004');
+
+insert into SHIPPER
+values
+	('EM2001'),
+	('EM2002'),
+	('EM2003'),
+	('EM2004'),
+	('EM2005'),
+	('EM2006'),
+	('EM2007'),
+	('EM2008');
+
+------------------------------------------------------------------------
+
+--INSERT BILL
+alter table bill nocheck constraint all;
 insert into bill
 values
 	('BM1001', '01-02-2023', 'Cancelled', null, 'CM1001', 'EM1001', '32', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
@@ -329,7 +431,8 @@ values
 	('BM1018', '10-05-2023', 'Done', null, 'CM1018', 'EM1001', '111', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
 	('BM1019', '10-04-2023', 'Done', null, 'CM1019', 'EM1004', '423', N'Lê Lai', N'TP Hồ Chí Minh'),
 	('BM1020', '07-03-2023', 'Waiting', null, 'CM1020', 'EM1002', '236', N'Cách mạng tháng 8', N'TP Hồ Chí Minh');
-alter table bill check CONSTRAINT all;
+alter table bill check constraint all;
+
 /*********INSERT PHƯƠNG TIỆN, CHUYẾN GIAO HÀNG********/
 GO
 insert into VECHILE
@@ -367,7 +470,7 @@ values
 Alter table DELIVERY_TRIP CHECK CONSTRAINT ALL;
 
 GO
-ALTER TABLE PACKAGE nocheck CONSTRAINT all;
+ALTER TABLE PACKAGE nocheck constraint all;
 insert into PACKAGE
 values
 	('PK1001', 'BM1001', 'Cancelled', 'DM1001'),
@@ -393,9 +496,9 @@ values
 	('PK1018', 'BM1018', 'Done', 'DM1018'),
 	('PK1019', 'BM1019', 'Done', 'DM1019'),
 	('PK1020', 'BM1020', 'Waiting', 'DM1020');
-alter table package check CONSTRAINT all;
+alter table package check constraint all;
 
-ALTER TABLE CONTAIN_PHYBAGS nocheck CONSTRAINT all;
+ALTER TABLE CONTAIN_PHYBAGS nocheck constraint all;
 insert into CONTAIN_PHYBAGS
 values
 	('PM1003', 'TB1010', 2, 'BM1001', 2),
@@ -440,9 +543,9 @@ values
 	('PM1012', 'TB1010', 41, 'BM1010', 1),
 	('PM1001', 'TB1002', 42, 'BM1003', 2),
 	('PM1012', 'TB1010', 43, 'BM1002', 2);
-alter table contain_phybags check CONSTRAINT all;
+alter table contain_phybags check constraint all;
 
-ALTER TABLE TYPE_OF_BAGS nocheck CONSTRAINT all;
+ALTER TABLE TYPE_OF_BAGS nocheck constraint all;
 insert into TYPE_OF_BAGS
 values
 	('PM1001', 'TB1002', 2, 20, 40000),
@@ -482,7 +585,7 @@ values
 	('PM1012', 'TB1005', 5, 22, 85000),
 	('PM1012', 'TB1010', 10, 23, 170000)
 
-ALTER TABLE TYPE_OF_BAGS check CONSTRAINT all;
+ALTER TABLE TYPE_OF_BAGS check constraint all;
 
 
 
@@ -503,9 +606,69 @@ values
 	('PM1012', N'Tám Điện Biên', N'Nổi tiếng với hương thơm và độ dẻo như nếp, tám Điện Biên có gạt gạo nhỏ, đều, căng bóng và hơi đục. Dù bề ngoài không được bắt mắt, cơm khi nấu xong lại cho ra những chén cơm thơm phức, dẻo ngọt khiến ai cũng phải thay đổi suy nghĩ về loại gạo này.', N'Hạt gạo nhỏ, đều, căng bóng và hơi đục', 'Vietnam', 'https://gaogiasi.com.vn/uploads/noidung/gao-tam-dien-bien-0-400.jpg');
 
 ALTER TABLE [PRODUCT] CHECK CONSTRAINT ALL;
+go
+insert PHYSICAL_RICEBAG (id_product, id_type, Quantity, NSX, HSD)
+values 
+	('PM1001','TB1002',5,'13-01-2022','13-01-2024'),
+	('PM1001','TB1005',10,'31-01-2022','31-01-2024'),
+	('PM1001','TB1010',5,'17-01-2022','17-01-2024'),
+	('PM1002','TB1002',2,'28-02-2022','28-02-2024'),
+	('PM1002','TB1005',5,'19-02-2022','19-02-2024'),
+	('PM1002','TB1010',10,'30-04-2022','30-04-2024'),
+	('PM1003','TB1002',5,'07-01-2022','07-01-2024'),
+	('PM1003','TB1005',10,'21-07-2022','21-07-2024'),
+	('PM1003','TB1010',20,'13-06-2022','13-06-2024'),
+	('PM1004','TB1002',5,'13-05-2022','13-05-2024'),
+	('PM1004','TB1005',10,'14-12-2022','14-12-2024'),
+	('PM1004','TB1010',7,'17-11-2022','17-11-2024'),
+	('PM1005','TB1002',5,'18-01-2022','18-01-2024'),
+	('PM1005','TB1005',1,'28-10-2022','28-10-2024'),
+	('PM1005','TB1010',1,'04-06-2022','04-06-2024'),
+	('PM1006','TB1002',10,'15-07-2022','15-07-2024'),
+	('PM1006','TB1005',15,'23-08-2022','23-08-2024'),
+	('PM1006','TB1010',20,'14-02-2022','14-02-2024'),
+	('PM1007','TB1002',10,'18-09-2022','18-09-2024'),
+	('PM1007','TB1005',10,'17-05-2022','17-05-2024'),
+	('PM1007','TB1010',5,'31-01-2022','31-01-2024'),
+	('PM1008','TB1002',5,'28-06-2022','28-06-2024'),
+	('PM1008','TB1005',5,'13-05-2022','13-05-2024'),
+	('PM1008','TB1010',20,'14-07-2022','14-07-2024'),
+	('PM1009','TB1002',30,'24-09-2022','24-09-2024'),
+	('PM1009','TB1005',30,'13-02-2022','13-02-2024'),
+	('PM1009','TB1010',30,'21-04-2022','21-04-2024'),
+	('PM1010','TB1002',20,'13-07-2022','13-07-2024'),
+	('PM1010','TB1005',20,'03-10-2022','03-10-2024'),
+	('PM1010','TB1010',20,'01-04-2022','01-04-2024'),
+	('PM1011','TB1002',1,'13-01-2022','13-01-2024'),
+	('PM1011','TB1005',4,'12-09-2022','12-09-2024'),
+	('PM1011','TB1010',8,'31-05-2022','31-05-2024'),
+	('PM1012','TB1002',7,'13-08-2022','13-08-2024'),
+	('PM1012','TB1005',15,'23-09-2022','23-09-2024'),
+	('PM1012','TB1010',10,'13-11-2022','13-11-2024');
 
+INSERT INTO COMPANY_PRODUCT (company_name)
+VALUES 
+	('Vinafood'),
+	('Ngọc Đồng'),
+	('Việt Hưng'),
+	('Sunrise');
 
+INSERT INTO PRODUCTION (company_name, id_product)
+VALUES
+	('Vinafood', 'PM1001'),
+	('Vinafood', 'PM1002'),
+	('Vinafood', 'PM1003'),
+	('Vinafood', 'PM1004'),
+	('Ngọc Đồng', 'PM1005'),
+	('Ngọc Đồng', 'PM1006'),
+	('Ngọc Đồng', 'PM1007'),
+	('Ngọc Đồng', 'PM1008'),
+	('Việt Hưng', 'PM1009'),
+	('Việt Hưng', 'PM1010'),
+	('Sunrise', 'PM1011'),
+	('Sunrise', 'PM1012');
 GO
+--FUNCTION
 create or alter function getRevenueOfProduct (@maGao CHAR(6))
 returns @ret_table table
 (
@@ -569,6 +732,7 @@ BEGIN
 END
 
 GO
+--TRIGGER
 CREATE OR ALTER TRIGGER UpdateBillStatus
 ON PACKAGE
 AFTER UPDATE
@@ -594,7 +758,34 @@ BEGIN
         END
     END
 END
+--  trigger to update points when the bill.status = 'Done'
+--create computed attribted
+GO
+ALTER TABLE [USER]
+ADD Point INT;
 
+GO
+CREATE OR ALTER TRIGGER UpdatePointCustomer
+ON BILL
+AFTER UPDATE
+AS
+BEGIN
+    IF UPDATE([status])
+    BEGIN
+        UPDATE [USER]
+
+        SET Point = (
+            SELECT COUNT(*) 
+            FROM BILL B 
+            WHERE B.customer_id = CUSTOMER.customer_id 
+				AND B.[status] = 'Done'
+        )
+        FROM [USER]
+        INNER JOIN CUSTOMER ON [USER].[user_id] = CUSTOMER.customer_id
+        INNER JOIN inserted i ON CUSTOMER.customer_id = i.customer_id
+        WHERE i.[status] = 'Done';
+    END
+END;
 
 
 /*
