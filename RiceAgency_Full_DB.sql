@@ -676,7 +676,7 @@ GO
 CREATE OR ALTER PROCEDURE getAllProducts 
 AS
 BEGIN	
-	SELECT matHang.Pname AS tenGao, loaiBao.BName AS loaiBao, matHang.picture AS imgSrc, loaiBao.price_Bags AS giaTien 
+	SELECT matHang.id_product AS maGao, matHang.Pname AS tenGao, loaiBao.BName AS loaiBao, matHang.picture AS imgSrc, loaiBao.price_Bags AS giaTien 
 	FROM PRODUCT AS matHang JOIN TYPE_OF_BAGS AS loaiBao ON matHang.id_product = loaiBao.id_pro
 	ORDER BY matHang.Pname;
 END

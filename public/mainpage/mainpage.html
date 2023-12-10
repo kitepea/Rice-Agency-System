@@ -25,7 +25,7 @@
     <script src="mainpage.js"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- Navigation-->
     <div class="container nav-bar my-3">
         <a href="./mainpage.html">
@@ -148,7 +148,7 @@
         </div>
     </div>
     <!-- Section-->
-    <section class="py-3">
+    <section class="py-3 flex-grow-1 ">
         <div class="container px-4 px-lg-5 mt-3">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="products-wrapper">
 
@@ -216,6 +216,9 @@
         });
     });
 </script>
+
+<script>displayProducts()</script>
+
 <script>
     var searchBox = document.getElementById('search-bar');
 
@@ -235,6 +238,6 @@
 
 </script>
 
-<script>displayProducts()</script>
+
 
 </html>
