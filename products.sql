@@ -138,7 +138,7 @@ CREATE PROCEDURE EditProduct
 	@featured NVARCHAR(255),
 	@origin NVARCHAR(20),
 	@picture VARCHAR(255),
-	@company_name VARCHAR(30),
+	@company_name NVARCHAR(30),
 	@type CHAR(2),
 	@price DECIMAL(10,0)
 AS

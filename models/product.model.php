@@ -2,7 +2,6 @@
 
 include 'db.model.php';
 
-
 class Product {
     var $product_db;
 
@@ -10,6 +9,33 @@ class Product {
     {
         global $connect;
         $this->product_db = $connect;
+    }
+
+    function addProduct($pname, $desc, $featured, $origin, $picture, $cname, $type, $price, $nsx, $hsd) {
+        $sql = sqlsrv_query($this->product_db, "EXEC InsertProduct @PName = N'$pname', @description = N'$desc', @featured = N'$featured', @origin = N'$origin', @picture = '$picture', @company_name = N'$cname', @type = '$type', @price = $price, @NSX = '$nsx', @HSD = '$hsd';");
+        if ($sql) {
+            return "Added successfully";
+        } else {
+            return sqlsrv_errors(SQLSRV_ERR_ERRORS);
+        }
+    }
+
+    function deleteProduct($id_product) {
+        $sql = sqlsrv_query($this->product_db, "EXEC DeleteProduct @id_product = '$id_product'");
+        if ($sql) {
+            return "Deleted successfully";
+        } else {
+            return sqlsrv_errors(SQLSRV_ERR_ERRORS);
+        }
+    }
+
+    function updateProduct($id_product, $pname, $desc, $featured, $origin, $picture, $cname, $type, $price) {
+        $sql = sqlsrv_query($this->product_db, "EXEC EditProduct @id_product = '$id_product', @PName = N'$pname', @description = N'$desc', @featured = N'$featured', @origin = N'$origin', @picture = '$picture', @company_name = '$cname', @type = '$type', @price = $price;");
+        if ($sql) {
+            return "Updated successfully";
+        } else {
+            return sqlsrv_errors(SQLSRV_ERR_ERRORS);
+        }
     }
 
     function getProductDetails($id_product, $type) {
