@@ -13,17 +13,17 @@ $input = file_get_contents("php://input");
 $input = json_decode($input,true);
 
 
-if (!empty($input)) {
+if ($input) {
     if (validateInput($input)) {
         $account = new Account();
         $result = $account->findUserName($input['inputUsername']);
 
-        if ($result) {
-            $result = json_decode($result, true);
+        echo json_encode($result);
 
+        if ($result) {
+    
             $password_db = $result['Password'];
 
-            // if ($input['inputPassword'] == $password_db) {
             if (password_verify($input['inputPassword'], $password_db)) {
                 $_SESSION["auth"] = true;
                 $data = array(
@@ -53,5 +53,3 @@ if (!empty($input)) {
 
 http_response_code($data['status_code']);
 echo json_encode($data);
-
-

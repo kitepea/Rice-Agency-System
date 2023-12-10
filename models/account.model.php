@@ -13,7 +13,7 @@ class Account
 
     function findUserName($username_input)
     {
-        $stmt = sqlsrv_query($this->account_db, "select * from findUserWith($username_input)");
+        $stmt = sqlsrv_query($this->account_db, "select * from findUserWith('$username_input')");
 
         if ($stmt === false) {
             die(print_r(sqlsrv_errors(), true));
@@ -21,10 +21,10 @@ class Account
 
         $result = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
         if ($result) {
-            return json_encode(array(
+            return array(
                 "Username" => $result['Username'],
                 "Password" => $result['Password']
-            ));
+            );
         } else {
             return null;
         }
