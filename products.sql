@@ -166,5 +166,22 @@ BEGIN
 END;
 
 -- b) Tìm kiếm thông tin bằng tên, công ty sx, mô tả - Filter & Sort
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE name='FilterProduct' AND [type]= 'P')
+BEGIN
+	DROP PROCEDURE FilterProduct
+END;
+GO
+CREATE PROCEDURE FilterProduct
+	@type CHAR(2),
+	@sort CHAR(1)
+AS
+BEGIN
+	SELECT *
+	FROM PRODUCT JOIN TYPE_OF_BAGS ON id_pro = id_product
+	WHERE BName = CAST('02' AS INT)
+	ORDER BY price_Bags * CASE WHEN @sort = 'A' THEN 1 ELSE -1 END
+END;
 -- c) Hiển thị số loại gạo - loại bao (2kg/5kg/10kg) bán được trong 1 năm --> Chọn loại gạo
+
 -- d) Xem chi tiết loại gạo (Thông tin các thứ)
