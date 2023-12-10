@@ -14,15 +14,13 @@ class Product {
 
     function getProductDetails($id_product, $type) {
         $sql = "SELECT * FROM GetProductDetails(?, ?)";
-        $stmt = sqlsrv_prepare($this->product_db, $sql, array($id_product, $type));
+        $stmt = sqlsrv_query($this->product_db, $sql, array($id_product, $type));
         
         if ($stmt) {
-            while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-                $result[] = $row;
-            }
-            return json_encode($result, JSON_UNESCAPED_UNICODE);
+            $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+            return json_encode($row, JSON_UNESCAPED_UNICODE);
         } else {
-            die(print_r(sqlsrv_errors(), true));
+            die(print_r(sqlsrv_errors(SQLSRV_ERR_ERRORS)));
         }
     }
 }

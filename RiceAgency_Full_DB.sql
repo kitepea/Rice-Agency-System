@@ -447,8 +447,6 @@ values
 
 ALTER TABLE TYPE_OF_BAGS check constraint all;
 
-
-
 ALTER TABLE [PRODUCT] NOCHECK CONSTRAINT ALL;
 insert into [PRODUCT]
 values
@@ -467,6 +465,27 @@ values
 
 ALTER TABLE [PRODUCT] CHECK CONSTRAINT ALL;
 
+INSERT INTO COMPANY_PRODUCT (company_name)
+VALUES 
+	('Vinafood'),
+	('Ngọc Đồng'),
+	('Việt Hưng'),
+	('Sunrise');
+
+INSERT INTO PRODUCTION (company_name, id_product)
+VALUES
+	('Vinafood', 'PM1001'),
+	('Vinafood', 'PM1002'),
+	('Vinafood', 'PM1003'),
+	('Vinafood', 'PM1004'),
+	('Ngọc Đồng', 'PM1005'),
+	('Ngọc Đồng', 'PM1006'),
+	('Ngọc Đồng', 'PM1007'),
+	('Ngọc Đồng', 'PM1008'),
+	('Việt Hưng', 'PM1009'),
+	('Việt Hưng', 'PM1010'),
+	('Sunrise', 'PM1011'),
+	('Sunrise', 'PM1012');
 
 GO
 create or alter function getRevenueOfProduct (@maGao CHAR(6))
