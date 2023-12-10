@@ -71,7 +71,7 @@ p {
 .CommonInform li{
     list-style: none;
     padding: 0;
-    background: url(/assets/wheat-sack.png) left center no-repeat;
+    background: url(/public/assets/wheat-sack.png) left center no-repeat;
     background-size: 18px;
     padding-left: 1.7rem;
     margin: 0.4rem 0;
