@@ -2,7 +2,8 @@
 -- QUAN --
 USE master;
 GO
-IF EXISTS (SELECT name
+IF EXISTS (
+SELECT name
 FROM master.sys.databases
 WHERE name = N'Rice_Agency')
 BEGIN
@@ -505,15 +506,16 @@ CREATE OR ALTER PROCEDURE getAllRevenueOfProduct
 AS
 BEGIN
 	select rela_gom_donHang_loBaoGao.id_product AS maGao, PRODUCT.PName AS TenGao, loaiBao.id_type AS maLoai, SUM(Quantity) AS soBao, SUM(loaibao.price_Bags) AS doanhThu, id_bill
-		from
-			CONTAIN_PHYBAGS AS rela_gom_donHang_loBaoGao
-			JOIN
-			TYPE_OF_BAGS AS loaiBao ON (
+	from
+		CONTAIN_PHYBAGS AS rela_gom_donHang_loBaoGao
+		JOIN
+		TYPE_OF_BAGS AS loaiBao ON (
 				rela_gom_donHang_loBaoGao.id_product = loaiBao.id_pro
-				AND rela_gom_donHang_loBaoGao.id_type = loaiBao.id_type
+			AND rela_gom_donHang_loBaoGao.id_type = loaiBao.id_type
 			)
-			JOIN PRODUCT ON rela_gom_donHang_loBaoGao.id_product = PRODUCT.id_product
-		GROUP BY rela_gom_donHang_loBaoGao.id_product, PRODUCT.PName, loaiBao.id_type, id_bill;
+		JOIN PRODUCT ON rela_gom_donHang_loBaoGao.id_product = PRODUCT.id_product
+	GROUP BY rela_gom_donHang_loBaoGao.id_product, PRODUCT.PName, loaiBao.id_type, id_bill
+	ORDER BY rela_gom_donHang_loBaoGao.id_product;
 END
 
 GO
