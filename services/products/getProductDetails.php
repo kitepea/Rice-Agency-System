@@ -1,6 +1,7 @@
 <?php
 include '../../models/db.model.php';
 include '../../models/product.model.php';
+include '../../config/httpConfig.config.php';
 global $connect;
 
 $product = new Product();
