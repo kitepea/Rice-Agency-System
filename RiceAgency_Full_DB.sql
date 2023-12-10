@@ -20,31 +20,31 @@ set dateformat dmy;
 
 CREATE TABLE [USER]
 (
-	userid CHAR(6),
+	[user_id] CHAR(6),
 	FMName VARCHAR(30) NOT NULL,
 	[Name] VARCHAR(10) NOT NULL,
 	Phone CHAR(10) UNIQUE,
 	Email VARCHAR(50) UNIQUE,
 	[Address] VARCHAR(50),
-	PRIMARY KEY(userid),
+	PRIMARY KEY([user_id]),
 	CHECK (
-        (LEFT(userid, 2) = 'EM' OR LEFT(userid, 2) = 'CM') AND
-		ISNUMERIC(RIGHT(userid, 4)) = 1 AND
-		LEN(userid) = 6
+        (LEFT([user_id], 2) = 'EM' OR LEFT([user_id], 2) = 'CM') AND
+		ISNUMERIC(RIGHT([user_id], 4)) = 1 AND
+		LEN([user_id]) = 6
     )
 );
 
 
-create table [ADDRESS]
+CREATE TABLE [ADDRESS]
 (
-	userid char(6),
-	house_num varchar(5) not null,
-	street varchar(50) not null,
-	city varchar(50) not null,
-	primary key (userid, house_num, street, city),
-	constraint fk_uid_address foreign key (userid) references [user] (userid) 
+	[user_id] CHAR(6),
+	house_num VARCHAR(5) not null,
+	street VARCHAR(50) not null,
+	city VARCHAR(50) not null,
+	PRIMARY KEY ([user_id], house_num, street, city),
+	CONSTRAINT fk_uid_address FOREIGN KEY ([user_id]) REFERENCES [user] ([user_id]) 
 	-- on delete cascade
-	on update cascade
+	ON UPDATE CASCADE
 );
 
 CREATE TABLE [ACCOUNT]
@@ -52,37 +52,37 @@ CREATE TABLE [ACCOUNT]
 	Username varchar(30),
 	[Password] varchar(65) not null,
 	[Type] VARCHAR(20) CHECK ([TYPE] IN ('Employee', 'Customer')) NOT NULL,
-	userid char(6),
+	[user_id] CHAR(6),
 	PRIMARY KEY(Username),
-	constraint fk_uid_account foreign key (userid) references [user] (userid)
+	CONSTRAINT fk_uid_account FOREIGN KEY ([user_id]) REFERENCES [user] ([user_id])
 	-- on delete cascade
-	on update cascade
+	ON UPDATE CASCADE
 );
 
-create table EMPLOYEE
+CREATE TABLE EMPLOYEE
 (
-	employee_id char(6) NOT NULL,
-	manager_id char(6) NOT NULL,
-	primary key (employee_id),
-	constraint fk_empid_uid foreign key (employee_id) references [user] (userid)
+	employee_id CHAR(6) NOT NULL,
+	manager_id CHAR(6) NOT NULL,
+	PRIMARY KEY (employee_id),
+	CONSTRAINT fk_empid_uid FOREIGN KEY (employee_id) REFERENCES [user] ([user_id])
 	-- on delete cascade
-	on update cascade
+	ON UPDATE CASCADE
 );
 
-create table CUSTOMER
+CREATE TABLE CUSTOMER
 (
-	customer_id char(6) PRIMARY KEY,
-	constraint fk_uid_customer foreign key (customer_id) references [user] (userid)
+	customer_id CHAR(6) PRIMARY KEY,
+	CONSTRAINT fk_uid_customer FOREIGN KEY (customer_id) REFERENCES [user] ([user_id])
 	-- on delete cascade
-	on update cascade
+	ON UPDATE CASCADE
 );
 
-create table SELLER
+CREATE TABLE SELLER
 (
-	seller_id char(6) PRIMARY KEY,
-	constraint fk_empid_seller foreign key (seller_id) references employee (employee_id)
+	seller_id CHAR(6) PRIMARY KEY,
+	CONSTRAINT fk_empid_seller FOREIGN KEY (seller_id) REFERENCES employee (employee_id)
 	-- on delete cascade
-	on update cascade
+	ON UPDATE CASCADE
 );
 
 -- VKDKhoa
@@ -92,12 +92,11 @@ CREATE TABLE [PRODUCT]
 (
 	id_product CHAR(6) NOT NULL,
 	[PName] NVARCHAR(30) NOT NULL,
-	-- [description] ntext,
 	[description] NVARCHAR(1000),
 	featured NVARCHAR(255),
-	Original VARCHAR(9),
+	origin NVARCHAR(20),
 	picture varchar(255) --this is IMAGE type
-		CONSTRAINT PR_Pro PRIMARY KEY(id_product),
+	CONSTRAINT PR_Pro PRIMARY KEY(id_product),
 	CONSTRAINT ProName UNIQUE([PName])
 )
 
@@ -130,13 +129,13 @@ CREATE TABLE TYPE_OF_BAGS
 
 
 
-/******************************************************/
+/*********************** LÔ BAO GẠO *******************************/
 
 CREATE TABLE PHYSICAL_RICEBAG
 (
 	id_product CHAR(6) NOT NULL,
 	id_type CHAR(6) NOT NULL,
-	NumOrder CHAR(6) NOT NULL,
+	NumOrder INT NOT NULL IDENTITY(1,1),
 	Quantity INT DEFAULT 1,
 	NSX DATE,
 	HSD DATE,
@@ -161,7 +160,7 @@ CREATE TABLE BILL
 	note NVARCHAR(200),
 	customer_id CHAR(6) NOT NULL,
 	seller_id CHAR(6) NOT NULL,
-	house_num varchar(5) NOT NULL,
+	house_num VARCHAR(5) NOT NULL,
 	street nvarchar(50) NOT NULL,
 	city nvarchar(50) NOT NULL,
 
@@ -208,7 +207,7 @@ CREATE TABLE CONTAIN_PACKAGE
 (
 	id_product CHAR(6) NOT NULL,
 	id_type CHAR(6) NOT NULL,
-	NumOrder CHAR(6) NOT NULL,
+	NumOrder INT NOT NULL,
 	-- ????
 	id_package CHAR(6) NOT NULL,
 	Quantity INT DEFAULT 1,
@@ -229,7 +228,7 @@ CREATE TABLE CONTAIN_PHYBAGS
 (
 	id_product CHAR(6) NOT NULL,
 	id_type CHAR(6) NOT NULL,
-	NumOrder CHAR(6) NOT NULL,
+	NumOrder INT NOT NULL,
 	-- ????
 	id_bill CHAR(6) NOT NULL,
 	Quantity INT DEFAULT 1,
@@ -269,8 +268,7 @@ CREATE TABLE VECHILE
 /************************* CÔNG TY SẢN SUẤT *****************************/
 CREATE TABLE COMPANY_PRODUCT
 (
-	company_name VARCHAR(30) NOT NULL,
-	hotline VARCHAR(15),
+	company_name NVARCHAR(30) NOT NULL,
 	CONSTRAINT PK_COMPANY_PRODUCT PRIMARY KEY (company_name)
 )
 /******************************************************/
@@ -279,7 +277,7 @@ CREATE TABLE COMPANY_PRODUCT
 CREATE TABLE PRODUCTION
 (
 	id_product CHAR(6) NOT NULL,
-	company_name VARCHAR(30) NOT NULL,
+	company_name NVARCHAR(30) NOT NULL,
 	CONSTRAINT PK_PRODUCTION PRIMARY KEY (id_product,company_name),
 
 	CONSTRAINT FK_PRODUCTION_TO_PRODUCT FOREIGN KEY(id_product) REFERENCES [PRODUCT](id_product),
@@ -289,7 +287,7 @@ CREATE TABLE PRODUCTION
 
 -- alter
 alter table employee
-add constraint fk_manager_id foreign key (manager_id) references employee (employee_id);
+add CONSTRAINT fk_manager_id FOREIGN KEY (manager_id) REFERENCES employee (employee_id);
 
 alter table BILL
 add CONSTRAINT FK_BILL_TO_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
@@ -309,7 +307,7 @@ add CONSTRAINT FK_DELTRP_TO_VECHILE FOREIGN KEY (id_vechile) REFERENCES VECHILE(
 
 -- insert data ---
 
-alter table bill nocheck constraint all;
+alter table bill nocheck CONSTRAINT all;
 insert into bill
 values
 	('BM1001', '01-02-2023', 'Cancelled', null, 'CM1001', 'EM1001', '32', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
@@ -332,7 +330,7 @@ values
 	('BM1018', '10-05-2023', 'Done', null, 'CM1018', 'EM1001', '111', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
 	('BM1019', '10-04-2023', 'Done', null, 'CM1019', 'EM1004', '423', N'Lê Lai', N'TP Hồ Chí Minh'),
 	('BM1020', '07-03-2023', 'Waiting', null, 'CM1020', 'EM1002', '236', N'Cách mạng tháng 8', N'TP Hồ Chí Minh');
-alter table bill check constraint all;
+alter table bill check CONSTRAINT all;
 /*********INSERT PHƯƠNG TIỆN, CHUYẾN GIAO HÀNG********/
 GO
 insert into VECHILE
@@ -370,7 +368,7 @@ values
 Alter table DELIVERY_TRIP CHECK CONSTRAINT ALL;
 
 GO
-ALTER TABLE PACKAGE nocheck constraint all;
+ALTER TABLE PACKAGE nocheck CONSTRAINT all;
 insert into PACKAGE
 values
 	('PK1001', 'BM1001', 'Cancelled', 'DM1001'),
@@ -396,9 +394,9 @@ values
 	('PK1018', 'BM1018', 'Done', 'DM1018'),
 	('PK1019', 'BM1019', 'Done', 'DM1019'),
 	('PK1020', 'BM1020', 'Waiting', 'DM1020');
-alter table package check constraint all;
+alter table package check CONSTRAINT all;
 
-ALTER TABLE CONTAIN_PHYBAGS nocheck constraint all;
+ALTER TABLE CONTAIN_PHYBAGS nocheck CONSTRAINT all;
 insert into CONTAIN_PHYBAGS
 values
 	('PM1003', 'TB1010', 2, 'BM1001', 2),
@@ -443,9 +441,9 @@ values
 	('PM1012', 'TB1010', 41, 'BM1010', 1),
 	('PM1001', 'TB1002', 42, 'BM1003', 2),
 	('PM1012', 'TB1010', 43, 'BM1002', 2);
-alter table contain_phybags check constraint all;
+alter table contain_phybags check CONSTRAINT all;
 
-ALTER TABLE TYPE_OF_BAGS nocheck constraint all;
+ALTER TABLE TYPE_OF_BAGS nocheck CONSTRAINT all;
 insert into TYPE_OF_BAGS
 values
 	('PM1001', 'TB1002', 2, 20, 40000),
@@ -485,7 +483,7 @@ values
 	('PM1012', 'TB1005', 5, 22, 85000),
 	('PM1012', 'TB1010', 10, 23, 170000)
 
-ALTER TABLE TYPE_OF_BAGS check constraint all;
+ALTER TABLE TYPE_OF_BAGS check CONSTRAINT all;
 
 
 
@@ -567,8 +565,8 @@ create or alter function getRevenueOfProduct (@maGao CHAR(6))
 returns @ret_table table
 (
 	-- columns returned by the function
-	maGao char(6) not null,
-	maBao char(6) not null,
+	maGao CHAR(6) not null,
+	maBao CHAR(6) not null,
 	soLuongBao int ,
 	doanhThu decimal(10,2)
 		PRIMARY KEY(maGao, maBao)
