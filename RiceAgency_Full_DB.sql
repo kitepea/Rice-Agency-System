@@ -50,7 +50,7 @@ create table [ADDRESS]
 CREATE TABLE [ACCOUNT]
 (
 	Username varchar(30),
-	[Password] varchar(20) not null,
+	[Password] varchar(65) not null,
 	[Type] VARCHAR(20) CHECK ([TYPE] IN ('Employee', 'Customer')) NOT NULL,
 	userid char(6),
 	PRIMARY KEY(Username),
@@ -92,8 +92,8 @@ CREATE TABLE [PRODUCT]
 (
 	id_product CHAR(6) NOT NULL,
 	[PName] NVARCHAR(30) NOT NULL,
-	[description] ntext,
-	--[description] NVARCHAR(255),
+	-- [description] ntext,
+	[description] NVARCHAR(1000),
 	featured NVARCHAR(255),
 	Original VARCHAR(9),
 	picture varchar(255) --this is IMAGE type
@@ -462,6 +462,60 @@ values
 
 ALTER TABLE [PRODUCT] CHECK CONSTRAINT ALL;
 
+ALTER TABLE [ACCOUNT] NOCHECK CONSTRAINT ALL;
+insert into [ACCOUNT]
+values
+	('admin', '$2y$10$MEZI7Xj5aWA9tdAMMG4Jl.cVTPRD2MbhmMaoHXEYsvvDPZp8/2bNi', 'Employee', 'EM1000'),
+	('employee1','$2y$10$z3CHupY4MItjXQIgaznt1OPYQ3m.KrKyJpvsp0mamul8X6wZrtjtW', 'Employee', 'EM1001'),
+	('employee2','$2y$10$cmrV4TmtJ6XMcGRn0H8CPe9Nd7rFXMj.k8io2e3rMDEwq5zCtMpbi', 'Employee', 'EM1002'),
+	('employee3','$2y$10$75RDiT/Ej170nuNxVFTqUucVxHnsGO79q30CH3VuBvm2ZscTCrlVq', 'Employee', 'EM1003'),
+	('employee4','$2y$10$hKDzBii6X5/cv5zpvu7eMuf0Pp7YxadaJWQRDN.WuINJBdnYADrBC', 'Employee', 'EM1004'),
+	('customer1','$2y$10$63h5LObr.SoGslMqFx06puehh8idFeR0AnFINQhqtfxs.n8BovKza', 'Customer', 'CM1001'),
+	('customer2','$2y$10$HYCJ2RJkdUo7HqEhYwGc6ebl7cMKa6ABild20lvZu8X5fopzxBasK', 'Customer', 'CM1002'),
+	('customer3','$2y$10$awCS6ZEcl6zIWrweGrbXLem6eYqGa/TJAgZw5U8jDv.aNXXqP2iee', 'Customer', 'CM1003'),
+	('customer4','$2y$10$zVR1wWmB6I3zmKevbnR.LOOBilEFPI33GARRUwzpWAnQfKSniBp3W', 'Customer', 'CM1004'),
+	('customer5','$2y$10$gsxAVqYdgPG7u35RL3pwUOGqyq73EabC.4Ymk3YpfNOnZTdcz3uSC', 'Customer', 'CM1005'),
+	('customer6','$2y$10$2e2Lz3o/xCqnjEfadq4.deh8WZR4CPXTQqeTIXtGJU6Gs3z21nbyq', 'Customer', 'CM1006'),
+	('customer7','$2y$10$NXOzUKdXy4Y.9n7sMWp76OXRt4VzrNSpZO3ovICvLiAqCpdQ/ZSMe', 'Customer', 'CM1007'),
+	('customer8','$2y$10$SUKX09fMRe961sDDLBynXOKs2Lc8D3IYFGYIqU6kuDh/.rmDn32D6', 'Customer', 'CM1008'),
+	('customer9','$2y$10$PNrDqqgK0AhRP0H./J8zV.PLa5IFuzTcZ0Tyal5SUnB7WoHfekTBm', 'Customer', 'CM1009'),
+	('customer10','$2y$10$TnJ/PRA7u1aVkQFj/2qZbuASHqZxy/Rn1y3jpThf.U1/oC1hfni6C', 'Customer', 'CM1010'),
+	('customer11','$2y$10$qQZG/4k5hoy0WfoK4LbfY.PCs689gVS2n3GZPVfZqXNANBWLqZVWq', 'Customer', 'CM1011'),
+	('customer12','$2y$10$.sIWOr9SopfUI6YwCDM9SOEHl0qlrVpoRG3Mj6e.KP7tiPgx.IjiS', 'Customer', 'CM1012'),
+	('customer13','$2y$10$Mb.zxT0jUenBUfxuofqv..6s..zSIFmPSIiBYykAEdDqKetZtrrS.', 'Customer', 'CM1013'),
+	('customer14','$2y$10$ZNLvGb66YwSbd9vWdIqGBuQpCAISXSXcVyq24mTZDpI0OpHzpRnPG', 'Customer', 'CM1014'),
+	('customer15','$2y$10$GG.ADgV9EQ315H6X49ggqO0gBAMwK5UngFA7oPyV0eBTiI2QnT2Yu', 'Customer', 'CM1015'),
+	('customer16','$2y$10$Us6dMLqu6qyWAMSXZGIwXOn0tJxQVxxp/8gDwDpMrtfg4BTOPPVqy', 'Customer', 'CM1016'),
+	('customer17','$2y$10$RzdY3x4J9Hp0/.fsK.vQdec1CaMdRKSPVEgbEkwRw48G1VynaifgS', 'Customer', 'CM1017'),
+	('customer18','$2y$10$qagD1fc87oKMtLGjLAQjUOG.lCSPC1.tUafnF/LvcCG0932Mar6j6', 'Customer', 'CM1018'),
+	('customer19','$2y$10$FCGLij.n/OpxGDv7pfZkFe7aeTNjWGx2dc4Jb7dGsVjHQO/KMCm2C', 'Customer', 'CM1019'),
+	('customer20','$2y$10$yQs.v4iCVBo2e/4r1fTcRubWq1C0/9H2lPOl.MDGFJwd0pQqdLcza', 'Customer', 'CM1020'),
+	('customer21','$2y$10$FhRGgcHKsgmUpZ3QLyfTW.ncuA8v1Gx1DW7kGO0bHW22RVlA9IfU2', 'Customer', 'CM1021'),
+	('customer22','$2y$10$tI82tqkyzuLZ9ik.5H3xS.pNESos5vtre3klz3p.A4/1W6wlPJnBO', 'Customer', 'CM1022'),
+	('customer23','$2y$10$FKYrdkQPZL1Ey3SF4Bqv2.5sEH5B1iMifBSv9dWXdcBQW6Ku0njl.', 'Customer', 'CM1023'),
+	('customer24','$2y$10$wfj926znuj0uMi9FzfYjheE2hVGwgtPqk8vPvOe.T5CBcI3X8Gfuy', 'Customer', 'CM1024'),
+	('customer25','$2y$10$DXSV.RqUw/snV.3mQg3bkOdNj8nCdVbMCRxiYUGo.vU5nfJfaf9A2', 'Customer', 'CM1025'),
+	('customer26','$2y$10$yzTsD89Q0kQJtgAyy1hu0uDpbCo3yzfZ5cCPOwVZBfhV/SFlm3l8y', 'Customer', 'CM1026'),
+	('customer27','$2y$10$VAbgqjZ2BKBFObsSlnrcaeQEkSg6L0wcu2cByNNKsicoDHI4xatp2', 'Customer', 'CM1027'),
+	('customer28','$2y$10$mLviibNiO0YnQlPfpuqsnu3709yw36vybKIkKFffGUJcg9cYlTQEa', 'Customer', 'CM1028'),
+	('customer29','$2y$10$ESXCLwusUDO2GX13iPUvzu0L7fP1kfO.PLQhUeXcmGVVmMvdkJVyK', 'Customer', 'CM1029'),
+	('customer30','$2y$10$hxNKoshULXHBZgwM.4zZveU7dy410ZFPNwOYhJjP6T2jjKQOhbMHK', 'Customer', 'CM1030'),
+	('customer31','$2y$10$GZD/mQI05qg23S0B8Z6g5.9ZU7tpWP.1CdID8srCXP2kTj.iSTstO', 'Customer', 'CM1031'),
+	('customer32','$2y$10$vCJnaxyu5BS5IKIK8nCAVeb68s2OwHk2FeIF3m/XN8.it3pInSePu', 'Customer', 'CM1032'),
+	('customer33','$2y$10$r6s2E45b0h0VNNq.lYNtFOG/0X5Ldlml9YLRJhhYAzMNJhNZk3mxm', 'Customer', 'CM1033'),
+	('customer34','$2y$10$fAv8FdqpYDazrlcgyejb.uNRUHoXjcKyYx8Jq0TWp4YOPiblRErRy', 'Customer', 'CM1034'),
+	('customer35','$2y$10$nxT33ddGIW6OsaL0HMwOzuuAXsENb3lAGPmRehzzfALIOvj7riM4q', 'Customer', 'CM1035'),
+	('customer36','$2y$10$jaL5D2hX0OWRg3IRycVGbO61GbIElpKGcqvTxI4Ikp5ou29V/Y8S2', 'Customer', 'CM1036'),
+	('customer37','$2y$10$ZLBelnFnjZKZTfq21sDE6utufx8sdG8uCAForY8C6ZiE7pq1JnylO', 'Customer', 'CM1037'),
+	('customer38','$2y$10$yps.OOI3SmCy2/aPleFLzO5/HjbbzbpPeizS3GGUraXa/7LJIjkyy', 'Customer', 'CM1038'),
+	('customer39','$2y$10$9F5fb3L9mLC8Lv0WZwCAjubJKzQYJ0x/J1TM5H//OP1rgr3Zm83gK', 'Customer', 'CM1039');
+
+
+
+ALTER TABLE [ACCOUNT] CHECK CONSTRAINT ALL;
+
+
+
 
 GO
 create or alter function getRevenueOfProduct (@maGao CHAR(6))
@@ -526,3 +580,53 @@ BEGIN
 	FROM CONTAIN_PHYBAGS JOIN PRODUCT ON CONTAIN_PHYBAGS.id_product = PRODUCT.id_product
 	GROUP BY PRODUCT.Pname;
 END
+
+GO
+CREATE OR ALTER TRIGGER UpdateBillStatus
+ON PACKAGE
+AFTER UPDATE
+AS
+BEGIN
+	DECLARE @id_bill CHAR(6);
+	DECLARE @status VARCHAR(15);
+	DECLARE @packageCount INT;
+
+	SELECT @id_bill = id_bill
+	FROM INSERTED;
+	SELECT @status = [status]
+	FROM INSERTED;
+
+	IF UPDATE([status]) AND @status = 'Done'
+    BEGIN
+		SELECT @packageCount = COUNT(*)
+		FROM PACKAGE
+		WHERE id_bill = @id_bill AND status <> 'Done';
+
+		IF @packageCount = 0
+        BEGIN
+			UPDATE BILL SET [status] = 'Done'
+            WHERE id_bill = @id_bill;
+		END
+	END
+END 
+
+
+
+GO
+CREATE OR ALTER FUNCTION findUserWith (@Username varchar(30))
+returns @ret_table TABLE 
+(
+	Username varchar(30) , 
+	[Password] nvarchar(65)
+)
+AS
+BEGIN
+	insert into @ret_table
+	SELECT Username, convert(nvarchar(65), [Password],0)
+	FROM ACCOUNT
+	WHERE Username = @Username;
+	RETURN
+END;
+GO
+
+SELECT * FROM findUserWith('admin');
