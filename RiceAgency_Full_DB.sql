@@ -91,10 +91,9 @@ CREATE TABLE [PRODUCT]
 (
 	id_product CHAR(6) NOT NULL,
 	[PName] NVARCHAR(30) NOT NULL,
-	[description] ntext,
-	--[description] NVARCHAR(255),
+	[description] NVARCHAR(1000),
 	featured NVARCHAR(255),
-	Original VARCHAR(9),
+	origin NVARCHAR(20),
 	picture varchar(255) --this is IMAGE type
 		CONSTRAINT PR_Pro PRIMARY KEY(id_product),
 	CONSTRAINT ProName UNIQUE([PName])
@@ -129,13 +128,13 @@ CREATE TABLE TYPE_OF_BAGS
 
 
 
-/******************************************************/
+/*********************** LÔ BAO GẠO *******************************/
 
 CREATE TABLE PHYSICAL_RICEBAG
 (
 	id_product CHAR(6) NOT NULL,
 	id_type CHAR(6) NOT NULL,
-	NumOrder CHAR(6) NOT NULL,
+	NumOrder INT NOT NULL IDENTITY(1,1),
 	Quantity INT DEFAULT 1,
 	NSX DATE,
 	HSD DATE,
@@ -206,7 +205,7 @@ CREATE TABLE CONTAIN_PACKAGE
 (
 	id_product CHAR(6) NOT NULL,
 	id_type CHAR(6) NOT NULL,
-	NumOrder CHAR(6) NOT NULL,
+	NumOrder INT NOT NULL,
 	-- ????
 	id_package CHAR(6) NOT NULL,
 	Quantity INT DEFAULT 1,
@@ -227,7 +226,7 @@ CREATE TABLE CONTAIN_PHYBAGS
 (
 	id_product CHAR(6) NOT NULL,
 	id_type CHAR(6) NOT NULL,
-	NumOrder CHAR(6) NOT NULL,
+	NumOrder INT NOT NULL,
 	-- ????
 	id_bill CHAR(6) NOT NULL,
 	Quantity INT DEFAULT 1,
@@ -267,8 +266,7 @@ CREATE TABLE VECHILE
 /************************* CÔNG TY SẢN SUẤT *****************************/
 CREATE TABLE COMPANY_PRODUCT
 (
-	company_name VARCHAR(30) NOT NULL,
-	hotline VARCHAR(15),
+	company_name NVARCHAR(30) NOT NULL,
 	CONSTRAINT PK_COMPANY_PRODUCT PRIMARY KEY (company_name)
 )
 /******************************************************/
@@ -277,7 +275,7 @@ CREATE TABLE COMPANY_PRODUCT
 CREATE TABLE PRODUCTION
 (
 	id_product CHAR(6) NOT NULL,
-	company_name VARCHAR(30) NOT NULL,
+	company_name NVARCHAR(30) NOT NULL,
 	CONSTRAINT PK_PRODUCTION PRIMARY KEY (id_product,company_name),
 
 	CONSTRAINT FK_PRODUCTION_TO_PRODUCT FOREIGN KEY(id_product) REFERENCES [PRODUCT](id_product),
