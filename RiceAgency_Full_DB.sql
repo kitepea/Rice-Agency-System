@@ -754,20 +754,8 @@ BEGIN
             WHERE id_bill = @id_bill;
         END
     END
-END
+END;
 
-
-
-/*
-UPDATE PACKAGE
-SET status = 'Done'
-where id_package = 'PK1016';
-go
-
-SELECT * FROM BILL;
-SELECT * FROM PACKAGE;
-go
-*/
 GO
 --  trigger to update points when the bill.status = 'Done'
 --create computed attribted
@@ -796,3 +784,15 @@ BEGIN
         WHERE i.[status] = 'Done';
     END
 END;
+
+
+/*
+UPDATE PACKAGE
+SET status = 'Done'
+where id_package = 'PK1016';
+go
+
+SELECT * FROM BILL;
+SELECT * FROM PACKAGE;
+go
+*/
