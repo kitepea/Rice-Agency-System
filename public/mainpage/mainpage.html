@@ -48,10 +48,10 @@
             <div class="input-group rounded mx-5">
                 <input
                     type="search"
-                    class="form-control rounded"
+                    id="search-bar" class="form-control rounded"
                     placeholder="Tìm kiếm..."
-                    aria-label="Search"
-                    aria-describedby="search-addon"
+                   
+                    aria-label="Search" aria-describedby="search-addon"
                 />
                 <span
                     class="input-group-text border-0 bg-danger"
@@ -188,11 +188,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="nsx"> Ngày sản suất</label>
-                                <input type="date" name="nsx" id="nsx" />
+                                <input type="date" id="manufacture" name="nsx" id="nsx" />
                             </div>
                             <div class="mb-3">
                                 <label for="hsd"> Hạn sử dụng</label>
-                                <input type="date" name="hsd" id="hsd" />
+                                <input type="date" id="expiry" name="hsd" id="hsd" />
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -267,9 +267,9 @@
         <section class="py-3">
             <div class="container px-4 px-lg-5 mt-3">
                 <div
-                    class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+                    class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start"
                 >
-                    <div class="col mb-5">
+                    <div class="col mb-5 product">
                         <div class="card h-100">
                             <!-- Product image-->
                             <img
@@ -281,7 +281,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">
+                                    <h5 class="fw-bolder product-name">
                                         Gạo Ông Cua ST25 Lúa Tôm (túi 5kg)
                                     </h5>
                                     <!-- Product price-->
@@ -311,7 +311,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5 product">
                         <div class="card h-100">
                             <!-- Product image-->
                             <img
@@ -323,7 +323,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
+                                    <h5 class="fw-bolder product-name">Special Item</h5>
                                     <!-- Product price-->
                                     <span
                                         class="text-muted text-decoration-line-through"
@@ -355,7 +355,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5 product">
                         <div class="card h-100">
                             <!-- Product image-->
                             <img
@@ -367,7 +367,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
+                                    <h5 class="fw-bolder product-name">Sale Item</h5>
                                     <!-- Product price-->
                                     <span
                                         class="text-muted text-decoration-line-through"
@@ -399,7 +399,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5 product">
                         <div class="card h-100">
                             <!-- Product image-->
                             <img
@@ -411,7 +411,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
+                                    <h5 class="fw-bolder product-name">Popular Item</h5>
                                     <!-- Product price-->
                                     $40.00
                                 </div>
@@ -439,7 +439,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5 product">
                         <div class="card h-100">
                             <!-- Product image-->
                             <img
@@ -451,7 +451,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
+                                    <h5 class="fw-bolder product-name">Sale Item</h5>
                                     <!-- Product price-->
                                     <span
                                         class="text-muted text-decoration-line-through"
@@ -483,7 +483,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5 product">
                         <div class="card h-100">
                             <!-- Product image-->
                             <img
@@ -495,7 +495,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    <h5 class="fw-bolder product-name">Fancy Product</h5>
                                     <!-- Product price-->
                                     $120.00 - $280.00
                                 </div>
@@ -523,7 +523,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5 product">
                         <div class="card h-100">
                             <!-- Product image-->
                             <img
@@ -535,7 +535,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
+                                    <h5 class="fw-bolder product-name">Special Item</h5>
                                     <!-- Product price-->
                                     <span
                                         class="text-muted text-decoration-line-through"
@@ -567,7 +567,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-5">
+                    <div class="col mb-5 product">
                         <div class="card h-100">
                             <!-- Product image-->
                             <img
@@ -579,7 +579,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
+                                    <h5 class="fw-bolder product-name">Popular Item</h5>
                                     <!-- Product reviews-->
                                     <!-- Product price-->
                                     $40.00
@@ -638,7 +638,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    </body>
+        <script src="script.js"></script>
+</body>
     <script>
         var content = [
             { id: 0, text: "Loại 1" },
@@ -677,4 +678,22 @@
             });
         });
     </script>
+<script>
+    var searchBox = document.getElementById('search-bar');
+
+    searchBox.addEventListener('keyup', function () {
+        var searchValue = searchBox.value.toLowerCase();
+        var products = document.querySelectorAll('.product');
+
+        products.forEach(function (product) {
+            var productName = product.querySelector('.product-name').textContent.toLowerCase();
+            if (productName.includes(searchValue)) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    });
+
+</script>
 </html>
