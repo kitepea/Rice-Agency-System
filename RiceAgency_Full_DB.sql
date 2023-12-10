@@ -19,29 +19,29 @@ set dateformat dmy;
 
 CREATE TABLE [USER]
 (
-	userid CHAR(6),
+	[user_id] CHAR(6),
 	FMName VARCHAR(30) NOT NULL,
 	[Name] VARCHAR(10) NOT NULL,
 	Phone CHAR(10) UNIQUE,
 	Email VARCHAR(50) UNIQUE,
 	[Address] VARCHAR(50),
-	PRIMARY KEY(userid),
+	PRIMARY KEY([user_id]),
 	CHECK (
-        (LEFT(userid, 2) = 'EM' OR LEFT(userid, 2) = 'CM') AND
-		ISNUMERIC(RIGHT(userid, 4)) = 1 AND
-		LEN(userid) = 6
+        (LEFT([user_id], 2) = 'EM' OR LEFT([user_id], 2) = 'CM') AND
+		ISNUMERIC(RIGHT([user_id], 4)) = 1 AND
+		LEN([user_id]) = 6
     )
 );
 
 
 CREATE TABLE [ADDRESS]
 (
-	userid CHAR(6),
+	[user_id] CHAR(6),
 	house_num VARCHAR(5) not null,
 	street VARCHAR(50) not null,
 	city VARCHAR(50) not null,
-	PRIMARY KEY (userid, house_num, street, city),
-	CONSTRAINT fk_uid_address FOREIGN KEY (userid) REFERENCES [user] (userid) 
+	PRIMARY KEY ([user_id], house_num, street, city),
+	CONSTRAINT fk_uid_address FOREIGN KEY ([user_id]) REFERENCES [user] ([user_id]) 
 	-- on delete cascade
 	ON UPDATE CASCADE
 );
@@ -51,9 +51,9 @@ CREATE TABLE [ACCOUNT]
 	Username VARCHAR(30),
 	[Password] VARCHAR(20) not null,
 	[Type] VARCHAR(20) CHECK ([TYPE] IN ('Employee', 'Customer')) NOT NULL,
-	userid CHAR(6),
+	[user_id] CHAR(6),
 	PRIMARY KEY(Username),
-	CONSTRAINT fk_uid_account FOREIGN KEY (userid) REFERENCES [user] (userid)
+	CONSTRAINT fk_uid_account FOREIGN KEY ([user_id]) REFERENCES [user] ([user_id])
 	-- on delete cascade
 	ON UPDATE CASCADE
 );
@@ -63,7 +63,7 @@ CREATE TABLE EMPLOYEE
 	employee_id CHAR(6) NOT NULL,
 	manager_id CHAR(6) NOT NULL,
 	PRIMARY KEY (employee_id),
-	CONSTRAINT fk_empid_uid FOREIGN KEY (employee_id) REFERENCES [user] (userid)
+	CONSTRAINT fk_empid_uid FOREIGN KEY (employee_id) REFERENCES [user] ([user_id])
 	-- on delete cascade
 	ON UPDATE CASCADE
 );
@@ -71,7 +71,7 @@ CREATE TABLE EMPLOYEE
 CREATE TABLE CUSTOMER
 (
 	customer_id CHAR(6) PRIMARY KEY,
-	CONSTRAINT fk_uid_customer FOREIGN KEY (customer_id) REFERENCES [user] (userid)
+	CONSTRAINT fk_uid_customer FOREIGN KEY (customer_id) REFERENCES [user] ([user_id])
 	-- on delete cascade
 	ON UPDATE CASCADE
 );
