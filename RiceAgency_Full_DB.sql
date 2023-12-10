@@ -754,8 +754,8 @@ BEGIN
             WHERE id_bill = @id_bill;
         END
     END
-END;
-
+END
+		
 GO
 --  trigger to update points when the bill.status = 'Done'
 --create computed attribted
