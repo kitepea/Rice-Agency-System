@@ -6,7 +6,6 @@ include '../models/statistical.model.php';
 
 header('Access-Control-Allow-Method: GET');
 
-global $connect;
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $statistical_info = new Statistical();
