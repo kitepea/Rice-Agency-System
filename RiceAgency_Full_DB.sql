@@ -305,6 +305,204 @@ add CONSTRAINT FK_DELTRP_TO_VECHILE FOREIGN KEY (id_vechile) REFERENCES VECHILE(
 -- add prefix auto_increment (procedure and trigger)
 
 -- insert data ---
+
+alter table bill nocheck CONSTRAINT all;
+insert into bill
+values
+	('BM1001', '01-02-2023', 'Cancelled', null, 'CM1001', 'EM1001', '32', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
+	('BM1002', '01-02-2023', 'Done', null, 'CM1002', 'EM1002', '234', N'Hoàng Diệu 2', N'TP Hồ Chí Minh'),
+	('BM1003', '21-02-2023', 'Delivering', null, 'CM1003', 'EM1001', '124', N'Võ Nguyên Giáp', N'TP Hồ Chí Minh'),
+	('BM1004', '20-04-2023', 'Waiting', null, 'CM1004', 'EM1002', '412', N'Nguyễn Thị Minh Khai', N'Bình Dương'),
+	('BM1005', '10-06-2023', 'Waiting', null, 'CM1005', 'EM1002', '512', N'Đường 3 tháng 2', N'TP Hồ Chí Minh'),
+	('BM1006', '18-07-2023', 'Done', null, 'CM1006', 'EM1001', '611', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
+	('BM1007', '15-08-2023', 'Delivering', null, 'CM1007', 'EM1002', '712', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
+	('BM1008', '05-09-2023', 'Done', null, 'CM1008', 'EM1001', '811', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
+	('BM1009', '23-10-2023', 'Waiting', null, 'CM1009', 'EM1003', '913', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
+	('BM1010', '18-11-2023', 'Waiting', null, 'CM1010', 'EM1002', '144', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
+	('BM1011', '14-12-2023', 'Delivering', N'Giao vào buổi sáng', 'CM1011', 'EM1003', '356', N'Võ Nguyên Giáp', N'TP Hồ Chí Minh'),
+	('BM1012', '05-01-2023', 'Cancelled', N'Giao vào buổi chiều', 'CM1012', 'EM1001', '126', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
+	('BM1013', '17-12-2023', 'Waiting', null, 'CM1013', 'EM1003', '543', N'Nguyễn Văn Trỗi', N'Cần Thơ'),
+	('BM1014', '15-10-2023', 'Cancelled', null, 'CM1014', 'EM1002', '6556', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
+	('BM1015', '10-09-2023', 'Delivering', null, 'CM1015', 'EM1001', '1256', N'Lê Lợi', N'Đồng Nai'),
+	('BM1016', '11-07-2023', 'Delivering', null, 'CM1016', 'EM1004', '2', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
+	('BM1017', '01-06-2023', 'Waiting', null, 'CM1017', 'EM1003', '11', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
+	('BM1018', '10-05-2023', 'Done', null, 'CM1018', 'EM1001', '111', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
+	('BM1019', '10-04-2023', 'Done', null, 'CM1019', 'EM1004', '423', N'Lê Lai', N'TP Hồ Chí Minh'),
+	('BM1020', '07-03-2023', 'Waiting', null, 'CM1020', 'EM1002', '236', N'Cách mạng tháng 8', N'TP Hồ Chí Minh');
+alter table bill check CONSTRAINT all;
+/*********INSERT PHƯƠNG TIỆN, CHUYẾN GIAO HÀNG********/
+GO
+insert into VECHILE
+values
+	('51G8-12345'),
+	('29F3-11111'),
+	('33A1-67890'),
+	('23G7-69176'),
+	('80C8-77777'),
+	('79F5-18877');
+
+Alter table DELIVERY_TRIP NOCHECK CONSTRAINT ALL;
+insert into DELIVERY_TRIP
+values
+	('DM1001','Cancelled',null,null,'EM2002','29F3-11111'),
+	('DM1002','Done','27-02-2023','27-02-2023','EM2006','33A1-67890'),
+	('DM1003','Delivering','28-02-2023',NULL,'EM2003','34A8-88888'),
+	('DM1004','Waiting','29-04-2023',null,'EM2004','23G7-69176'),
+	('DM1005','Waiting','23-06-2023',NULL,'EM2005','80C8-77777'),
+	('DM1006','Done','25-07-2023','25-07-2023','EM2006','79F5-18877'),
+	('DM1007','Delivering','23-08-2023',NULL,'EM2007','51G8-66554'),
+	('DM1008','Done','12-09-2023','12-09-2023','EM2001','51G8-12345'),
+	('DM1009','Waiting','31-10-2023',NULL,'EM2008','80C8-77777'),
+	('DM1010','Waiting','28-11-2023',NULL,'EM2001','51G8-12345'),
+	('DM1011','Delivering','25-12-2023',NULL,'EM2001','23G7-69176'),
+	('DM1012','Cancelled',null,NULL,'EM2007','51G8-12345'),
+	('DM1013','Waiting','17-12-2023',NULL,'EM2003','51G8-12345'),
+	('DM1014','Cancelled',null,NULL,'EM2008','79F5-18877'),
+	('DM1015','Delivering','20-09-2023',NULL,'EM2008','23G7-69176'),
+	('DM1016','Delivering','25-07-2023',NULL,'EM2008','80C8-77777'),
+	('DM1017','Waiting','30-06-2023',NULL,'EM2008','23G7-69176'),
+	('DM1018','Done','20-05-2023','20-05-2023','EM2008','80C8-77777'),
+	('DM1019','Done','18-04-2023','17-04-2023','EM2008','80C8-77777'),
+	('DM1020','Waiting','25-03-2023',NULL,'EM2008','51G8-66554');
+Alter table DELIVERY_TRIP CHECK CONSTRAINT ALL;
+
+GO
+ALTER TABLE PACKAGE nocheck CONSTRAINT all;
+insert into PACKAGE
+values
+	('PK1001', 'BM1001', 'Cancelled', 'DM1001'),
+	('PK1002', 'BM1002', 'Done', 'DM1002'),
+	('PK1003', 'BM1003', 'Delivering', 'DM1003'),
+	('PK1004', 'BM1004', 'Waiting', 'DM1004'),
+	('PK1005', 'BM1005', 'Waiting', 'DM1005'),
+	('PK1006', 'BM1006', 'Done', 'DM1006'),
+	('PK1007', 'BM1007', 'Delivering', 'DM1007'),
+	('PK1008', 'BM1008', 'Done', 'DM1008'),
+	('PK1009', 'BM1009', 'Waiting', 'DM1009'),
+	('PK1010', 'BM1010', 'Waiting', 'DM1010'),
+	('PK1011', 'BM1011', 'Delivering', 'DM1011'),
+	('PK1023', 'BM1011', 'Delivering', 'DM1011'),
+	('PK1012', 'BM1012', 'Cancelled', 'DM1012'),
+	('PK1013', 'BM1013', 'Waiting', 'DM1013'),
+	('PK1014', 'BM1014', 'Cancelled', 'DM1014'),
+	('PK1015', 'BM1015', 'Delivering', 'DM1015'),
+	('PK1016', 'BM1016', 'Delivering', 'DM1016'),
+	('PK1021', 'BM1016', 'Delivering', 'DM1016'),
+	('PK1022', 'BM1016', 'Delivering', 'DM1016'),
+	('PK1017', 'BM1017', 'Waiting', 'DM1017'),
+	('PK1018', 'BM1018', 'Done', 'DM1018'),
+	('PK1019', 'BM1019', 'Done', 'DM1019'),
+	('PK1020', 'BM1020', 'Waiting', 'DM1020');
+alter table package check CONSTRAINT all;
+
+ALTER TABLE CONTAIN_PHYBAGS nocheck CONSTRAINT all;
+insert into CONTAIN_PHYBAGS
+values
+	('PM1003', 'TB1010', 2, 'BM1001', 2),
+	('PM1001', 'TB1002', 3, 'BM1009', 2),
+	('PM1002', 'TB1005', 4, 'BM1001', 1),
+	('PM1003', 'TB1002', 5, 'BM1009', 1),
+	('PM1004', 'TB1010', 6, 'BM1004', 3),
+	('PM1005', 'TB1005', 7, 'BM1001', 2),
+	('PM1006', 'TB1005', 8, 'BM1009', 1),
+	('PM1007', 'TB1010', 9, 'BM1020', 1),
+	('PM1008', 'TB1002', 10, 'BM1019', 3),
+	('PM1009', 'TB1010', 11, 'BM1015', 2),
+	('PM1010', 'TB1005', 12, 'BM1014', 2),
+	('PM1011', 'TB1002', 13, 'BM1010', 3),
+	('PM1012', 'TB1005', 14, 'BM1008', 1),
+	('PM1011', 'TB1010', 15, 'BM1009', 2),
+	('PM1011', 'TB1002', 16, 'BM1008', 3),
+	('PM1007', 'TB1005', 17, 'BM1020', 1),
+	('PM1004', 'TB1005', 18, 'BM1005', 2),
+	('PM1004', 'TB1005', 19, 'BM1006', 2),
+	('PM1001', 'TB1002', 20, 'BM1002', 1),
+	('PM1001', 'TB1002', 21, 'BM1005', 3),
+	('PM1009', 'TB1002', 22, 'BM1014', 3),
+	('PM1002', 'TB1005', 23, 'BM1005', 3),
+	('PM1005', 'TB1010', 24, 'BM1002', 2),
+	('PM1006', 'TB1002', 25, 'BM1005', 2),
+	('PM1009', 'TB1005', 26, 'BM1014', 3),
+	('PM1005', 'TB1010', 27, 'BM1009', 2),
+	('PM1002', 'TB1002', 28, 'BM1003', 1),
+	('PM1009', 'TB1005', 29, 'BM1013', 2),
+	('PM1005', 'TB1002', 30, 'BM1003', 3),
+	('PM1009', 'TB1005', 31, 'BM1012', 1),
+	('PM1006', 'TB1002', 32, 'BM1007', 3),
+	('PM1009', 'TB1005', 33, 'BM1011', 2),
+	('PM1010', 'TB1002', 34, 'BM1014', 3),
+	('PM1012', 'TB1010', 35, 'BM1008', 2),
+	('PM1008', 'TB1002', 36, 'BM1020', 3),
+	('PM1012', 'TB1005', 37, 'BM1009', 1),
+	('PM1008', 'TB1002', 38, 'BM1003', 2),
+	('PM1008', 'TB1002', 39, 'BM1005', 1),
+	('PM1010', 'TB1010', 40, 'BM1014', 2),
+	('PM1012', 'TB1010', 41, 'BM1010', 1),
+	('PM1001', 'TB1002', 42, 'BM1003', 2),
+	('PM1012', 'TB1010', 43, 'BM1002', 2);
+alter table contain_phybags check CONSTRAINT all;
+
+ALTER TABLE TYPE_OF_BAGS nocheck CONSTRAINT all;
+insert into TYPE_OF_BAGS
+values
+	('PM1001', 'TB1002', 2, 20, 40000),
+	('PM1001', 'TB1005', 5, 31, 100000),
+	('PM1001', 'TB1010', 10, 15, 200000),
+	('PM1002', 'TB1002', 2, 14, 42000),
+	('PM1002', 'TB1005', 5, 12, 105000),
+	('PM1002', 'TB1010', 10, 42, 210000),
+	('PM1003', 'TB1002', 2, 12, 40000),
+	('PM1003', 'TB1005', 5, 45, 100000),
+	('PM1003', 'TB1010', 10, 23, 200000),
+	('PM1004', 'TB1002', 2, 26, 36000),
+	('PM1004', 'TB1005', 5, 13, 90000),
+	('PM1004', 'TB1010', 10, 45, 180000),
+	('PM1005', 'TB1002', 2, 52, 38000),
+	('PM1005', 'TB1005', 5, 12, 95000),
+	('PM1005', 'TB1010', 10, 53, 190000),
+	('PM1006', 'TB1002', 2, 31, 44000),
+	('PM1006', 'TB1005', 5, 30, 110000),
+	('PM1006', 'TB1010', 10, 20, 220000),
+	('PM1007', 'TB1002', 2, 21, 42000),
+	('PM1007', 'TB1005', 5, 21, 105000),
+	('PM1007', 'TB1010', 10, 22, 210000),
+	('PM1008', 'TB1002', 2, 22, 38000),
+	('PM1008', 'TB1005', 5, 12, 95000),
+	('PM1008', 'TB1010', 10, 46, 190000),
+	('PM1009', 'TB1002', 2, 56, 50000),
+	('PM1009', 'TB1005', 5, 54, 125000),
+	('PM1009', 'TB1010', 10, 44, 250000),
+	('PM1010', 'TB1002', 2, 45, 36000),
+	('PM1010', 'TB1005', 5, 46, 90000),
+	('PM1010', 'TB1010', 10, 43, 180000),
+	('PM1011', 'TB1002', 2, 42, 50000),
+	('PM1011', 'TB1005', 5, 41, 125000),
+	('PM1011', 'TB1010', 10, 45, 250000),
+	('PM1012', 'TB1002', 2, 21, 34000),
+	('PM1012', 'TB1005', 5, 22, 85000),
+	('PM1012', 'TB1010', 10, 23, 170000)
+
+ALTER TABLE TYPE_OF_BAGS check CONSTRAINT all;
+
+
+
+ALTER TABLE [PRODUCT] NOCHECK CONSTRAINT ALL;
+insert into [PRODUCT]
+values
+	('PM1001', N'thơm Thái', N'Khi nấu xong, gạo sẽ có độ dẻo mềm vừa phải và rất thơm.', N'Hạt dài, màu trắng trong và ít bạc bụng', 'Vietnam', 'https://khogaomientay.com.vn/uploads/images/image(4).png'),
+	('PM1002', N'Bắc Hương', N'Hạt gạo Bắc Hương nhỏ dài và có màu trắng trong. Khi nấu xong gạo có độ dẻo nhiều và độ dính cao. Cơm khi để nguội vẫn giữ được độ dẻo và mùi thơm đặc trưng.', N'Hạt nhỏ dài và có màu trắng trong', 'Vietnam', 'https://gaogiasi.com.vn/uploads/noidung/gao-bac-huong-0-167.jpg'),
+	('PM1003', N'Tám Xoan', N'Với hạt gạo hơi dài, thon nhỏ và vẹo một đầu, bạn sẽ dễ dàng nhận ra gạo Tám Xoan. Hạt của chúng có màu trong xanh, không bị bạc bụng, mùi thơm lại dịu và rất tự nhiên.', N'Hạt nhỏ dài và có màu trắng trong, dẻo và độ dính', 'Vietnam', 'https://down-vn.img.susercontent.com/file/f37eb203adc72dbc2ad840f956eba3dc'),
+	('PM1004', N'ST24', N'Gạo ST24 có dáng dài và dẹt, màu trắng trong, mang mùi thơm lá dứa tự nhiên. Khi nấu cho cơm mềm dẻo với hương thơm của lá dứa. Điều đặc biệt ở gạo ST24 là càng để nguội ăn càng ngon, hạt gạo vẫn giữ được độ mềm dẻo mà không bị cứng.', N'Hạt có dáng dài và dẹt, màu trắng trong', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/08/gao-ST24_AAN.jpg'),
+	('PM1005', N'Hàm Châu', N'Với dáng vẻ bên ngoài giống như các loại gạo khác, gạo Hàm Châu với hương thơm tự nhiên, vị ngọt đậm. Gạo khi nấu xong nở và xốp, rất thích hợp để làm món cơm chiên.', N'Hạt có hương thơm tự nhiên, vị ngọt đậm', 'Vietnam', 'https://gaosachonline.com/wp-content/uploads/2018/05/gao-ham-chau-dong-tui.png'),
+	('PM1006', N'Nàng Xuân', N'Là sự lai tạo của hai giống lúa Tám Xoan và KhaoDawk Mali (Thái Lan), gạo Nàng Xuân có hạt thon dài. Cơm khi nấu xong mềm dẻo, ngọt và có mùi thơm đặc trưng.', N'Hạt thon dài, khi nấu mềm dẻo, ngọt', 'Vietnam', 'https://gaochatluong.com/wp-content/uploads/2023/03/gao-nang-xuan-removebg-preview.png'),
+	('PM1007', N'Tài Nguyên', N'Khác với những hạt gạo trắng trong, hạt gạo Tài Nguyên có màu trắng đục. Khi nấu sẽ cho cơm ráo, mềm, xốp, ngọt cơm. Đặc biệt, cơm vẫn ngon khi để nguội.', N'Hạt có màu trắng đục', 'Vietnam', 'https://product.hstatic.net/1000362335/product/14_9eedb99655254a0dbdaa78657657cfbf_master.png'),
+	('PM1008', N'thơm Jasmine', N'Hạt gạo thơm Jasmine dài và màu trắng bóng rất đẹp mắt. Khi nấu cho cơm dẻo vừa và có mùi thơm nhẹ, được nhiều người ưa chuộng.', N'Hạt gạo thơm lài dài và màu trắng bóng', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/08/gao-Jasmine_AAN.jpg'),
+	('PM1009', N'ST25', N'Hạt gạo ST25 có mùi thơm đặc trưng của lá dứa hòa quyện với mùi thơm của cốm non rất dễ ngửi thấy kể cả khi gạo còn sống. Hơn thế nữa cơm được nấu từ gạo ST25 là loại cơm "cực phẩm" với hạt cơm khô ráo, độ dẻo, thơm nhất định và vị ngọt thanh đến từ tinh bột gạo hảo hạng, khi để nguội cũng khô bị khô cứng.', N'Hạt có mùi thơm đặc trưng', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/10/gao-ST25-hut-chan-khong-5kg-600x600.jpg'),
+	('PM1010', N'Tám Thái đỏ', N'Được lai tạo từ gạo Hom Mali (Thái Lan), gạo Tám Thái đỏ có hạt nhỏ, dài đều, căng bóng, màu đục. Cơm chín có vị dẻo dai, màu cơm trắng hồng và có độ kết dính vừa phải.', N'Hạt nhỏ, dài đều, căng bóng, màu đục', 'Vietnam', 'http://cefvina.com.vn/wp-content/uploads/2018/07/3vFQHlMPPapyM2tj56Z1_simg_de2fe0_250x250_maxb.jpg'),
+	('PM1011', N'Lứt', N'Gạo lứt với lớp cám gạo chưa được xay xát, có màu tím hoặc đỏ, mang đến hàm lượng dinh dưỡng dồi dào cho người tiêu dùng. Gạo lứt có các loại như: gạo lứt đỏ, gạo lứt đen, gạo lứt tẻ, gạo lứt nếp. Khi nấu, gạo cũng cần được nấu lâu hơn gạo trắng để đạt được độ mềm như mong muốn.', N'Hạt có màu tím hoặc đỏ', 'Vietnam', 'https://gaophuongnam.vn/thumbs/560x640x1/upload/product/gao-lut-dien-bien-do-4618.jpg'),
+	('PM1012', N'Tám Điện Biên', N'Nổi tiếng với hương thơm và độ dẻo như nếp, tám Điện Biên có gạt gạo nhỏ, đều, căng bóng và hơi đục. Dù bề ngoài không được bắt mắt, cơm khi nấu xong lại cho ra những chén cơm thơm phức, dẻo ngọt khiến ai cũng phải thay đổi suy nghĩ về loại gạo này.', N'Hạt gạo nhỏ, đều, căng bóng và hơi đục', 'Vietnam', 'https://gaogiasi.com.vn/uploads/noidung/gao-tam-dien-bien-0-400.jpg');
+
+ALTER TABLE [PRODUCT] CHECK CONSTRAINT ALL;
 --INSERT USER CUSTOMER
 go
 alter table [USER] NOCHECK CONSTRAINT ALL;
@@ -406,206 +604,6 @@ values
 	('EM2008');
 
 ------------------------------------------------------------------------
-
---INSERT BILL
-alter table bill nocheck constraint all;
-insert into bill
-values
-	('BM1001', '01-02-2023', 'Cancelled', null, 'CM1001', 'EM1001', '32', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1002', '01-02-2023', 'Done', null, 'CM1002', 'EM1002', '234', N'Hoàng Diệu 2', N'TP Hồ Chí Minh'),
-	('BM1003', '21-02-2023', 'Delivering', null, 'CM1003', 'EM1001', '124', N'Võ Nguyên Giáp', N'TP Hồ Chí Minh'),
-	('BM1004', '20-04-2023', 'Waiting', null, 'CM1004', 'EM1002', '412', N'Nguyễn Thị Minh Khai', N'Bình Dương'),
-	('BM1005', '10-06-2023', 'Waiting', null, 'CM1005', 'EM1002', '512', N'Đường 3 tháng 2', N'TP Hồ Chí Minh'),
-	('BM1006', '18-07-2023', 'Done', null, 'CM1006', 'EM1001', '611', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
-	('BM1007', '15-08-2023', 'Delivering', null, 'CM1007', 'EM1002', '712', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
-	('BM1008', '05-09-2023', 'Done', null, 'CM1008', 'EM1001', '811', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
-	('BM1009', '23-10-2023', 'Waiting', null, 'CM1009', 'EM1003', '913', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1010', '18-11-2023', 'Waiting', null, 'CM1010', 'EM1002', '144', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
-	('BM1011', '14-12-2023', 'Delivering', N'Giao vào buổi sáng', 'CM1011', 'EM1003', '356', N'Võ Nguyên Giáp', N'TP Hồ Chí Minh'),
-	('BM1012', '05-01-2023', 'Cancelled', N'Giao vào buổi chiều', 'CM1012', 'EM1001', '126', N'Đường Cộng hoà', N'TP Hồ Chí Minh'),
-	('BM1013', '17-12-2023', 'Waiting', null, 'CM1013', 'EM1003', '543', N'Nguyễn Văn Trỗi', N'Cần Thơ'),
-	('BM1014', '15-10-2023', 'Cancelled', null, 'CM1014', 'EM1002', '6556', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
-	('BM1015', '10-09-2023', 'Delivering', null, 'CM1015', 'EM1001', '1256', N'Lê Lợi', N'Đồng Nai'),
-	('BM1016', '11-07-2023', 'Delivering', null, 'CM1016', 'EM1004', '2', N'Nguyễn Chí Thanh', N'TP Hồ Chí Minh'),
-	('BM1017', '01-06-2023', 'Waiting', null, 'CM1017', 'EM1003', '11', N'Võ Văn Ngân', N'TP Hồ Chí Minh'),
-	('BM1018', '10-05-2023', 'Done', null, 'CM1018', 'EM1001', '111', N'Cách mạng tháng 8', N'TP Hồ Chí Minh'),
-	('BM1019', '10-04-2023', 'Done', null, 'CM1019', 'EM1004', '423', N'Lê Lai', N'TP Hồ Chí Minh'),
-	('BM1020', '07-03-2023', 'Waiting', null, 'CM1020', 'EM1002', '236', N'Cách mạng tháng 8', N'TP Hồ Chí Minh');
-alter table bill check constraint all;
-
-/*********INSERT PHƯƠNG TIỆN, CHUYẾN GIAO HÀNG********/
-GO
-insert into VECHILE
-values
-	('51G8-12345'),
-	('29F3-11111'),
-	('33A1-67890'),
-	('23G7-69176'),
-	('80C8-77777'),
-	('79F5-18877');
-
-Alter table DELIVERY_TRIP NOCHECK CONSTRAINT ALL;
-insert into DELIVERY_TRIP
-values
-	('DM1001','Cancelled',null,null,'EM2002','29F3-11111'),
-	('DM1002','Done','27-02-2023','27-02-2023','EM2006','33A1-67890'),
-	('DM1003','Delivering','28-02-2023',NULL,'EM2003','34A8-88888'),
-	('DM1004','Waiting','29-04-2023',null,'EM2004','23G7-69176'),
-	('DM1005','Waiting','23-06-2023',NULL,'EM2005','80C8-77777'),
-	('DM1006','Done','25-07-2023','25-07-2023','EM2006','79F5-18877'),
-	('DM1007','Delivering','23-08-2023',NULL,'EM2007','51G8-66554'),
-	('DM1008','Done','12-09-2023','12-09-2023','EM2001','51G8-12345'),
-	('DM1009','Waiting','31-10-2023',NULL,'EM2008','80C8-77777'),
-	('DM1010','Waiting','28-11-2023',NULL,'EM2001','51G8-12345'),
-	('DM1011','Delivering','25-12-2023',NULL,'EM2001','23G7-69176'),
-	('DM1012','Cancelled',null,NULL,'EM2007','51G8-12345'),
-	('DM1013','Waiting','17-12-2023',NULL,'EM2003','51G8-12345'),
-	('DM1014','Cancelled',null,NULL,'EM2008','79F5-18877'),
-	('DM1015','Delivering','20-09-2023',NULL,'EM2008','23G7-69176'),
-	('DM1016','Delivering','25-07-2023',NULL,'EM2008','80C8-77777'),
-	('DM1017','Waiting','30-06-2023',NULL,'EM2008','23G7-69176'),
-	('DM1018','Done','20-05-2023','20-05-2023','EM2008','80C8-77777'),
-	('DM1019','Done','18-04-2023','17-04-2023','EM2008','80C8-77777'),
-	('DM1020','Waiting','25-03-2023',NULL,'EM2008','51G8-66554');
-Alter table DELIVERY_TRIP CHECK CONSTRAINT ALL;
-
-GO
-ALTER TABLE PACKAGE nocheck constraint all;
-insert into PACKAGE
-values
-	('PK1001', 'BM1001', 'Cancelled', 'DM1001'),
-	('PK1002', 'BM1002', 'Done', 'DM1002'),
-	('PK1003', 'BM1003', 'Delivering', 'DM1003'),
-	('PK1004', 'BM1004', 'Waiting', 'DM1004'),
-	('PK1005', 'BM1005', 'Waiting', 'DM1005'),
-	('PK1006', 'BM1006', 'Done', 'DM1006'),
-	('PK1007', 'BM1007', 'Delivering', 'DM1007'),
-	('PK1008', 'BM1008', 'Done', 'DM1008'),
-	('PK1009', 'BM1009', 'Waiting', 'DM1009'),
-	('PK1010', 'BM1010', 'Waiting', 'DM1010'),
-	('PK1011', 'BM1011', 'Delivering', 'DM1011'),
-	('PK1023', 'BM1011', 'Delivering', 'DM1011'),
-	('PK1012', 'BM1012', 'Cancelled', 'DM1012'),
-	('PK1013', 'BM1013', 'Waiting', 'DM1013'),
-	('PK1014', 'BM1014', 'Cancelled', 'DM1014'),
-	('PK1015', 'BM1015', 'Delivering', 'DM1015'),
-	('PK1016', 'BM1016', 'Delivering', 'DM1016'),
-	('PK1021', 'BM1016', 'Delivering', 'DM1016'),
-	('PK1022', 'BM1016', 'Delivering', 'DM1016'),
-	('PK1017', 'BM1017', 'Waiting', 'DM1017'),
-	('PK1018', 'BM1018', 'Done', 'DM1018'),
-	('PK1019', 'BM1019', 'Done', 'DM1019'),
-	('PK1020', 'BM1020', 'Waiting', 'DM1020');
-alter table package check constraint all;
-
-ALTER TABLE CONTAIN_PHYBAGS nocheck constraint all;
-insert into CONTAIN_PHYBAGS
-values
-	('PM1003', 'TB1010', 2, 'BM1001', 2),
-	('PM1001', 'TB1002', 3, 'BM1009', 2),
-	('PM1002', 'TB1005', 4, 'BM1001', 1),
-	('PM1003', 'TB1002', 5, 'BM1009', 1),
-	('PM1004', 'TB1010', 6, 'BM1004', 3),
-	('PM1005', 'TB1005', 7, 'BM1001', 2),
-	('PM1006', 'TB1005', 8, 'BM1009', 1),
-	('PM1007', 'TB1010', 9, 'BM1020', 1),
-	('PM1008', 'TB1002', 10, 'BM1019', 3),
-	('PM1009', 'TB1010', 11, 'BM1015', 2),
-	('PM1010', 'TB1005', 12, 'BM1014', 2),
-	('PM1011', 'TB1002', 13, 'BM1010', 3),
-	('PM1012', 'TB1005', 14, 'BM1008', 1),
-	('PM1011', 'TB1010', 15, 'BM1009', 2),
-	('PM1011', 'TB1002', 16, 'BM1008', 3),
-	('PM1007', 'TB1005', 17, 'BM1020', 1),
-	('PM1004', 'TB1005', 18, 'BM1005', 2),
-	('PM1004', 'TB1005', 19, 'BM1006', 2),
-	('PM1001', 'TB1002', 20, 'BM1002', 1),
-	('PM1001', 'TB1002', 21, 'BM1005', 3),
-	('PM1009', 'TB1002', 22, 'BM1014', 3),
-	('PM1002', 'TB1005', 23, 'BM1005', 3),
-	('PM1005', 'TB1010', 24, 'BM1002', 2),
-	('PM1006', 'TB1002', 25, 'BM1005', 2),
-	('PM1009', 'TB1005', 26, 'BM1014', 3),
-	('PM1005', 'TB1010', 27, 'BM1009', 2),
-	('PM1002', 'TB1002', 28, 'BM1003', 1),
-	('PM1009', 'TB1005', 29, 'BM1013', 2),
-	('PM1005', 'TB1002', 30, 'BM1003', 3),
-	('PM1009', 'TB1005', 31, 'BM1012', 1),
-	('PM1006', 'TB1002', 32, 'BM1007', 3),
-	('PM1009', 'TB1005', 33, 'BM1011', 2),
-	('PM1010', 'TB1002', 34, 'BM1014', 3),
-	('PM1012', 'TB1010', 35, 'BM1008', 2),
-	('PM1008', 'TB1002', 36, 'BM1020', 3),
-	('PM1012', 'TB1005', 37, 'BM1009', 1),
-	('PM1008', 'TB1002', 38, 'BM1003', 2),
-	('PM1008', 'TB1002', 39, 'BM1005', 1),
-	('PM1010', 'TB1010', 40, 'BM1014', 2),
-	('PM1012', 'TB1010', 41, 'BM1010', 1),
-	('PM1001', 'TB1002', 42, 'BM1003', 2),
-	('PM1012', 'TB1010', 43, 'BM1002', 2);
-alter table contain_phybags check constraint all;
-
-ALTER TABLE TYPE_OF_BAGS nocheck constraint all;
-insert into TYPE_OF_BAGS
-values
-	('PM1001', 'TB1002', 2, 20, 40000),
-	('PM1001', 'TB1005', 5, 31, 100000),
-	('PM1001', 'TB1010', 10, 15, 200000),
-	('PM1002', 'TB1002', 2, 14, 42000),
-	('PM1002', 'TB1005', 5, 12, 105000),
-	('PM1002', 'TB1010', 10, 42, 210000),
-	('PM1003', 'TB1002', 2, 12, 40000),
-	('PM1003', 'TB1005', 5, 45, 100000),
-	('PM1003', 'TB1010', 10, 23, 200000),
-	('PM1004', 'TB1002', 2, 26, 36000),
-	('PM1004', 'TB1005', 5, 13, 90000),
-	('PM1004', 'TB1010', 10, 45, 180000),
-	('PM1005', 'TB1002', 2, 52, 38000),
-	('PM1005', 'TB1005', 5, 12, 95000),
-	('PM1005', 'TB1010', 10, 53, 190000),
-	('PM1006', 'TB1002', 2, 31, 44000),
-	('PM1006', 'TB1005', 5, 30, 110000),
-	('PM1006', 'TB1010', 10, 20, 220000),
-	('PM1007', 'TB1002', 2, 21, 42000),
-	('PM1007', 'TB1005', 5, 21, 105000),
-	('PM1007', 'TB1010', 10, 22, 210000),
-	('PM1008', 'TB1002', 2, 22, 38000),
-	('PM1008', 'TB1005', 5, 12, 95000),
-	('PM1008', 'TB1010', 10, 46, 190000),
-	('PM1009', 'TB1002', 2, 56, 50000),
-	('PM1009', 'TB1005', 5, 54, 125000),
-	('PM1009', 'TB1010', 10, 44, 250000),
-	('PM1010', 'TB1002', 2, 45, 36000),
-	('PM1010', 'TB1005', 5, 46, 90000),
-	('PM1010', 'TB1010', 10, 43, 180000),
-	('PM1011', 'TB1002', 2, 42, 50000),
-	('PM1011', 'TB1005', 5, 41, 125000),
-	('PM1011', 'TB1010', 10, 45, 250000),
-	('PM1012', 'TB1002', 2, 21, 34000),
-	('PM1012', 'TB1005', 5, 22, 85000),
-	('PM1012', 'TB1010', 10, 23, 170000)
-
-ALTER TABLE TYPE_OF_BAGS check constraint all;
-
-
-
-ALTER TABLE [PRODUCT] NOCHECK CONSTRAINT ALL;
-insert into [PRODUCT]
-values
-	('PM1001', N'thơm Thái', N'Khi nấu xong, gạo sẽ có độ dẻo mềm vừa phải và rất thơm.', N'Hạt dài, màu trắng trong và ít bạc bụng', 'Vietnam', 'https://khogaomientay.com.vn/uploads/images/image(4).png'),
-	('PM1002', N'Bắc Hương', N'Hạt gạo Bắc Hương nhỏ dài và có màu trắng trong. Khi nấu xong gạo có độ dẻo nhiều và độ dính cao. Cơm khi để nguội vẫn giữ được độ dẻo và mùi thơm đặc trưng.', N'Hạt nhỏ dài và có màu trắng trong', 'Vietnam', 'https://gaogiasi.com.vn/uploads/noidung/gao-bac-huong-0-167.jpg'),
-	('PM1003', N'Tám Xoan', N'Với hạt gạo hơi dài, thon nhỏ và vẹo một đầu, bạn sẽ dễ dàng nhận ra gạo Tám Xoan. Hạt của chúng có màu trong xanh, không bị bạc bụng, mùi thơm lại dịu và rất tự nhiên.', N'Hạt nhỏ dài và có màu trắng trong, dẻo và độ dính', 'Vietnam', 'https://down-vn.img.susercontent.com/file/f37eb203adc72dbc2ad840f956eba3dc'),
-	('PM1004', N'ST24', N'Gạo ST24 có dáng dài và dẹt, màu trắng trong, mang mùi thơm lá dứa tự nhiên. Khi nấu cho cơm mềm dẻo với hương thơm của lá dứa. Điều đặc biệt ở gạo ST24 là càng để nguội ăn càng ngon, hạt gạo vẫn giữ được độ mềm dẻo mà không bị cứng.', N'Hạt có dáng dài và dẹt, màu trắng trong', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/08/gao-ST24_AAN.jpg'),
-	('PM1005', N'Hàm Châu', N'Với dáng vẻ bên ngoài giống như các loại gạo khác, gạo Hàm Châu với hương thơm tự nhiên, vị ngọt đậm. Gạo khi nấu xong nở và xốp, rất thích hợp để làm món cơm chiên.', N'Hạt có hương thơm tự nhiên, vị ngọt đậm', 'Vietnam', 'https://gaosachonline.com/wp-content/uploads/2018/05/gao-ham-chau-dong-tui.png'),
-	('PM1006', N'Nàng Xuân', N'Là sự lai tạo của hai giống lúa Tám Xoan và KhaoDawk Mali (Thái Lan), gạo Nàng Xuân có hạt thon dài. Cơm khi nấu xong mềm dẻo, ngọt và có mùi thơm đặc trưng.', N'Hạt thon dài, khi nấu mềm dẻo, ngọt', 'Vietnam', 'https://gaochatluong.com/wp-content/uploads/2023/03/gao-nang-xuan-removebg-preview.png'),
-	('PM1007', N'Tài Nguyên', N'Khác với những hạt gạo trắng trong, hạt gạo Tài Nguyên có màu trắng đục. Khi nấu sẽ cho cơm ráo, mềm, xốp, ngọt cơm. Đặc biệt, cơm vẫn ngon khi để nguội.', N'Hạt có màu trắng đục', 'Vietnam', 'https://product.hstatic.net/1000362335/product/14_9eedb99655254a0dbdaa78657657cfbf_master.png'),
-	('PM1008', N'thơm Jasmine', N'Hạt gạo thơm Jasmine dài và màu trắng bóng rất đẹp mắt. Khi nấu cho cơm dẻo vừa và có mùi thơm nhẹ, được nhiều người ưa chuộng.', N'Hạt gạo thơm lài dài và màu trắng bóng', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/08/gao-Jasmine_AAN.jpg'),
-	('PM1009', N'ST25', N'Hạt gạo ST25 có mùi thơm đặc trưng của lá dứa hòa quyện với mùi thơm của cốm non rất dễ ngửi thấy kể cả khi gạo còn sống. Hơn thế nữa cơm được nấu từ gạo ST25 là loại cơm "cực phẩm" với hạt cơm khô ráo, độ dẻo, thơm nhất định và vị ngọt thanh đến từ tinh bột gạo hảo hạng, khi để nguội cũng khô bị khô cứng.', N'Hạt có mùi thơm đặc trưng', 'Vietnam', 'https://giagao.com/wp-content/uploads/2021/10/gao-ST25-hut-chan-khong-5kg-600x600.jpg'),
-	('PM1010', N'Tám Thái đỏ', N'Được lai tạo từ gạo Hom Mali (Thái Lan), gạo Tám Thái đỏ có hạt nhỏ, dài đều, căng bóng, màu đục. Cơm chín có vị dẻo dai, màu cơm trắng hồng và có độ kết dính vừa phải.', N'Hạt nhỏ, dài đều, căng bóng, màu đục', 'Vietnam', 'http://cefvina.com.vn/wp-content/uploads/2018/07/3vFQHlMPPapyM2tj56Z1_simg_de2fe0_250x250_maxb.jpg'),
-	('PM1011', N'Lứt', N'Gạo lứt với lớp cám gạo chưa được xay xát, có màu tím hoặc đỏ, mang đến hàm lượng dinh dưỡng dồi dào cho người tiêu dùng. Gạo lứt có các loại như: gạo lứt đỏ, gạo lứt đen, gạo lứt tẻ, gạo lứt nếp. Khi nấu, gạo cũng cần được nấu lâu hơn gạo trắng để đạt được độ mềm như mong muốn.', N'Hạt có màu tím hoặc đỏ', 'Vietnam', 'https://gaophuongnam.vn/thumbs/560x640x1/upload/product/gao-lut-dien-bien-do-4618.jpg'),
-	('PM1012', N'Tám Điện Biên', N'Nổi tiếng với hương thơm và độ dẻo như nếp, tám Điện Biên có gạt gạo nhỏ, đều, căng bóng và hơi đục. Dù bề ngoài không được bắt mắt, cơm khi nấu xong lại cho ra những chén cơm thơm phức, dẻo ngọt khiến ai cũng phải thay đổi suy nghĩ về loại gạo này.', N'Hạt gạo nhỏ, đều, căng bóng và hơi đục', 'Vietnam', 'https://gaogiasi.com.vn/uploads/noidung/gao-tam-dien-bien-0-400.jpg');
-
-ALTER TABLE [PRODUCT] CHECK CONSTRAINT ALL;
 go
 insert PHYSICAL_RICEBAG (id_product, id_type, Quantity, NSX, HSD)
 values 
@@ -667,8 +665,8 @@ VALUES
 	('Việt Hưng', 'PM1010'),
 	('Sunrise', 'PM1011'),
 	('Sunrise', 'PM1012');
+
 GO
---FUNCTION
 create or alter function getRevenueOfProduct (@maGao CHAR(6))
 returns @ret_table table
 (
@@ -732,7 +730,6 @@ BEGIN
 END
 
 GO
---TRIGGER
 CREATE OR ALTER TRIGGER UpdateBillStatus
 ON PACKAGE
 AFTER UPDATE
@@ -758,9 +755,22 @@ BEGIN
         END
     END
 END
+
+
+
+/*
+UPDATE PACKAGE
+SET status = 'Done'
+where id_package = 'PK1016';
+go
+
+SELECT * FROM BILL;
+SELECT * FROM PACKAGE;
+go
+*/
+GO
 --  trigger to update points when the bill.status = 'Done'
 --create computed attribted
-GO
 ALTER TABLE [USER]
 ADD Point INT;
 
@@ -786,15 +796,3 @@ BEGIN
         WHERE i.[status] = 'Done';
     END
 END;
-
-
-/*
-UPDATE PACKAGE
-SET status = 'Done'
-where id_package = 'PK1016';
-go
-
-SELECT * FROM BILL;
-SELECT * FROM PACKAGE;
-go
-*/
