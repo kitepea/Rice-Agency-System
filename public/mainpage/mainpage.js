@@ -1,11 +1,4 @@
-async function fetchDataProductPHP() {
-    const response = await fetch(`/services/getAllProducts.php`);
-    const json = await response.json();
-    return json.data;
-}
-
-async function displayProducts() {
-    const products = await fetchDataProductPHP();
+function displayProducts(products) {
     const HTMLcontent = products.map((product) => {
         return `
         <div class="col mb-5 product">
@@ -28,7 +21,7 @@ async function displayProducts() {
                         href="./view.html?id_product=${product.maGao}&type=${product.loaiBao}">View</a>
                 </div>
                 <div class="text-center"><a class="btn  mt-auto bg-danger text-white" style="width: 80px;"
-                        href="#">Delete</a>
+                        href="../../services/products/deleteProduct.php?id_product=${product.maGao}">Delete</a>
                 </div>
             </div>
         </div>

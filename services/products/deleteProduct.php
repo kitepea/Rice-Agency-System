@@ -5,7 +5,8 @@ global $connect;
 
 $product = new Product();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $details = $product->deleteProduct($_POST['id_product']);
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $details = $product->deleteProduct($_GET['id_product']);
     echo $details;
+    header('Location: ../../public/mainpage/mainpage.html');
 }
