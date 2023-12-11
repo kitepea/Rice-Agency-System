@@ -15,6 +15,7 @@ function fetchDataAndFillTemplate() {
             $("#BName").text(data.BName);
             $("#inventory_num").text(`${data.inventory_num} bao`);
             $("#featured").text(data.featured);
+            $('#id_company').text(data.company_name);
         })
         .catch(() => {
             console.log('abdfajskldfjaslkdf')
