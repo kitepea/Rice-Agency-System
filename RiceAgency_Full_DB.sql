@@ -551,6 +551,44 @@ values
 	('customer38', '$2y$10$yps.OOI3SmCy2/aPleFLzO5/HjbbzbpPeizS3GGUraXa/7LJIjkyy', 'Customer', 'CM1038'),
 	('customer39', '$2y$10$9F5fb3L9mLC8Lv0WZwCAjubJKzQYJ0x/J1TM5H//OP1rgr3Zm83gK', 'Customer', 'CM1039');
 ALTER TABLE [ACCOUNT] CHECK CONSTRAINT ALL;
+-- INSERT [USER] EMPLOYEE
+alter table [USER] nocheck constraint all;
+insert into [USER]
+values 
+	('EM1001','Tran Van','An','0333222111 ',' example1@gmail.com',N'123 Điện Biên Phủ TP Hồ Chí Minh'),
+	('EM1002','Nguyen Thi','Bao','0555666777',' example2@gmail.com',N'56 Lê Lợi TP Hà Nội'),
+	('EM1003','Hoang Van','Cuong',' 044433322','example3@gmail.com',N'789 Nguyễn Huệ TP Đà Nẵng'),
+	('EM1004','Le Thanh','Dung','0666777888','example4@gmail.com',N'102 Trần Hưng Đạo TP Hải Phòng'),
+	('EM2001','Pham Hong','Khanh','0876565656','example5@gmail.com', N'457 Lý Thường Kiệt TP Cần Thơ'),
+	('EM2002','Vo Ngoc','Linh','0912345678','example6@gmail.com',N'234 Lê Duẩn TP Nha Trang'),
+	('EM2003','Nguyen Tien','Minh','0987123456','example7@gmail.com',N'999 Nguyễn Công Trứ TP Đà Lạt'),
+	('EM2004','Tran Thanh','Nga','0955555555','example8@gmail.com',N'222 Nguyễn Văn Linh tp Cần Thơ'),
+	('EM2005','Vo Van','Xuan','0999999991','example9@gmail.com',N'555 Võ Văn Kiệt TP Đà Nẵng'),
+	('EM2006','Le Van','Huy','0922222222','example10@gmail.com',N'7777 Lê Thánh Tôn TP Hồ Chí Minh'),
+	('EM2007','Pham Van','Trung','0944444444','example11@gmail.com',N'321 Hai Bà Trưng TP Huế'),
+	('EM2008','Hoang Thi','My','011111112','example12@gmail.com',N'356 Nguyễn Thị Minh Khai TP Vũng Tàu');
+
+insert into [EMPLOYEE]
+values
+	('EM1001','EM1001'),
+	('EM1002','EM1001'),
+	('EM1003','EM1001'),
+	('EM1004','EM1001'),
+	('EM2001','EM2008'),
+	('EM2002','EM2008'),
+	('EM2003','EM2008'),
+	('EM2004','EM2008'),
+	('EM2005','EM2004'),
+	('EM2006','EM2004'),
+	('EM2007','EM2004'),
+	('EM2008','EM2008');
+
+insert into SELLER
+values
+	('EM1001'),
+	('EM1002'),
+	('EM1003'),
+	('EM1004');
 
 INSERT INTO COMPANY_PRODUCT (company_name)
 VALUES 
@@ -573,6 +611,17 @@ VALUES
 	('Việt Hưng', 'PM1010'),
 	('Sunrise', 'PM1011'),
 	('Sunrise', 'PM1012');
+
+insert into SHIPPER
+values
+	('EM2001'),
+	('EM2002'),
+	('EM2003'),
+	('EM2004'),
+	('EM2005'),
+	('EM2006'),
+	('EM2007'),
+	('EM2008');
 
 GO
 create or alter function getRevenueOfProduct (@maGao CHAR(6))
@@ -895,3 +944,31 @@ RETURN (
 	FROM (PRODUCT JOIN TYPE_OF_BAGS ON id_pro = id_product) JOIN PRODUCTION ON PRODUCT.id_product = PRODUCTION.id_product
 	WHERE id_pro = @id_product AND BName = CAST(@type as INT)
 );
+
+GO
+--  trigger to update points when the bill.status = 'Done'
+--create computed attribted
+ALTER TABLE [ACCOUNT]
+ADD Point INT DEFAULT 0;
+GO
+CREATE OR ALTER TRIGGER UpdatePointCustomer
+ON BILL
+AFTER INSERT,UPDATE
+AS
+BEGIN
+    IF UPDATE([status])
+    BEGIN
+        UPDATE [ACCOUNT]
+
+        SET Point = (
+            SELECT COUNT(*) 
+            FROM BILL B 
+            WHERE B.customer_id = CUSTOMER.customer_id 
+				AND B.[status] = 'Done'
+        )
+        FROM [ACCOUNT]
+        JOIN CUSTOMER ON [ACCOUNT].[user_id] = CUSTOMER.customer_id
+        JOIN inserted i ON CUSTOMER.customer_id = i.customer_id
+        WHERE i.[status] = 'Done';
+    END
+END;

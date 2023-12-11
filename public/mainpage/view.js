@@ -11,7 +11,7 @@ function fetchDataAndFillTemplate() {
             $("#id_product").text(data.id_product);
             $("#price_Bags").text(`${parseInt(data.price_Bags).toLocaleString()} VNĐ`);
             $("#description").text(data.description);
-            $('#origin').text(data.origin);
+            $("#origin").text(data.origin);
             $("#BName").text(data.BName);
             $("#inventory_num").text(`${data.inventory_num} bao`);
             $("#featured").text(data.featured);
