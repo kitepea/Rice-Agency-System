@@ -592,25 +592,25 @@ values
 
 INSERT INTO COMPANY_PRODUCT (company_name)
 VALUES 
-	('Vinafood'),
-	('Ngọc Đồng'),
-	('Việt Hưng'),
-	('Sunrise');
+	(N'Vinafood'),
+	(N'Ngọc Đồng'),
+	(N'Việt Hưng'),
+	(N'Sunrise');
 
 INSERT INTO PRODUCTION (company_name, id_product)
 VALUES
-	('Vinafood', 'PM1001'),
-	('Vinafood', 'PM1002'),
-	('Vinafood', 'PM1003'),
-	('Vinafood', 'PM1004'),
-	('Ngọc Đồng', 'PM1005'),
-	('Ngọc Đồng', 'PM1006'),
-	('Ngọc Đồng', 'PM1007'),
-	('Ngọc Đồng', 'PM1008'),
-	('Việt Hưng', 'PM1009'),
-	('Việt Hưng', 'PM1010'),
-	('Sunrise', 'PM1011'),
-	('Sunrise', 'PM1012');
+	(N'Vinafood', 'PM1001'),
+	(N'Vinafood', 'PM1002'),
+	(N'Vinafood', 'PM1003'),
+	(N'Vinafood', 'PM1004'),
+	(N'Ngọc Đồng', 'PM1005'),
+	(N'Ngọc Đồng', 'PM1006'),
+	(N'Ngọc Đồng', 'PM1007'),
+	(N'Ngọc Đồng', 'PM1008'),
+	(N'Việt Hưng', 'PM1009'),
+	(N'Việt Hưng', 'PM1010'),
+	(N'Sunrise', 'PM1011'),
+	(N'Sunrise', 'PM1012');
 
 insert into SHIPPER
 values
