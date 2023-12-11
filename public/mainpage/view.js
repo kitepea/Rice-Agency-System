@@ -5,6 +5,7 @@ function fetchDataAndFillTemplate() {
     })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             $("#picture").attr("src", data.picture);
             $("#PName-BName").text(`Gạo ${data.PName} (túi ${data.BName} kg)`);
             $("#id_product").text(data.id_product);
@@ -14,5 +15,9 @@ function fetchDataAndFillTemplate() {
             $("#BName").text(data.BName);
             $("#inventory_num").text(`${data.inventory_num} bao`);
             $("#featured").text(data.featured);
+            $('#id_company').text(data.company_name);
+        })
+        .catch(() => {
+            console.log('abdfajskldfjaslkdf')
         })
 }

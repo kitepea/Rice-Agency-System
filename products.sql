@@ -138,7 +138,7 @@ CREATE PROCEDURE EditProduct
 	@featured NVARCHAR(255),
 	@origin NVARCHAR(20),
 	@picture VARCHAR(255),
-	@company_name VARCHAR(30),
+	@company_name NVARCHAR(30),
 	@type CHAR(2),
 	@price DECIMAL(10,0)
 AS
@@ -179,7 +179,7 @@ AS
 BEGIN
 	SELECT *
 	FROM PRODUCT JOIN TYPE_OF_BAGS ON id_pro = id_product
-	WHERE BName = CAST('02' AS INT)
+	WHERE BName = CAST(@type AS INT)
 	ORDER BY price_Bags * CASE WHEN @sort = 'A' THEN 1 ELSE -1 END
 END;
 
@@ -194,7 +194,7 @@ CREATE OR ALTER FUNCTION GetProductDetails (@id_product CHAR(6), @type CHAR(2))
 RETURNS TABLE
 AS
 RETURN (
-	SELECT *
-	FROM PRODUCT JOIN TYPE_OF_BAGS ON id_pro = id_product
+	SELECT company_name, [description], PRODUCT.id_product, PName, featured, origin, picture, BName, inventory_num, price_Bags 
+	FROM (PRODUCT JOIN TYPE_OF_BAGS ON id_pro = id_product) JOIN PRODUCTION ON PRODUCT.id_product = PRODUCTION.id_product
 	WHERE id_pro = @id_product AND BName = CAST(@type as INT)
 );
