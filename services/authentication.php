@@ -18,8 +18,6 @@ if ($input) {
         $account = new Account();
         $result = $account->findUserName($input['inputUsername']);
 
-        echo json_encode($result);
-
         if ($result) {
     
             $password_db = $result['Password'];
