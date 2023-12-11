@@ -729,19 +729,20 @@ BEGIN
 	FROM PRODUCT AS matHang JOIN TYPE_OF_BAGS AS loaiBao ON matHang.id_product = loaiBao.id_pro
 	ORDER BY matHang.Pname;
 END
-Go
-ALTER TABLE [USER]
-ADD Point INT;
 
+--  trigger to update points when the bill.status = 'Done'
+--create computed attribted
+ALTER TABLE [ACCOUNT]
+ADD Point INT DEFAULT 0;
 GO
 CREATE OR ALTER TRIGGER UpdatePointCustomer
 ON BILL
-AFTER UPDATE
+AFTER INSERT,UPDATE
 AS
 BEGIN
     IF UPDATE([status])
     BEGIN
-        UPDATE [USER]
+        UPDATE [ACCOUNT]
 
         SET Point = (
             SELECT COUNT(*) 
@@ -749,9 +750,9 @@ BEGIN
             WHERE B.customer_id = CUSTOMER.customer_id 
 				AND B.[status] = 'Done'
         )
-        FROM [USER]
-        INNER JOIN CUSTOMER ON [USER].[user_id] = CUSTOMER.customer_id
-        INNER JOIN inserted i ON CUSTOMER.customer_id = i.customer_id
+        FROM [ACCOUNT]
+        JOIN CUSTOMER ON [ACCOUNT].[user_id] = CUSTOMER.customer_id
+        JOIN inserted i ON CUSTOMER.customer_id = i.customer_id
         WHERE i.[status] = 'Done';
     END
-END
+END;
