@@ -680,4 +680,29 @@ BEGIN
 	FROM PRODUCT AS matHang JOIN TYPE_OF_BAGS AS loaiBao ON matHang.id_product = loaiBao.id_pro
 	ORDER BY matHang.Pname;
 END
+Go
+ALTER TABLE [USER]
+ADD Point INT;
 
+GO
+CREATE OR ALTER TRIGGER UpdatePointCustomer
+ON BILL
+AFTER UPDATE
+AS
+BEGIN
+    IF UPDATE([status])
+    BEGIN
+        UPDATE [USER]
+
+        SET Point = (
+            SELECT COUNT(*) 
+            FROM BILL B 
+            WHERE B.customer_id = CUSTOMER.customer_id 
+				AND B.[status] = 'Done'
+        )
+        FROM [USER]
+        INNER JOIN CUSTOMER ON [USER].[user_id] = CUSTOMER.customer_id
+        INNER JOIN inserted i ON CUSTOMER.customer_id = i.customer_id
+        WHERE i.[status] = 'Done';
+    END
+END
