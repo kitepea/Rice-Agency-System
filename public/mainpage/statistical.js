@@ -31,7 +31,7 @@ async function show(Pname) {
     document.querySelector("#Tong-so-bao").innerHTML = statisticalData.soBaoLoai2 + statisticalData.soBaoLoai5 + statisticalData.soBaoLoai10;
     document.querySelector("#Tong-doanh-thu").innerHTML = statisticalData.doanhThuTong;
 
-    
+    document.querySelector(".chon-mat-hang").innerHTML = Pname;
     resetChart(chart1, [statisticalData.soBaoLoai2, statisticalData.soBaoLoai5, statisticalData.soBaoLoai10],null);
     resetChart(chart2, [statisticalData.doanhThuLoai2, statisticalData.doanhThuLoai5, statisticalData.doanhThuLoai10],null);
 }
