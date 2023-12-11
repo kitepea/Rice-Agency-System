@@ -194,7 +194,7 @@ CREATE OR ALTER FUNCTION GetProductDetails (@id_product CHAR(6), @type CHAR(2))
 RETURNS TABLE
 AS
 RETURN (
-	SELECT company_name, PRODUCT.id_product, PName, featured, origin, picture, BName, inventory_num, price_Bags 
+	SELECT company_name, [description], PRODUCT.id_product, PName, featured, origin, picture, BName, inventory_num, price_Bags 
 	FROM (PRODUCT JOIN TYPE_OF_BAGS ON id_pro = id_product) JOIN PRODUCTION ON PRODUCT.id_product = PRODUCTION.id_product
 	WHERE id_pro = @id_product AND BName = CAST(@type as INT)
 );
