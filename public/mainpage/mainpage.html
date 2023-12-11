@@ -209,11 +209,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="hsd"> Hạn sử dụng</label>
-                                <input
-                                    name="hsd"
-                                    type="date"
-                                    id="expiry"
-                                />
+                                <input name="hsd" type="date" id="expiry" />
                             </div>
                             <div class="modal-footer">
                                 <button
@@ -240,43 +236,41 @@
         <!-- END POP UP -->
         <!-- Filter -->
         <div class="container my-5">
-            <div class="row d-flex justify-content-between pl-5">
+            <div
+                class="row d-flex justify-content-between align-items-center pl-5"
+            >
                 <div class="col-sm-3">
-                    <input class="prompt" type="text" placeholder="" />
+                    <label for="filter-type">Chọn loại gạo</label>
+                    <select
+                        style="
+                            border: 1px solid lightgray;
+                            padding: 8px 16px;
+                            border-radius: 4px;
+                            margin-left: 4px;
+                        "
+                        name="filter-type"
+                        id="filter-type"
+                    >
+                        <option value="02">2 kg</option>
+                        <option value="05">5 kg</option>
+                        <option value="10">10 kg</option>
+                    </select>
                 </div>
                 <div class="col-sm-3">
-                    <input class="prompt-type" type="text" placeholder="" />
-                </div>
-                <div class="col-sm-2">
-                    <div class="dropdown">
-                        <button
-                            class="btn btn-primary dropdown-toggle"
-                            type="button"
-                            id="dropdownPriceButton"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                            style="width: 160px"
-                        >
-                            Hiển thị theo giá
-                        </button>
-                        <ul
-                            class="dropdown-menu"
-                            aria-labelledby="dropdownPriceButton"
-                        >
-                            <div class="priceMenu">
-                                <li>
-                                    <a class="dropdown-item" href="#"
-                                        >Cao đến thấp</a
-                                    >
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#"
-                                        >Thấp đến cao</a
-                                    >
-                                </li>
-                            </div>
-                        </ul>
-                    </div>
+                    <label for="price-sort">Sắp xếp</label>
+                    <select
+                        style="
+                            border: 1px solid lightgray;
+                            padding: 8px 16px;
+                            border-radius: 4px;
+                            margin-left: 4px;
+                        "
+                        name="price-sort"
+                        id="price-sort"
+                    >
+                        <option value="A">Giá tăng dần</option>
+                        <option value="D">Giá giảm dần</option>
+                    </select>
                 </div>
                 <div class="col-sm-3">
                     <button
@@ -327,26 +321,11 @@
         <script src="script.js"></script>
     </body>
     <script>
-        var content = [
-            { id: 0, text: "Loại 1" },
-            { id: 1, text: "Loại 2" },
-            { id: 2, text: "Loại 3" },
-            { id: 3, text: "Loại 4" },
-        ];
         var type = [
             { id: 0, text: "2kg" },
             { id: 1, text: "5kg" },
             { id: 2, text: "10kg" },
         ];
-
-        $(".prompt").select2({
-            data: content,
-            // minimumInputLength: 2,
-            width: "250px",
-            multiple: true,
-            placeholder: "Hiển thị theo loại",
-            // templateResult:formatState
-        });
 
         $(".prompt-type").select2({
             data: type,
@@ -368,8 +347,8 @@
     <script>
         // Fetch API and display products
         fetch("/services/getAllProducts.php")
-            .then(response => response.json())
-            .then(json => displayProducts(json.data));
+            .then((response) => response.json())
+            .then((json) => displayProducts(json.data));
     </script>
 
     <script>
@@ -390,5 +369,29 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        const btn_handler = () => {
+            var type = $("#filter-type").val();
+            var sort = $("#price-sort").val();
+            var body = JSON.stringify({
+                "filter-type": type,
+                sort: sort,
+            });
+            console.log(body);
+            fetch("/services/products/filterProduct.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: body,
+            })
+                .then((res) => res.json())
+                .then((json) => displayProducts1(json.data))
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
     </script>
 </html>

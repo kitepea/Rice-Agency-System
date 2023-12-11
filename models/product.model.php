@@ -16,7 +16,7 @@ class Product {
         if ($sql) {
             return "Added successfully";
         } else {
-            return sqlsrv_errors(SQLSRV_ERR_ERRORS);
+            die(print_r(sqlsrv_errors(SQLSRV_ERR_ERRORS)));
         }
     }
 
@@ -25,7 +25,7 @@ class Product {
         if ($sql) {
             return "Deleted successfully";
         } else {
-            return sqlsrv_errors(SQLSRV_ERR_ERRORS);
+            die(print_r(sqlsrv_errors(SQLSRV_ERR_ERRORS)));
         }
     }
 
@@ -34,7 +34,7 @@ class Product {
         if ($sql) {
             return "Updated successfully";
         } else {
-            return sqlsrv_errors(SQLSRV_ERR_ERRORS);
+            die(print_r(sqlsrv_errors(SQLSRV_ERR_ERRORS)));
         }
     }
 
@@ -49,6 +49,19 @@ class Product {
             array_push($ret_object, $result);
         }
         return $ret_object;
+    }
+
+    function filterProducts($type, $sort) {
+        $sql = sqlsrv_query($this->product_db, "EXEC FilterProduct @type = '$type', @sort = '$sort'");
+        if ($sql) {
+            $res = array();
+            while ($row = sqlsrv_fetch_array($sql, SQLSRV_FETCH_ASSOC)) {
+                array_push($res, $row);
+            }
+            return $res;
+        } else {
+            die(print_r(sqlsrv_errors(SQLSRV_ERR_ERRORS)));
+        }
     }
     
     function getProductDetails($id_product, $type)

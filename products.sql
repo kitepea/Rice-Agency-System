@@ -179,7 +179,7 @@ AS
 BEGIN
 	SELECT *
 	FROM PRODUCT JOIN TYPE_OF_BAGS ON id_pro = id_product
-	WHERE BName = CAST('02' AS INT)
+	WHERE BName = CAST(@type AS INT)
 	ORDER BY price_Bags * CASE WHEN @sort = 'A' THEN 1 ELSE -1 END
 END;
 
